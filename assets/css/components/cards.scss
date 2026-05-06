@@ -1,0 +1,78 @@
+.card-grid {
+  display: grid; gap: 1.4rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+.card-grid__real { display: contents; }
+
+// ── Post card ──────────────────────────────────────────────────
+.post-card {
+  position: relative; border-radius: var(--radius);
+  background: var(--surface); border: 1px solid var(--border);
+  overflow: hidden; transition: transform .4s var(--ease), border-color .4s var(--ease), box-shadow .4s var(--ease);
+
+  &:hover { transform: translateY(-6px); border-color: var(--border-strong); box-shadow: var(--shadow); }
+  &:hover .post-card__img { transform: scale(1.06); }
+  &:hover .post-card__more { gap: .7rem; color: var(--accent-2); }
+}
+.post-card__link { display: flex; flex-direction: column; height: 100%; }
+.post-card__media { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--bg-soft); }
+.post-card__img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease); }
+.post-card__gradient { width: 100%; height: 100%; background: var(--accent-grad); }
+.post-card__gradient[data-gradient="1"] { background: linear-gradient(135deg, #7c5cff, #f472b6); }
+.post-card__gradient[data-gradient="2"] { background: linear-gradient(135deg, #22d3ee, #7c5cff); }
+.post-card__gradient[data-gradient="3"] { background: linear-gradient(135deg, #f472b6, #22d3ee); }
+.post-card__media-skeleton {
+  position: absolute; inset: 0; background: var(--surface-2);
+  opacity: 1; transition: opacity .4s var(--ease);
+}
+.post-card.is-loaded .post-card__media-skeleton { opacity: 0; }
+
+.post-card__body { padding: 1.2rem 1.3rem 1.4rem; display: flex; flex-direction: column; gap: .6rem; flex: 1; }
+.post-card__meta { display: flex; align-items: center; gap: .5rem; font-size: .8rem; color: var(--text-mute); font-family: var(--font-mono); }
+.post-card__rt { display: inline-flex; align-items: center; gap: .3rem; .icon { width: 14px; height: 14px; } }
+.post-card__title { color: var(--text); font-size: 1.2rem; }
+.post-card__excerpt { font-size: .92rem; color: var(--text-soft); flex: 1; }
+.post-card__tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+.post-card__more {
+  display: inline-flex; align-items: center; gap: .4rem; margin-top: .4rem;
+  font-family: var(--font-display); font-weight: 600; font-size: .9rem; color: var(--text);
+  transition: gap .3s var(--ease), color .3s var(--ease);
+  .icon { width: 16px; height: 16px; }
+}
+
+// ── Project card ───────────────────────────────────────────────
+.project-card {
+  border-radius: var(--radius); padding: 1.6rem;
+  background: var(--surface); border: 1px solid var(--border);
+  transition: transform .4s var(--ease), border-color .4s var(--ease), box-shadow .4s var(--ease);
+  display: flex; flex-direction: column; gap: .8rem;
+  &:hover { transform: translateY(-6px); border-color: var(--border-strong); box-shadow: var(--shadow); }
+}
+.project-card__top { display: flex; align-items: center; justify-content: space-between; }
+.project-card__index { font-family: var(--font-mono); color: var(--accent-2); font-size: .9rem; }
+.project-card__title { color: var(--text); }
+.project-card__desc { font-size: .95rem; }
+.project-card__stack { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .4rem; }
+
+// ── Stats ──────────────────────────────────────────────────────
+.stats { padding: 2rem 0; }
+.stats__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+.stat {
+  text-align: center; padding: 1.6rem 1rem; border-radius: var(--radius);
+  background: var(--surface); border: 1px solid var(--border);
+}
+.stat__value { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--text); }
+.stat__label { font-size: .85rem; color: var(--text-mute); margin-top: .3rem; }
+@media (max-width: 680px) { .stats__grid { grid-template-columns: repeat(2, 1fr); } }
+
+// ── CTA band ───────────────────────────────────────────────────
+.cta-band { padding: 4rem 0 1rem; }
+.cta-band__inner {
+  text-align: center; padding: clamp(2rem, 6vw, 3.5rem);
+  border-radius: var(--radius-lg); border: 1px solid var(--border);
+  background:
+    radial-gradient(120% 140% at 50% 0%, rgba(124,92,255,.18), transparent 60%),
+    var(--surface);
+  h2 { color: var(--text); }
+  p { margin: .7rem auto 1.6rem; max-width: 46ch; }
+}

@@ -1,0 +1,19 @@
+{%- comment -%}
+  Runnable JS playground. Usage inside a post:
+
+    {% capture demo %}
+    const sum = (a, b) => a + b;
+    console.log(sum(2, 3));
+    {% endcapture %}
+    {% include playground.html title="Add two numbers" code=demo %}
+{%- endcomment -%}
+<div class="playground" data-playground>
+  <div class="playground__bar">
+    <span class="playground__title"><strong>JS</strong>&nbsp; {{ include.title | default: "Live playground" }}</span>
+    <button class="playground__run" type="button" data-run aria-label="Run code">
+      {% include icon.html name="play" %} Run
+    </button>
+  </div>
+  <textarea class="playground__editor" spellcheck="false" data-editor>{{ include.code }}</textarea>
+  <div class="playground__console" data-console></div>
+</div>

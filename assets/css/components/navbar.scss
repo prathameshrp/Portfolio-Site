@@ -1,0 +1,98 @@
+.navbar {
+  position: sticky; top: 0; z-index: 100;
+  backdrop-filter: blur(14px);
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  border-bottom: 1px solid transparent;
+  transition: border-color .3s var(--ease), background .3s var(--ease);
+
+  &.is-scrolled { border-bottom-color: var(--border); }
+}
+.navbar__inner {
+  max-width: var(--container-wide); margin-inline: auto;
+  padding: .8rem clamp(1.1rem, 4vw, 2rem);
+  display: flex; align-items: center; gap: 1rem;
+}
+.navbar__brand { display: flex; align-items: center; gap: .55rem; font-family: var(--font-display); font-weight: 700; }
+.navbar__logo {
+  font-family: var(--font-mono); font-weight: 700; color: #fff;
+  background: var(--accent-grad); padding: .15rem .4rem; border-radius: 8px; font-size: .85rem;
+  box-shadow: var(--shadow-glow);
+}
+.navbar__title { font-size: 1.05rem; }
+
+.navbar__links { display: flex; gap: .35rem; margin-left: auto; }
+.navbar__link {
+  position: relative; padding: .5rem .85rem; border-radius: 10px;
+  color: var(--text-soft); font-size: .92rem; font-weight: 500;
+  transition: color .25s var(--ease), background .25s var(--ease);
+  &:hover { color: var(--text); background: var(--surface); }
+  &.is-active { color: var(--text); }
+  &.is-active::after {
+    content: ""; position: absolute; left: 50%; bottom: 4px; transform: translateX(-50%);
+    width: 18px; height: 2px; border-radius: 2px; background: var(--accent-grad);
+  }
+}
+
+.navbar__actions { display: flex; align-items: center; gap: .5rem; }
+.navbar__links + .navbar__actions { margin-left: .5rem; }
+
+// theme toggle shows one icon at a time
+.theme-toggle .icon--moon { display: none; }
+[data-theme="light"] .theme-toggle .icon--sun { display: none; }
+[data-theme="light"] .theme-toggle .icon--moon { display: inline-flex; }
+
+.navbar__burger { display: none; }
+.navbar__burger .icon--x { display: none; }
+.navbar__burger.is-open .icon--menu { display: none; }
+.navbar__burger.is-open .icon--x { display: inline-flex; }
+
+.navbar__mobile {
+  display: none; flex-direction: column; gap: .25rem;
+  padding: .5rem clamp(1.1rem, 4vw, 2rem) 1.1rem;
+  border-top: 1px solid var(--border);
+}
+.navbar__mobile-link {
+  padding: .8rem .6rem; border-radius: 10px; color: var(--text-soft); font-weight: 500;
+  &:hover { background: var(--surface); color: var(--text); }
+}
+
+// reading progress bar
+.navbar__progress {
+  position: absolute; left: 0; bottom: -1px; height: 2px; width: 0;
+  background: var(--accent-grad); transition: width .1s linear; opacity: 0;
+}
+.navbar__progress.is-active { opacity: 1; }
+
+@media (max-width: 760px) {
+  .navbar__links { display: none; }
+  .navbar__burger { display: inline-grid; }
+  .navbar__mobile[hidden] { display: none; }
+  .navbar__mobile { display: flex; }
+}
+
+// ── Footer ─────────────────────────────────────────────────────
+.footer {
+  position: relative; z-index: 1; margin-top: 6rem;
+  border-top: 1px solid var(--border); background: var(--bg-soft);
+}
+.footer__inner {
+  max-width: var(--container); margin-inline: auto;
+  padding: 3rem clamp(1.1rem, 4vw, 2rem) 1.5rem;
+  display: grid; grid-template-columns: 1.4fr 1fr auto; gap: 2rem; align-items: start;
+}
+.footer__brand-top { display: inline-flex; align-items: center; gap: .55rem; }
+.footer__brand-name { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; }
+.footer__tagline { margin-top: .8rem; color: var(--text-mute); max-width: 30ch; }
+.footer__nav { display: flex; flex-direction: column; gap: .6rem; a { color: var(--text-soft); &:hover { color: var(--text); } } }
+.footer__social { display: flex; gap: .5rem; }
+.footer__bottom {
+  max-width: var(--container); margin-inline: auto;
+  padding: 1.2rem clamp(1.1rem, 4vw, 2rem); border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+  color: var(--text-mute); font-size: .85rem;
+  a:hover { color: var(--text); }
+}
+.footer__build { display: inline-flex; align-items: center; gap: .5rem; font-family: var(--font-mono); font-size: .8rem; }
+.footer__build-dot { width: 7px; height: 7px; border-radius: 50%; background: #28c840; box-shadow: 0 0 8px #28c840; animation: pulse 2s infinite; }
+.footer__build a { color: var(--accent-2); }
+@media (max-width: 680px) { .footer__inner { grid-template-columns: 1fr; } }

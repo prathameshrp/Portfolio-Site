@@ -1,0 +1,33 @@
+{%- assign post = include.post -%}
+{%- assign words = post.content | strip_html | number_of_words -%}
+{%- assign rt = words | divided_by: 200 | plus: 1 -%}
+<article class="post-card reveal" data-post-card
+         data-title="{{ post.title | escape }}"
+         data-tags="{% for t in post.tags %}{{ t | downcase }} {% endfor %}"
+         data-excerpt="{{ post.excerpt | strip_html | strip_newlines | escape | truncate: 160 }}">
+  <a class="post-card__link" href="{{ post.url | relative_url }}">
+    <div class="post-card__media">
+      {%- if post.cover -%}
+        <img src="{{ post.cover | relative_url }}" alt="" loading="lazy" class="post-card__img">
+      {%- else -%}
+        <div class="post-card__gradient" data-gradient="{{ post.title | size | modulo: 4 }}"></div>
+      {%- endif -%}
+      <div class="post-card__media-skeleton" data-skeleton></div>
+    </div>
+    <div class="post-card__body">
+      <div class="post-card__meta">
+        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+        <span class="dot">&middot;</span>
+        <span class="post-card__rt">{% include icon.html name="clock" %}{{ rt }} min</span>
+      </div>
+      <h3 class="post-card__title">{{ post.title }}</h3>
+      <p class="post-card__excerpt">{{ post.excerpt | strip_html | strip_newlines | truncate: 130 }}</p>
+      <div class="post-card__tags">
+        {%- for t in post.tags limit: 3 -%}
+          <span class="chip">{{ t }}</span>
+        {%- endfor -%}
+      </div>
+      <span class="post-card__more">Read article {% include icon.html name="arrow" %}</span>
+    </div>
+  </a>
+</article>

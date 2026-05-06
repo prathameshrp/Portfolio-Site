@@ -1,0 +1,13 @@
+# Footer / contact social links. Leave url blank to hide.
+- name: GitHub
+  url: https://github.com/prathameshrp
+  icon: github
+- name: LinkedIn
+  url: ""
+  icon: linkedin
+- name: Twitter
+  url: ""
+  icon: twitter
+- name: Email
+  url: mailto:prathameshind305@gmail.com
+  icon: mail

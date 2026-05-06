@@ -1,0 +1,41 @@
+// ── Ambient sound toggle (equalizer button) ────────────────────
+.sound-eq { display: flex; align-items: flex-end; gap: 2px; height: 16px; width: 18px; }
+.sound-bar {
+  flex: 1; height: 30%; min-height: 2px;
+  background: var(--text-soft); border-radius: 2px;
+  transition: height .15s linear, background .25s var(--ease);
+}
+.sound-toggle:hover .sound-bar { background: var(--text); }
+.sound-toggle.is-playing .sound-bar { background: var(--accent-2); box-shadow: 0 0 6px var(--accent-2); }
+.sound-toggle:not(.is-playing) .sound-bar:nth-child(1) { height: 40%; }
+.sound-toggle:not(.is-playing) .sound-bar:nth-child(2) { height: 70%; }
+.sound-toggle:not(.is-playing) .sound-bar:nth-child(3) { height: 50%; }
+.sound-toggle:not(.is-playing) .sound-bar:nth-child(4) { height: 85%; }
+
+// ── Konami matrix rain ─────────────────────────────────────────
+.matrix-rain {
+  position: fixed; inset: 0; z-index: 9998;
+  background: #0a0a12; animation: fxIn .4s var(--ease);
+}
+.matrix-rain.is-out { animation: fxOut .6s var(--ease) forwards; }
+.matrix-toast {
+  position: fixed; z-index: 9999; left: 50%; bottom: 8%; transform: translateX(-50%);
+  font-family: var(--font-mono); font-size: .85rem; color: #c3e88d;
+  background: rgba(10,10,18,.7); border: 1px solid rgba(34,211,238,.4);
+  padding: .6rem 1rem; border-radius: 999px; backdrop-filter: blur(6px);
+  animation: fxIn .5s var(--ease);
+}
+.matrix-toast.is-out { animation: fxOut .5s var(--ease) forwards; }
+@keyframes fxIn { from { opacity: 0; } }
+@keyframes fxOut { to { opacity: 0; } }
+
+// ── Self-drawing diagrams ──────────────────────────────────────
+.diagram { margin: 2rem 0; }
+.diagram svg { width: 100%; height: auto; overflow: visible; }
+.diagram rect { fill: var(--surface); stroke: var(--accent); stroke-width: 1.5; }
+.diagram .diagram__arrows path { fill: none; stroke: var(--accent-2); stroke-width: 2; }
+.diagram .diagram__head { fill: var(--accent-2); stroke: none; }
+.diagram text { fill: var(--text); font-family: var(--font-mono); font-size: 14px; font-weight: 500; }
+.diagram .diagram__sub { fill: var(--text-mute); font-size: 12px; }
+.diagram figcaption { margin-top: .8rem; text-align: center; font-size: .88rem; color: var(--text-mute); }
+

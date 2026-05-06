@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+{% include head.html %}
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="aurora" aria-hidden="true">
+    <span class="aurora__blob aurora__blob--1"></span>
+    <span class="aurora__blob aurora__blob--2"></span>
+    <span class="aurora__blob aurora__blob--3"></span>
+    <span class="aurora__grid"></span>
+  </div>
+
+  {% include navbar.html %}
+
+  <main id="main" class="site-main">
+    {{ content }}
+  </main>
+
+  {% include footer.html %}
+  {% include search.html %}
+  {% include scripts.html %}
+</body>
+</html>

@@ -1,0 +1,91 @@
+// ── Constellation knowledge graph (home hero) ──────────────────
+.constellation {
+  position: relative;
+  height: min(86vh, 820px);
+  min-height: 540px;
+  margin-top: -1px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  // a deeper "space" backdrop than the rest of the page
+  background:
+    radial-gradient(120% 90% at 80% 10%, rgba(34,211,238,.10), transparent 55%),
+    radial-gradient(120% 90% at 15% 90%, rgba(244,114,182,.10), transparent 55%),
+    radial-gradient(100% 100% at 50% 40%, rgba(124,92,255,.12), transparent 60%);
+}
+
+.constellation__canvas {
+  position: absolute; inset: 0; z-index: 1;
+  cursor: grab; touch-action: none;
+  &:active { cursor: grabbing; }
+}
+
+.constellation__overlay {
+  position: absolute; z-index: 2; inset: 0;
+  padding: clamp(1.4rem, 5vw, 3.4rem);
+  display: flex; align-items: flex-start;
+  pointer-events: none;
+}
+.constellation__intro {
+  max-width: 30rem;
+  pointer-events: auto;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--bg) 55%, transparent), transparent 90%);
+  border-radius: var(--radius);
+  // let the stars peek behind the text on large screens
+  @media (min-width: 740px) { background: none; }
+}
+.constellation__eyebrow {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-family: var(--font-mono); font-size: .76rem; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--accent-2);
+}
+.constellation__eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-2); box-shadow: 0 0 10px var(--accent-2); }
+.constellation__title { margin-top: 1rem; font-size: clamp(2.2rem, 6vw, 3.8rem); }
+.constellation__lede { margin-top: 1.1rem; font-size: 1.05rem; max-width: 34ch; color: var(--text-soft); }
+.constellation__cta { margin-top: 1.6rem; display: flex; gap: .7rem; flex-wrap: wrap; }
+
+.constellation__hud {
+  position: absolute; z-index: 2; left: 0; right: 0; bottom: 0;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem clamp(1.4rem, 5vw, 3.4rem);
+  pointer-events: none;
+}
+.constellation__legend { display: flex; gap: 1.1rem; }
+.constellation__legend-item { display: inline-flex; align-items: center; gap: .45rem; font-size: .8rem; color: var(--text-mute); font-family: var(--font-mono); }
+.constellation__swatch { width: 11px; height: 11px; border-radius: 50%; }
+.constellation__swatch--post { background: var(--accent-2); box-shadow: 0 0 8px var(--accent-2); }
+.constellation__swatch--tag { background: var(--accent-3); box-shadow: 0 0 8px var(--accent-3); }
+.constellation__hint {
+  font-family: var(--font-mono); font-size: .78rem; color: var(--text-mute);
+  border: 1px solid var(--border); border-radius: 999px; padding: .35rem .75rem;
+  background: color-mix(in srgb, var(--bg) 60%, transparent);
+  transition: opacity .4s var(--ease);
+  animation: hintPulse 2.6s var(--ease) infinite;
+}
+@keyframes hintPulse { 50% { border-color: var(--border-strong); color: var(--text-soft); } }
+
+.constellation__tooltip {
+  position: absolute; z-index: 3; top: 0; left: 0;
+  pointer-events: none; will-change: transform;
+  max-width: 280px;
+  display: flex; flex-direction: column; gap: .25rem;
+  padding: .7rem .85rem; border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--bg-soft) 92%, transparent);
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(8px);
+
+  .tt-kind { font-family: var(--font-mono); font-size: .68rem; text-transform: uppercase; letter-spacing: .06em; color: var(--accent-2); }
+  strong { color: var(--text); font-family: var(--font-display); font-size: .98rem; line-height: 1.25; }
+  .tt-meta { font-family: var(--font-mono); font-size: .72rem; color: var(--text-mute); }
+  .tt-go { margin-top: .25rem; font-size: .78rem; color: var(--accent-3); font-weight: 600; }
+}
+.constellation__tooltip[hidden] { display: none; }
+
+.constellation__fallback ul { display: flex; flex-wrap: wrap; gap: .5rem; padding: 2rem; }
+.constellation__fallback a { color: var(--accent-2); text-decoration: underline; }
+
+@media (max-width: 740px) {
+  .constellation { height: 78vh; }
+  .constellation__lede { display: none; }
+  .constellation__hud { display: none; }
+}

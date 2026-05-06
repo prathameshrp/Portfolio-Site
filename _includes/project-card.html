@@ -1,0 +1,18 @@
+{%- assign project = include.project -%}
+<article class="project-card reveal">
+  <div class="project-card__top">
+    <span class="project-card__index">_{{ include.index }}</span>
+    {%- if project.url and project.url != "" -%}
+      <a class="icon-btn" href="{{ project.url }}" target="_blank" rel="noopener" aria-label="Visit {{ project.title }}">
+        {% include icon.html name="arrow-up-right" %}
+      </a>
+    {%- endif -%}
+  </div>
+  <h3 class="project-card__title">{{ project.title }}</h3>
+  <p class="project-card__desc">{{ project.description }}</p>
+  <div class="project-card__stack">
+    {%- for tech in project.tech -%}
+      <span class="chip chip--ghost">{{ tech }}</span>
+    {%- endfor -%}
+  </div>
+</article>

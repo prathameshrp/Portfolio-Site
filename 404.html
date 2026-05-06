@@ -1,24 +1,16 @@
 ---
 layout: default
+title: Page not found
+permalink: /404.html
 ---
-
-<style type="text/css" media="screen">
-  .container {
-    margin: 10px auto;
-    max-width: 600px;
-    text-align: center;
-  }
-  h1 {
-    margin: 30px 0;
-    font-size: 4em;
-    line-height: 1;
-    letter-spacing: -1px;
-  }
-</style>
-
-<div class="container">
-  <h1>404</h1>
-
-  <p><strong>Page not found :(</strong></p>
-  <p>The requested page could not be found.</p>
-</div>
+<section class="page-shell">
+  <div class="container container--narrow" style="text-align:center; padding-block: 4rem;">
+    <div class="gradient-text" style="font-family:var(--font-display); font-size:clamp(5rem,18vw,9rem); font-weight:700; line-height:1;">404</div>
+    <h1 style="margin-top:1rem;">This page wandered off.</h1>
+    <p style="margin:1rem auto 2rem; max-width:42ch;">The link might be broken, or the page may have been moved. Let's get you back on track.</p>
+    <div style="display:flex; gap:.8rem; justify-content:center; flex-wrap:wrap;">
+      <a class="btn btn--primary" href="{{ '/' | relative_url }}">Back home {% include icon.html name="arrow" %}</a>
+      <a class="btn btn--ghost" href="{{ '/blog/' | relative_url }}">Read the blog</a>
+    </div>
+  </div>
+</section>

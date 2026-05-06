@@ -1,0 +1,41 @@
+// Custom cursor (desktop only; enabled via JS class)
+@media (pointer: fine) {
+  .has-custom-cursor,
+  .has-custom-cursor a,
+  .has-custom-cursor button,
+  .has-custom-cursor .chip,
+  .has-custom-cursor .post-card { cursor: none; }
+  // keep a sane caret in text fields
+  .has-custom-cursor input,
+  .has-custom-cursor textarea { cursor: text; }
+  .has-custom-cursor [data-graph-canvas] { cursor: none; }
+}
+
+.cursor-dot, .cursor-ring {
+  position: fixed; top: 0; left: 0; z-index: 9999;
+  pointer-events: none; opacity: 0;
+  margin-left: 0; margin-top: 0;
+  will-change: transform;
+}
+.cursor-dot {
+  width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px;
+  border-radius: 50%; background: var(--accent-2);
+  box-shadow: 0 0 10px var(--accent-2);
+  transition: opacity .25s ease;
+}
+.cursor-ring {
+  width: 34px; height: 34px; margin: -17px 0 0 -17px;
+  border-radius: 50%; border: 1.5px solid var(--accent);
+  transition: width .22s var(--ease), height .22s var(--ease), margin .22s var(--ease),
+              border-color .22s var(--ease), opacity .25s ease, background .22s var(--ease);
+}
+.cursor-ring.is-hover {
+  width: 54px; height: 54px; margin: -27px 0 0 -27px;
+  border-color: var(--accent-2);
+  background: color-mix(in srgb, var(--accent-2) 12%, transparent);
+}
+.cursor-ring.is-down { width: 24px; height: 24px; margin: -12px 0 0 -12px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-ring { transition: opacity .25s ease; }
+}

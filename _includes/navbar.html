@@ -1,0 +1,46 @@
+{%- assign current = page.url | downcase -%}
+<header class="navbar" data-navbar>
+  <div class="navbar__inner">
+    <a class="navbar__brand" href="{{ '/' | relative_url }}">
+      <span class="navbar__logo" aria-hidden="true">&lt;/&gt;</span>
+      <span class="navbar__title">{{ site.brand_short | default: site.title }}</span>
+    </a>
+
+    <nav class="navbar__links" aria-label="Primary">
+      {%- for item in site.data.navigation -%}
+        {%- assign link = item.url | relative_url -%}
+        {%- assign active = false -%}
+        {%- if item.url == "/" and page.url == "/" -%}{%- assign active = true -%}
+        {%- elsif item.url != "/" and current contains item.url -%}{%- assign active = true -%}
+        {%- endif -%}
+        <a class="navbar__link{% if active %} is-active{% endif %}" href="{{ link }}">{{ item.name }}</a>
+      {%- endfor -%}
+    </nav>
+
+    <div class="navbar__actions">
+      <button class="icon-btn" data-search-open aria-label="Search posts">
+        {% include icon.html name="search" %}
+      </button>
+      <button class="icon-btn sound-toggle" data-sound-toggle aria-label="Toggle ambient sound" aria-pressed="false" title="Ambient sound">
+        <span class="sound-eq" aria-hidden="true">
+          <span class="sound-bar"></span><span class="sound-bar"></span><span class="sound-bar"></span><span class="sound-bar"></span>
+        </span>
+      </button>
+      <button class="icon-btn theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        {% include icon.html name="sun" %}
+        {% include icon.html name="moon" %}
+      </button>
+      <button class="icon-btn navbar__burger" data-nav-toggle aria-label="Menu" aria-expanded="false">
+        {% include icon.html name="menu" %}
+        {% include icon.html name="x" %}
+      </button>
+    </div>
+  </div>
+
+  <div class="navbar__mobile" data-nav-mobile hidden>
+    {%- for item in site.data.navigation -%}
+      <a class="navbar__mobile-link" href="{{ item.url | relative_url }}">{{ item.name }}</a>
+    {%- endfor -%}
+  </div>
+  <div class="navbar__progress" data-reading-progress></div>
+</header>

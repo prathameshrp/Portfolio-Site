@@ -1,0 +1,43 @@
+# Home page content — edit freely, no template changes needed.
+hero:
+  rotator:
+    - "scalable systems."
+    - "clean interfaces."
+    - "fast web apps."
+    - "developer tools."
+  intro: >-
+    I'm a software engineer who likes turning messy problems into simple,
+    fast, well-tested software — and writing about it along the way.
+  terminal:
+    - "$ whoami"
+    - "prathamesh — software engineer"
+    - "$ cat focus.txt"
+    - "backend · web · developer-experience"
+    - "$ ./start --read-the-blog"
+
+stats:
+  - value: 5
+    suffix: "+"
+    label: "Years writing code"
+  - value: 40
+    suffix: "+"
+    label: "Articles published"
+  - value: 12
+    suffix: "+"
+    label: "Side projects"
+  - value: 100
+    suffix: "%"
+    label: "Curiosity"
+
+# Highlighted skills (rendered as animated chips)
+stack:
+  - JavaScript
+  - TypeScript
+  - Python
+  - Go
+  - React
+  - Node.js
+  - PostgreSQL
+  - Docker
+  - AWS
+  - Kubernetes

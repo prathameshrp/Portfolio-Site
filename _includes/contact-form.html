@@ -1,0 +1,33 @@
+{%- comment -%}
+  Static-site friendly contact form. Uses Formspree (set form_id in page
+  front matter). Falls back to a mailto link if not configured.
+{%- endcomment -%}
+{%- if include.form_id and include.form_id != "" -%}
+<form class="contact-form" action="https://formspree.io/f/{{ include.form_id }}" method="POST" data-contact-form>
+  <div class="contact-form__row">
+    <label class="field">
+      <span class="field__label">Name</span>
+      <input class="field__input" type="text" name="name" required placeholder="Ada Lovelace">
+    </label>
+    <label class="field">
+      <span class="field__label">Email</span>
+      <input class="field__input" type="email" name="email" required placeholder="you@example.com">
+    </label>
+  </div>
+  <label class="field">
+    <span class="field__label">Message</span>
+    <textarea class="field__input" name="message" rows="5" required placeholder="Let's build something..."></textarea>
+  </label>
+  <button class="btn btn--primary" type="submit">
+    Send message {% include icon.html name="arrow" %}
+  </button>
+  <p class="contact-form__status" data-form-status role="status"></p>
+</form>
+{%- else -%}
+<div class="contact-fallback">
+  <p>Drop me a line — I usually reply within a day.</p>
+  <a class="btn btn--primary" href="mailto:{{ site.author.email }}">
+    {% include icon.html name="mail" %} {{ site.author.email }}
+  </a>
+</div>
+{%- endif -%}

@@ -1,0 +1,11 @@
+# Primary nav — edit order/labels here, navbar renders automatically.
+- name: Home
+  url: /
+- name: Blog
+  url: /blog/
+- name: Projects
+  url: /projects/
+- name: About
+  url: /about/
+- name: Contact
+  url: /contact/

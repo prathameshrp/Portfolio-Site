@@ -1,0 +1,71 @@
+{%- comment -%}
+  Constellation graph: posts = star nodes, tags = hub nodes.
+  Each post links to each of its tags, so posts sharing a tag cluster together.
+  Data is emitted as JSON; the canvas engine in graph.js renders + simulates it.
+{%- endcomment -%}
+{%- assign all_tags = "" | split: "" -%}
+{%- for post in site.posts -%}
+  {%- for t in post.tags -%}{%- assign all_tags = all_tags | push: t -%}{%- endfor -%}
+{%- endfor -%}
+{%- assign all_tags = all_tags | uniq | sort -%}
+
+<section class="constellation" data-graph-section>
+  <canvas class="constellation__canvas" data-graph-canvas aria-hidden="true"></canvas>
+
+  <div class="constellation__overlay">
+    <div class="constellation__intro reveal">
+      <span class="constellation__eyebrow"><span class="constellation__eyebrow-dot"></span> {{ site.brand_short | default: site.title }} &middot; knowledge map</span>
+      <h1 class="constellation__title">A galaxy of things<br>I've <span class="gradient-text">figured out</span>.</h1>
+      <p class="constellation__lede">Every post is a star. Stars that share a topic drift together into constellations. Drag to roam, scroll to zoom, click a star to read.</p>
+      <div class="constellation__cta">
+        <a class="btn btn--primary" href="{{ '/blog/' | relative_url }}">Browse as a list {% include icon.html name="arrow" %}</a>
+        <button class="btn btn--ghost" type="button" data-graph-reset>Recenter map</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="constellation__hud">
+    <div class="constellation__legend">
+      <span class="constellation__legend-item"><span class="constellation__swatch constellation__swatch--post"></span> Post</span>
+      <span class="constellation__legend-item"><span class="constellation__swatch constellation__swatch--tag"></span> Topic</span>
+    </div>
+    <div class="constellation__hint" data-graph-hint>drag &middot; scroll &middot; click</div>
+  </div>
+
+  <div class="constellation__tooltip" data-graph-tooltip hidden></div>
+
+  {%- comment -%} Crawlable / no-JS fallback {%- endcomment -%}
+  <noscript>
+    <div class="constellation__fallback">
+      <ul>
+        {%- for post in site.posts -%}
+        <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </noscript>
+
+  <script id="graph-data" type="application/json">
+  {
+    "nodes": [
+      {%- for post in site.posts -%}
+      {"id":"post-{{ forloop.index }}","type":"post","label":{{ post.title | jsonify }},"url":{{ post.url | relative_url | jsonify }},"date":{{ post.date | date: "%b %-d, %Y" | jsonify }},"tags":{{ post.tags | jsonify }},"weight":{{ post.tags | size }}}{%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+      {%- if all_tags.size > 0 and site.posts.size > 0 -%},{%- endif -%}
+      {%- for t in all_tags -%}
+        {%- assign tcount = 0 -%}
+        {%- for post in site.posts -%}{%- if post.tags contains t -%}{%- assign tcount = tcount | plus: 1 -%}{%- endif -%}{%- endfor -%}
+      {"id":"tag-{{ t | slugify }}","type":"tag","label":{{ t | jsonify }},"weight":{{ tcount }}}{%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    ],
+    "links": [
+      {%- assign firstlink = true -%}
+      {%- for post in site.posts -%}
+        {%- for t in post.tags -%}
+          {%- unless firstlink -%},{%- endunless -%}{"source":"post-{{ forloop.parentloop.index }}","target":"tag-{{ t | slugify }}"}{%- assign firstlink = false -%}
+        {%- endfor -%}
+      {%- endfor -%}
+    ]
+  }
+  </script>
+</section>

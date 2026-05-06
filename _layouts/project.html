@@ -1,0 +1,21 @@
+---
+layout: default
+---
+<section class="page-shell">
+  <div class="container container--narrow">
+    <a class="post__back" href="{{ '/projects/' | relative_url }}">&larr; All projects</a>
+    <header class="page-head reveal">
+      <h1 class="page-head__title">{{ page.title }}</h1>
+      {%- if page.description -%}<p class="page-head__subtitle">{{ page.description }}</p>{%- endif -%}
+      <div class="project-card__stack">
+        {%- for tech in page.tech -%}<span class="chip chip--ghost">{{ tech }}</span>{%- endfor -%}
+      </div>
+      {%- if page.url_live -%}
+      <a class="btn btn--primary" href="{{ page.url_live }}" target="_blank" rel="noopener">
+        Visit project {% include icon.html name="arrow-up-right" %}
+      </a>
+      {%- endif -%}
+    </header>
+    <div class="prose reveal">{{ content }}</div>
+  </div>
+</section>

@@ -1,0 +1,30 @@
+// Shimmer skeleton loaders
+.skeleton {
+  position: relative; overflow: hidden;
+  background: var(--surface-2); border-radius: 8px;
+}
+.skeleton::after {
+  content: ""; position: absolute; inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--text) 9%, transparent), transparent);
+  animation: shimmer 1.4s infinite;
+}
+@keyframes shimmer { 100% { transform: translateX(100%); } }
+@media (prefers-reduced-motion: reduce) { .skeleton::after { animation: none; } }
+
+.skeleton--media { aspect-ratio: 16 / 9; border-radius: 0; }
+.skeleton--line { height: 13px; margin-top: .7rem; }
+.skeleton--sm { width: 40%; }
+.skeleton--md { width: 70%; }
+.skeleton--lg { width: 90%; height: 20px; }
+.skeleton--chip { height: 22px; width: 60px; border-radius: 999px; display: inline-block; margin-right: .4rem; }
+
+.post-card--skeleton {
+  pointer-events: none;
+  .post-card__body { gap: 0; }
+  .post-card__tags { margin-top: .9rem; }
+}
+
+// Generic content fade-in once loaded
+.fade-in { opacity: 0; transition: opacity .5s var(--ease); }
+.fade-in.is-loaded { opacity: 1; }

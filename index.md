@@ -1,10 +1,5 @@
 ---
-layout: default
+layout: home
 title: Home
+description: Developer blog with interactive, runnable code — software engineering, systems, and the craft of building for the web.
 ---
-
-# My Blog
-
-{% for post in site.posts %}
-- [{{ post.title }}]({{ post.url }})
-{% endfor %}
