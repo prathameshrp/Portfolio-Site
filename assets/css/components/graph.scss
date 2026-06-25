@@ -55,19 +55,7 @@
   // let the stars peek behind the text on large screens
   @media (min-width: 740px) { background: none; }
 }
-  position: absolute; z-index: 2; inset: 0;
-  padding: clamp(1.4rem, 5vw, 3.4rem);
-  display: flex; align-items: flex-start;
-  pointer-events: none;
-}
-.constellation__intro {
-  max-width: 30rem;
-  pointer-events: auto;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--bg) 55%, transparent), transparent 90%);
-  border-radius: var(--radius);
-  // let the stars peek behind the text on large screens
-  @media (min-width: 740px) { background: none; }
-}
+
 .constellation__eyebrow {
   display: inline-flex; align-items: center; gap: .5rem;
   font-family: var(--font-mono); font-size: .76rem; letter-spacing: .06em;
