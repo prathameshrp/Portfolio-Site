@@ -26,42 +26,30 @@
   </div>
 
   <canvas class="constellation__canvas" data-graph-canvas aria-hidden="true"></canvas>
+  <svg class="constellation__lines" data-graph-lines style="position: absolute; inset: 0; pointer-events: none; z-index: 2; width: 100%; height: 100%;"></svg>
 
   <div class="constellation__overlay">
     <div class="constellation__intro reveal">
-      <span class="constellation__eyebrow"><span class="constellation__eyebrow-dot"></span> {{ site.brand_short | default: site.title }} &middot; knowledge map</span>
-      <h1 class="constellation__title">A galaxy of things<br>I've <span class="gradient-text">figured out</span>.</h1>
-      <p class="constellation__lede">Every post is a star. Stars that share a topic drift together into constellations. Drag to roam, scroll to zoom, click a star to read.</p>
+      <span class="constellation__eyebrow"><span class="constellation__eyebrow-dot"></span> DATABASE SYSTEM v2.08 &middot; ACTIVE SIMULATION</span>
+      <h1 class="constellation__title">I am <br><span class="glitch-text" data-glitch-target>a renaissance engineer</span>.</h1>
+      <p class="constellation__lede">An interactive archive of my thoughts, projects, and designs. Scroll down to initialize the database timeline.</p>
       <div class="constellation__cta">
         <a class="btn btn--primary" href="{{ '/blog/' | relative_url }}">Browse as a list {% include icon.html name="arrow" %}</a>
         <button class="btn btn--ghost" type="button" data-graph-reset>Recenter map</button>
       </div>
     </div>
+  </div>
 
-    <div class="constellation__about" data-graph-about>
-      <div class="about-card">
-        <div class="about-telemetry">// DOSSIER SYSTEM // USER_PROFILE ACTIVE</div>
-        {%- assign about_page = site.html_pages | where: "url", "/about/" | first -%}
-        {%- if about_page -%}
-          <div class="about-content prose">
-            {{ about_page.content | markdownify }}
-          </div>
-        {%- endif -%}
-        <div class="about-footer">
-          <div class="about-footer-social">
-            {%- for s in site.data.social -%}
-              {%- if s.url and s.url != "" -%}
-                <a href="{{ s.url }}" class="icon-btn" aria-label="{{ s.name }}" target="_blank" rel="noopener">
-                  {% include icon.html name=s.icon %}
-                </a>
-              {%- endif -%}
-            {%- endfor -%}
-          </div>
-          <div class="about-footer-copyright">
-            &copy; {{ 'now' | date: "%Y" }} {{ site.author.name }}.
-          </div>
-        </div>
-      </div>
+  <div class="constellation__menu" data-graph-menu>
+    <div class="menu-header">// INDEX // DATA ARCHIVES</div>
+    <div class="menu-list">
+      {%- for post in site.posts -%}
+        <button class="menu-item" type="button" data-menu-index="{{ forloop.index0 }}">
+          <span class="menu-item-decor"></span>
+          <span class="menu-item-num">0{{ forloop.index }}</span>
+          <span class="menu-item-label">{{ post.title }}</span>
+        </button>
+      {%- endfor -%}
     </div>
   </div>
 
@@ -79,6 +67,17 @@
         <a class="btn btn--primary details-link" href="#">Read Full Post {% include icon.html name="arrow" %}</a>
         <button class="btn btn--ghost details-next" type="button">Next Milestone &rarr;</button>
       </div>
+    </div>
+  </div>
+
+  <div class="constellation__sidebar reveal">
+    <div class="sidebar-links">
+      {%- for s in site.data.social -%}
+        {%- if s.url and s.url != "" -%}
+          <a class="sidebar-item" href="{{ s.url }}" target="_blank" rel="noopener">{{ s.name }}</a>
+          {%- unless forloop.last -%}<span class="sidebar-line"></span>{%- endunless -%}
+        {%- endif -%}
+      {%- endfor -%}
     </div>
   </div>
 

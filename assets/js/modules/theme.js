@@ -8,7 +8,7 @@
     root.setAttribute('data-theme', theme);
     try { localStorage.setItem('theme', theme); } catch (e) {}
     var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', theme === 'dark' ? '#0a0a12' : '#f7f7fb');
+    if (meta) meta.setAttribute('content', theme === 'dark' ? '#0a0a12' : '#f5f2eb');
   }
 
   toggle.addEventListener('click', function () {
