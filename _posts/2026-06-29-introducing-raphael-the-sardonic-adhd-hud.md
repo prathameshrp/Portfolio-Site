@@ -1,152 +1,142 @@
-## The Blog Post (`_posts/2026-06-29-introducing-raphael-the-sardonic-adhd-hud.md`)
-
-```markdown
 ---
 title: "Introducing Raphael: The Sardonic ADHD Advisor Inside Your Desktop HUD"
 date: 2026-06-29 10:00:00 +0530
 tags: [KDE, Plasma, Python, AI, Productivity]
-excerpt: "Meet Raphael: a cockpit-style HUD widget for KDE Plasma that acts as an aggressive, sardonically supportive ADHD cognitive advisor."
+excerpt: "A cockpit-style HUD widget for KDE Plasma that acts as an aggressive, sardonically supportive ADHD cognitive advisor."
 cover: /assets/img/raphael-hud.png
 ---
 
-We've all been there. You sit down to update code or write a technical doc. You open a browser tab to check a reference, and twenty minutes later, you find yourself deep in a Wikipedia rabbit hole reading about the engineering of medieval trebuchets. 
+We've all been there. You sit down to write code or update a doc. You open a browser tab to check a reference, and twenty minutes later you're deep in a Wikipedia rabbit hole reading about medieval trebuchet engineering.
 
-Standard website blockers don’t work for engineers or power users. They are too easy to turn off, too rigid, and completely lack context. If you use a browser blocker, it blocks all of Chrome or none of it—incapable of separating a critical documentation page from a social media feed.
+Standard website blockers don't work for engineers or power users — they're too easy to disable, too rigid, and completely context-blind. Block Chrome and you lose everything: the critical docs page *and* the social media feed you were trying to avoid.
 
-That is why I built **Raphael**. 
+That's why I built **Raphael**.
 
-Raphael is a sardonically supportive **ADHD cognitive advisor** that integrates directly into your Linux desktop environment as a high-tech, cockpit-style HUD. It watches your active workspace context, dynamically categorizes your behavior using an LLM pipeline, calls out your focus slippages with ruthless surgical wit, and locks your screen with interactive psychological challenges when you drift too far off track.
-
----
-
-## The Core Concept: A Hardware-Informed Focus Matrix
-
-Raphael splits its footprint between a lightweight desktop presentation layer and an analytics core daemon:
-
-1. **The QML HUD Frontend:** A set of custom, frosted-glass overlay panels (`leftQuotePanel`, `rightInsightPanel`) pinned above your windows using **KDE Plasma 6 (Qt Quick/QML)**. It streams live advisor observations, active telemetry data, and your real-time **Focus Efficiency Rating**.
-2. **The Flask Core Daemon:** A zero-overhead background engine that polls system states every few seconds. It parses active window properties, handles tracking triggers, serves a local analytical telemetry hub, and runs real-time classification requests against a blazing-fast **Groq AI pipeline**.
+Raphael is a sardonically supportive **ADHD cognitive advisor** that integrates directly into your Linux desktop as a cockpit-style HUD. It watches your active workspace context, dynamically categorizes your behavior using an LLM pipeline, calls out focus slippages with ruthless wit, and locks your screen with interactive psychological challenges when you drift too far off track.
 
 ---
 
-## Key Performance Features
+## Core Architecture
 
-### 🔍 Deep Window & Tab Dissection
-Most focus trackers simply read standard process strings like `google-chrome` or `vscodium`. Raphael uses direct active window parsing (optimized for XWayland environments) to extract the **exact browser tab title** or current file pathway, discarding the underlying application wrap entirely. Raphael knows whether you're browsing `github.com/pulls` or reading an article on an entertainment blog.
+Raphael splits its footprint between a lightweight desktop layer and a background analytics daemon.
 
-### ⚡ The Distraction Challenge
-When the polling module detects you've lingered on an unapproved window for longer than your defined threshold (e.g., 30 seconds), it overrides your layout with an intense focus interruption. Instead of a basic warning banner, Raphael fires a pop-up and an alert mechanism that forces you to textually justify your action:
+**QML HUD Frontend** — A pair of frosted-glass overlay panels (`leftQuotePanel`, `rightInsightPanel`) pinned above your windows using KDE Plasma 6 (Qt Quick/QML). Streams live advisor observations, active telemetry, and your real-time **Focus Efficiency Rating**.
+
+**Flask Core Daemon** — A zero-overhead background engine polling system state every few seconds. Parses active window properties, handles tracking triggers, serves a local analytics dashboard, and fires real-time classification requests against a **Groq AI pipeline**.
+
+---
+
+## Key Features
+
+### Deep Window & Tab Dissection
+
+Most focus trackers read process strings like `google-chrome` or `vscodium` and stop there. Raphael uses direct active window parsing (optimized for XWayland) to extract the **exact browser tab title** or current file path — stripping the application wrapper entirely. It knows the difference between `github.com/pulls` and an entertainment blog.
+
+### The Distraction Challenge
+
+When the polling module detects you've lingered on an unapproved window past your threshold (default: 30 seconds), it overrides your layout with a focus interruption. Not a warning banner — a pop-up that forces you to textually justify your action:
 
 > *"Explain exactly how this tab aids your immediate deployment target, or return to work."*
 
-You don't get a free pass; your session logging metrics don't resume until you justify your shift or exit the window.
+Session metrics don't resume until you justify the context switch or close the window.
 
-### 🧠 Dynamic Mid-Session Context Shifting
-You don't have to rebuild configuration files to tweak your environment. Raphael listens to dynamic natural language updates. Using the integrated **Chat Console**, you can alter rules mid-session on the fly:
-* *"Remind me to stretch every 20 minutes."*
-* *"From now on, ignore my Spotify track changes."*
-* *"Escalate the aggression matrix; I'm drifting."*
+### Dynamic Mid-Session Context Shifting
+
+You don't need to edit config files to change Raphael's behavior mid-session. The integrated **Chat Console** accepts natural language updates on the fly:
+
+- *"Remind me to stretch every 20 minutes."*
+- *"From now on, ignore Spotify track changes."*
+- *"Escalate the aggression matrix — I'm drifting."*
 
 ---
 
-## Architecture Blueprint
-
-The framework maps cleanly to modern Linux system architectures, relying on a robust pipeline across data storage, backend monitoring, and Qt-native presentation bindings:
-
+## Project Structure
 
 ```
-
 raphael/
-├── run.sh                 # Environment setup and daemon launch controller
-├── daemon.log             # Main background log output
-├── contents/
-│   ├── ui/
-│   │   ├── main.qml       # Core Plasma widget and control surface
-│   │   ├── ChatPanel.qml  # Interactivity shell for rule overrides
-│   │   └── daemon/
-│   │       ├── raphael_core_daemon.py  # Active parser, Flask app, Groq wrapper
-│   │       └── dashboard.html          # Local analytics telemetry asset
-│   └── config/
-│       └── main.xml       # Preserved state schemas for the desktop layer
-
+├── run.sh                  # Environment setup and daemon launcher
+├── daemon.log              # Main background log output
+└── contents/
+    ├── ui/
+    │   ├── main.qml        # Core Plasma widget and control surface
+    │   ├── ChatPanel.qml   # Chat shell for mid-session rule overrides
+    │   └── daemon/
+    │       ├── raphael_core_daemon.py   # Parser, Flask app, Groq wrapper
+    │       └── dashboard.html           # Local analytics telemetry UI
+    └── config/
+        └── main.xml        # Preserved state schemas for the desktop layer
 ```
 
-The underlying pipeline relies on telemetry loops that continuously report system statistics, which look like this under the hood:
+---
 
-```liquid
-{% capture demo %}
-// A look inside the QML telemetry parsing engine
+## Under the Hood: QML Telemetry Sync
+
+The HUD polls the Flask daemon on a tight loop and pushes live data directly into the overlay:
+
+```javascript
 function syncNetworkPayload() {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "[http://127.0.0.1:5757/telemetry_v3?caring=](http://127.0.0.1:5757/telemetry_v3?caring=)" + caringLevel + "&ai_track=" + aiWindowTracking);
+    xhr.open(
+        "GET",
+        "http://127.0.0.1:5757/telemetry_v3?caring=" + caringLevel + "&ai_track=" + aiWindowTracking
+    );
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
             var res = JSON.parse(xhr.responseText);
-            
-            // Push direct streaming attributes to HUD variables
-            sharedState.currentQuote = res.quote.text;
+
+            sharedState.currentQuote       = res.quote.text;
             sharedState.focusEfficiencyText = (res.efficiency * 100) + "% FOCUS";
-            
+
             console.log("HUD Matrix Sync Complete // Status: " + res.status);
         }
-    }
+    };
     xhr.send();
 }
-{% endcapture %}
-{% include playground.html title="QML Network Protocol Sync" code=demo %}
-
 ```
 
 ---
 
-## The Web Telemetry Dashboard
+## Web Telemetry Dashboard
 
-If you want to view longer-term behavioral patterns, the local Flask daemon hosts a full tracking dashboard natively at `http://127.0.0.1:5757/dashboard`.
+The Flask daemon also hosts a full session dashboard at `http://127.0.0.1:5757/dashboard`, built with **Chart.js**:
 
-Using **Chart.js**, the cockpit aggregates session statistics into visible pipelines:
-
-* **Focus Timeline:** A minute-by-minute historical view charting active focus against structural distractions.
-* **Window Breakdown:** A clean, structural doughnut graph showing time distribution by file pathways, browser tabs, and applications.
-* **Session Goals:** Dynamic, checkable item metrics generated on session creation.
+- **Focus Timeline** — Minute-by-minute view charting active focus against distractions.
+- **Window Breakdown** — Doughnut graph showing time distribution across file paths, browser tabs, and applications.
+- **Session Goals** — Checkable goal metrics generated at session start.
 
 ---
 
-## Deployment Mechanics
+## Getting Started
 
-To deploy the workspace to your local environment, ensure you are running **KDE Plasma 6.0+** and your terminal environment has a valid API token set up:
+Requirements: **KDE Plasma 6.0+** and a valid Groq API key.
 
 ```bash
-# 1. Clone the core layout
-git clone [https://github.com/prathameshrp/Raphael.git](https://github.com/prathameshrp/Raphael.git)
+# Clone the repo
+git clone https://github.com/prathameshrp/Raphael.git
 cd Raphael
 
-# 2. Bind your execution token
-export GROQ_API_KEY="your_secure_api_key_here"
+# Set your API key
+export GROQ_API_KEY="your_api_key_here"
 
-# 3. Fire up the orchestration runner
+# Launch the daemon
 chmod +x run.sh
 ./run.sh
-
 ```
 
-The setup script checks running port constraints, terminates old instances safely, sets up file structures, and activates the background python process. From there, simply add the **Raphael Widget** straight from your system's desktop panel tool picker.
+After the daemon starts, add the **Raphael Widget** from your desktop panel's widget picker.
 
-If you make modifications to layout files or want to check raw data behaviors, you can hard-reload your Plasma window components without breaking the backend data logs:
+To reload the Plasma shell after editing QML files (without interrupting the backend):
 
 ```bash
 killall plasmashell && kstart plasmashell
-
 ```
 
 ---
 
-## Open Source Blueprint
+## Open Source
 
-Raphael was built for those of us who need more than a simple stopwatch to stay on track. If you want to configure custom modules, tweak the AI cognitive persona rules, or optimize the Wayland window reading extensions, come check out the open-source repository!
+Raphael was built for those of us who need more than a stopwatch to stay on track. If you want to configure custom modules, tweak the AI persona rules, or extend the Wayland window reader — the repo is open.
 
-👉 **[GitHub - prathameshrp/Raphael](https://github.com/prathameshrp/Raphael)**
+👉 **[github.com/prathameshrp/Raphael](https://github.com/prathameshrp/Raphael)**
 
-*Got feature ideas or tailored rulesets? Open an issue or drop a PR! If Raphael has successfully guilted you back into finishing your codebase today, consider dropping a ⭐️ on the project.*
-
-```
-
-```
+If Raphael has successfully guilted you back into finishing your codebase today, consider dropping a ⭐️.
