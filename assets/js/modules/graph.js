@@ -84,53 +84,85 @@
   var guideGrid = new THREE.LineSegments(gridGeom, gridMat);
   scene.add(guideGrid);
 
-  // ── AC2 Background Floating Slat Columns ──────────────────────
+  // ── AC2 Background Mahal Silhouette & Data ──────────────────────
   var backgroundGroup = new THREE.Group();
   scene.add(backgroundGroup);
 
-  var bgSlatGeom = new THREE.BoxGeometry(45, 1.4, 8);
-  var colConfigs = [];
-  // Stack 35 database timeline columns in the background to look like a massive mainframe rack
-  for (var c = 0; c < 35; c++) {
-    colConfigs.push({
-      x: (Math.random() - 0.5) * 650,
-      z: -100 - Math.random() * 280,
-      yOffset: (Math.random() - 0.5) * 140,
-      count: Math.floor(Math.random() * 12) + 20 // 20 to 32 slats tall!
+  var baseUrl = section.getAttribute('data-baseurl') || '/';
+  if (!baseUrl.endsWith('/')) baseUrl += '/';
+  
+  var textureLoader = new THREE.TextureLoader();
+  textureLoader.load(baseUrl + 'assets/img/mahal.jpg', function(texture) {
+    // Determine image aspect ratio and create a plane (e.g. roughly 16:9 or 4:3)
+    var mahalGeom = new THREE.PlaneGeometry(800, 500);
+    // Dark silhouette material
+    var mahalMat = new THREE.MeshBasicMaterial({
+      map: texture,
+      transparent: true,
+      opacity: 0.22, // dim like a ghost
+      blending: THREE.MultiplyBlending,
+      color: new THREE.Color(0x33261a) // dark brownish tint to match the site's palette
     });
+    // On dark mode, use an additive or different blend if preferred, but multiply on dark might be invisible.
+    if (document.documentElement.getAttribute('data-theme') === 'dark') {
+      mahalMat.blending = THREE.AdditiveBlending;
+      mahalMat.color = new THREE.Color(0x443525);
+      mahalMat.opacity = 0.12;
+    }
+    
+    var mahalMesh = new THREE.Mesh(mahalGeom, mahalMat);
+    // Position deep in background
+    mahalMesh.position.set(0, 50, -350);
+    backgroundGroup.add(mahalMesh);
+  });
+
+  var homeDataEl = document.getElementById('home-data');
+  var homeData = null;
+  if (homeDataEl) {
+    try { homeData = JSON.parse(homeDataEl.textContent); } catch (e) {}
   }
 
-  var isDarkTheme = document.documentElement.getAttribute('data-theme') === 'dark';
-  var initialBgColor = isDarkTheme ? 0xffffff : 0x8c826c;
-
-  colConfigs.forEach(function (cfg) {
-    var colGroup = new THREE.Group();
-    colGroup.position.set(cfg.x, cfg.yOffset, cfg.z);
-    
-    var dy = 13.5;
-    var colAngle = Math.random() * Math.PI;
-    for (var i = 0; i < cfg.count; i++) {
-      var bgMat = new THREE.MeshStandardMaterial({
-        color: new THREE.Color(initialBgColor),
-        transparent: true,
-        opacity: 0.28, // highly visible background simulation slats
-        roughness: 0.5,
-        metalness: 0.1
-      });
-      var bgMesh = new THREE.Mesh(bgSlatGeom, bgMat);
-      
-      // Calculate boundary chaos for off-screen drift
-      var distFromCenter = Math.abs(i - cfg.count / 2);
-      var factor = Math.pow(distFromCenter / (cfg.count / 2), 1.6); // zero at middle, high at top/bottom
-      var chaosX = Math.sin(i * 0.6) * factor * 26;
-      var chaosZ = Math.cos(i * 0.6) * factor * 26;
-
-      bgMesh.position.set(chaosX, (i - cfg.count / 2) * dy, chaosZ);
-      // Twist slats more dynamically as they drift off screen
-      bgMesh.rotation.set(0.12, colAngle + i * 0.03 + Math.PI / 2 + factor * 0.55, 0.04);
-      colGroup.add(bgMesh);
+  var floatingTexts = [];
+  if (homeData) {
+    if (homeData.stack) {
+      homeData.stack.forEach(function(skill) { floatingTexts.push(skill); });
     }
-    backgroundGroup.add(colGroup);
+    if (homeData.stats) {
+      homeData.stats.forEach(function(s) { floatingTexts.push(s.value + s.suffix + " " + s.label); });
+    }
+  }
+
+  var dataSprites = [];
+  function createTextSprite(text, fontSize) {
+    var canvas = document.createElement('canvas');
+    var ctx = canvas.getContext('2d');
+    ctx.font = fontSize + "px 'JetBrains Mono', monospace";
+    var textWidth = ctx.measureText(text).width;
+    canvas.width = textWidth + 40;
+    canvas.height = fontSize * 1.5;
+    ctx.font = fontSize + "px 'JetBrains Mono', monospace";
+    ctx.fillStyle = cssVar('--text-mute', '#8c826c');
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(text, canvas.width/2, canvas.height/2);
+
+    var tex = new THREE.CanvasTexture(canvas);
+    var spriteMat = new THREE.SpriteMaterial({ map: tex, transparent: true, opacity: 0.8 });
+    var sprite = new THREE.Sprite(spriteMat);
+    sprite.scale.set(canvas.width / 4, canvas.height / 4, 1);
+    return sprite;
+  }
+
+  floatingTexts.forEach(function(txt, i) {
+    var sprite = createTextSprite(txt, 32);
+    // Distribute in a cylinder around the mahal
+    var angle = (i / floatingTexts.length) * Math.PI * 2;
+    var radius = 280 + Math.random() * 80;
+    var yOffset = (Math.random() - 0.5) * 250;
+    sprite.position.set(Math.cos(angle) * radius, yOffset, -350 + Math.sin(angle) * radius);
+    sprite.userData = { angle: angle, radius: radius, speed: 0.0005 + Math.random() * 0.001, yOffset: yOffset };
+    backgroundGroup.add(sprite);
+    dataSprites.push(sprite);
   });
 
   // Create 3D Box Slats for foreground active posts
@@ -698,6 +730,16 @@
       p.mesh.scale.y += (targetScale - p.mesh.scale.y) * 0.08;
       p.mesh.scale.z += (targetScale - p.mesh.scale.z) * 0.08;
     });
+
+    if (typeof dataSprites !== 'undefined') {
+      dataSprites.forEach(function(sprite) {
+        sprite.userData.angle += sprite.userData.speed;
+        sprite.position.x = Math.cos(sprite.userData.angle) * sprite.userData.radius;
+        sprite.position.z = -350 + Math.sin(sprite.userData.angle) * sprite.userData.radius;
+        // add slight bobbing effect
+        sprite.position.y = sprite.userData.yOffset + Math.sin(time * 2 + sprite.userData.angle) * 15;
+      });
+    }
 
     // Animus background columns movable with respect to cursor hover
     backgroundGroup.rotation.y = pointerParallax.x * 0.42;

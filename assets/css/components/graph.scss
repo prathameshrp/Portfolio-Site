@@ -47,10 +47,18 @@
   background: transparent;
   border: none;
   box-shadow: none;
-  transform: scale(var(--intro-scale, 1)) translate3d(0, 0, var(--intro-translate-z, 0px)) rotateX(var(--intro-rotate-x, 0deg)) rotateY(var(--intro-rotate-y, 0deg));
+  transform: scale(var(--intro-scale, 1)) translate3d(0, calc(-8vh + var(--intro-translate-y, 0px)), var(--intro-translate-z, 0px)) rotateX(var(--intro-rotate-x, 0deg)) rotateY(var(--intro-rotate-y, 0deg));
   transform-style: preserve-3d;
   transform-origin: center;
   transition: transform 0.1s ease-out;
+}
+
+.constellation__recenter-btn {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 20;
+  pointer-events: auto;
 }
 
 .constellation__eyebrow {

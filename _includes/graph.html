@@ -9,7 +9,7 @@
 {%- endfor -%}
 {%- assign all_tags = all_tags | uniq | sort -%}
 
-<section class="constellation" data-graph-section>
+<section class="constellation" data-graph-section data-baseurl="{{ '/' | relative_url }}">
   <div class="constellation__loader" data-graph-loader>
     <div class="loader-content">
       <div class="animus-sync-logo">
@@ -39,9 +39,12 @@
       <p class="constellation__lede">An interactive archive of my thoughts, projects, and designs. Scroll down to initialize the database timeline.</p>
       <div class="constellation__cta">
         <a class="btn btn--primary" href="{{ '/blog/' | relative_url }}">Browse as a list {% include icon.html name="arrow" %}</a>
-        <button class="btn btn--ghost" type="button" data-graph-reset>Recenter map</button>
       </div>
     </div>
+    
+    <button class="btn btn--ghost constellation__recenter-btn" type="button" data-graph-reset>
+      Recenter map
+    </button>
   </div>
 
   <div class="constellation__menu" data-graph-menu>
