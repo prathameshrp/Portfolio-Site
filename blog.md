@@ -18,7 +18,7 @@ description: Articles on software engineering, systems design, and web developme
   <div class="container">
     <header class="page-head reveal">
       <h1 class="page-head__title">The Blog</h1>
-      <p class="page-head__subtitle">Notes on building software — systems, performance, developer experience, and the occasional deep dive with runnable code.</p>
+      <p class="page-head__subtitle">Notes on building software, systems, performance, developer experience, and the occasional deep dive with runnable code.</p>
     </header>
 
     <div class="blog-controls reveal">

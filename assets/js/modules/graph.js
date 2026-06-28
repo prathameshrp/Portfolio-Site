@@ -30,9 +30,9 @@
       x: 0, y: 0, z: 0
     };
   });
-  
+
   var postsList = nodes.filter(function (n) { return n.type === 'post'; });
-  
+
   // Arrange posts helical staircase
   postsList.forEach(function (p, index) {
     var ratio = index / (postsList.length - 1 || 1);
@@ -93,7 +93,7 @@
 
   // ── Chand Bibi Mahal silhouette (transparent PNG) ──────────────────────────
   var textureLoader = new THREE.TextureLoader();
-  textureLoader.load(baseUrl + 'assets/img/mahal-silhouette.png', function(texture) {
+  textureLoader.load(baseUrl + 'assets/img/colloseum.png', function (texture) {
     texture.colorSpace = THREE.SRGBColorSpace;
     // Wide panoramic plane matching the silhouette aspect ratio (~2:1)
     var mahalGeom = new THREE.PlaneGeometry(1000, 500);
@@ -127,7 +127,7 @@
   var isDarkTheme = document.documentElement.getAttribute('data-theme') === 'dark';
   var initialBgColor = isDarkTheme ? 0xffffff : 0x8c826c;
 
-  colConfigs.forEach(function(cfg) {
+  colConfigs.forEach(function (cfg) {
     var colGroup = new THREE.Group();
     colGroup.position.set(cfg.x, cfg.yOffset, cfg.z);
 
@@ -160,16 +160,16 @@
   var homeDataEl = document.getElementById('home-data');
   var homeData = null;
   if (homeDataEl) {
-    try { homeData = JSON.parse(homeDataEl.textContent); } catch (e) {}
+    try { homeData = JSON.parse(homeDataEl.textContent); } catch (e) { }
   }
 
   var floatingTexts = [];
   if (homeData) {
     if (homeData.stack) {
-      homeData.stack.forEach(function(skill) { floatingTexts.push(skill); });
+      homeData.stack.forEach(function (skill) { floatingTexts.push(skill); });
     }
     if (homeData.stats) {
-      homeData.stats.forEach(function(s) { floatingTexts.push(s.value + s.suffix + ' ' + s.label); });
+      homeData.stats.forEach(function (s) { floatingTexts.push(s.value + s.suffix + ' ' + s.label); });
     }
   }
 
@@ -193,7 +193,7 @@
     return sprite;
   }
 
-  floatingTexts.forEach(function(txt, i) {
+  floatingTexts.forEach(function (txt, i) {
     var sprite = createTextSprite(txt, 32);
     var angle = (i / floatingTexts.length) * Math.PI * 2;
     var radius = 200 + Math.random() * 80;
@@ -236,7 +236,7 @@
     if (scene) {
       scene.fog.color.set(COL.bg);
       if (guideGrid) guideGrid.material.color.set(COL.mute);
-      
+
       var bgVal = isDark ? 0xffffff : 0x8c826c;
       backgroundGroup.children.forEach(function (colGroup) {
         colGroup.children.forEach(function (mesh) {
@@ -376,7 +376,7 @@
   });
 
   window.graph = {
-    setCameraFromScroll: function(progress) {
+    setCameraFromScroll: function (progress) {
       // Show/hide menu based on progress to avoid initial overlap
       if (menuEl) {
         if (progress < 0.10) {
@@ -410,14 +410,14 @@
         var post = postsList[idx];
         if (post) {
           showDetailsForPost(post);
-          
+
           var targetPos = post.mesh.position.clone();
           // Offset camera to the right so slats appear on the left-center viewport next to index titles
           var rightX = Math.cos(targetTheta);
           var rightZ = -Math.sin(targetTheta);
           targetPos.x += rightX * 32;
           targetPos.z += rightZ * 32;
- 
+
           targetCameraTarget.copy(targetPos);
           targetRadius = 135; // zoom in on slat
           targetTheta = post.timelineAngle + Math.PI / 3.5;
@@ -448,7 +448,7 @@
         var rectM = menuAnchor.getBoundingClientRect();
         var rectD = detailsAnchor.getBoundingClientRect();
         var parentRect = linesSvg.getBoundingClientRect();
-        
+
         var xm = rectM.left - parentRect.left + rectM.width / 2;
         var ym = rectM.top - parentRect.top + rectM.height / 2;
 
@@ -457,11 +457,11 @@
 
         // Unified HUD Path: Left Menu -> 3D Slat -> Right Details Card
         var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        path.setAttribute('d', 
-          'M ' + xm + ' ' + ym + 
-          ' L ' + (xm + 25) + ' ' + ym + 
-          ' L ' + x1 + ' ' + y1 + 
-          ' L ' + (xd - 25) + ' ' + yd + 
+        path.setAttribute('d',
+          'M ' + xm + ' ' + ym +
+          ' L ' + (xm + 25) + ' ' + ym +
+          ' L ' + x1 + ' ' + y1 +
+          ' L ' + (xd - 25) + ' ' + yd +
           ' L ' + xd + ' ' + yd
         );
         path.setAttribute('stroke', COL.accent);
@@ -473,7 +473,7 @@
         // Diamond at menu
         var diamondM = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
         var dSize = 4.5;
-        diamondM.setAttribute('points', 
+        diamondM.setAttribute('points',
           (xm - dSize) + ',' + ym + ' ' + xm + ',' + (ym - dSize) + ' ' + (xm + dSize) + ',' + ym + ' ' + xm + ',' + (ym + dSize)
         );
         diamondM.setAttribute('fill', COL.accent);
@@ -481,12 +481,12 @@
 
         // Diamond at details
         var diamondD = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-        diamondD.setAttribute('points', 
+        diamondD.setAttribute('points',
           (xd - dSize) + ',' + yd + ' ' + xd + ',' + (yd - dSize) + ' ' + (xd + dSize) + ',' + yd + ' ' + xd + ',' + (yd + dSize)
         );
         diamondD.setAttribute('fill', COL.accent);
         linesSvg.appendChild(diamondD);
-        
+
         // Pulsing dot at slat center
         var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
         circle.setAttribute('cx', x1);
@@ -505,7 +505,7 @@
       targetRadius = 135;
       targetTheta = Math.atan2(targetPos.x, targetPos.z);
       targetPhi = 0.18;
-      
+
       var dist = camera.position.distanceTo(targetPos);
       if (dist < 150 && flightNode.url) {
         window.location.href = flightNode.url;
@@ -565,7 +565,7 @@
       vector.project(camera);
       var tx = (vector.x * 0.5 + 0.5) * W + 12;
       var ty = (-(vector.y * 0.5) + 0.5) * H + 12;
-      
+
       var tw = tooltip.offsetWidth, th = tooltip.offsetHeight;
       if (tx + tw > W) tx -= tw + 24;
       if (ty + th > H) ty -= th + 24;
@@ -662,11 +662,11 @@
   var glitchTarget = document.querySelector('[data-glitch-target]');
   if (glitchTarget) {
     var phrases = [
-      "a renaissance engineer",
-      "an artist in code",
-      "a design architect",
-      "a history explorer",
-      "a builder of worlds"
+      "a software engineer",
+      "a student",
+      "an art enthusiast",
+      "a poet",
+      "a writer"
     ];
     var phraseIdx = 0;
     var chars = "$#@%&01ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -675,7 +675,7 @@
       var nextPhrase = phrases[(phraseIdx + 1) % phrases.length];
       var length = Math.max(glitchTarget.textContent.length, nextPhrase.length);
       var current = glitchTarget.textContent;
-      
+
       var frame = 0;
       var maxFrames = 10;
       var interval = setInterval(function () {
@@ -705,7 +705,7 @@
   var loaderBar = document.querySelector('[data-loader-bar]');
   var loaderPct = document.querySelector('[data-loader-pct]');
   var loaderStatus = document.querySelector('[data-loader-status]');
-  
+
   if (loaderEl && loaderBar && loaderPct) {
     document.documentElement.classList.add('animus-loading');
     var pct = 0;
@@ -716,18 +716,18 @@
       "COMPILING SHARD GRAPH...",
       "SYSTEM DECRYPTION SYNCED"
     ];
-    
+
     var progressInterval = setInterval(function () {
       pct += Math.floor(Math.random() * 4) + 3; // increments by 3-6%
       if (pct >= 100) {
         pct = 100;
         clearInterval(progressInterval);
         if (loaderStatus) loaderStatus.textContent = statusPhrases[statusPhrases.length - 1];
-        
+
         setTimeout(function () {
           loaderEl.classList.add('fade-out');
           document.documentElement.classList.remove('animus-loading');
-          setTimeout(function() { loaderEl.style.display = 'none'; }, 600);
+          setTimeout(function () { loaderEl.style.display = 'none'; }, 600);
         }, 300);
       } else {
         loaderBar.style.width = pct + "%";
@@ -771,7 +771,7 @@
     });
 
     if (typeof dataSprites !== 'undefined') {
-      dataSprites.forEach(function(sprite) {
+      dataSprites.forEach(function (sprite) {
         sprite.userData.angle += sprite.userData.speed;
         sprite.position.x = Math.cos(sprite.userData.angle) * sprite.userData.radius;
         sprite.position.z = -350 + Math.sin(sprite.userData.angle) * sprite.userData.radius;
