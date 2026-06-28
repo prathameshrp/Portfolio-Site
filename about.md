@@ -13,7 +13,6 @@ about the things I build and learn.
 - **Systems & backend** - APIs, data modeling, performance, and the boring-but-important stuff that keeps things running.
 - **Web & frontend** - building interfaces that feel fast and look good without a mountain of JavaScript.
 - **Developer experience** - tooling, automation, and workflows that make the day-to-day better.
-- **Personal experience** - About life and everything in general, this is also my public journal.
 
 
 ## Elsewhere

@@ -1,6 +1,6 @@
 ---
 title: "Set Cover Meets Ant Colony: How We Optimized Multi-Store Delivery Routes"
-date: 2026-06-29 10:00:00 +0530
+date: 2025-10-10 10:00:00 +0530
 tags: [Algorithms, Optimization, Research, Python]
 excerpt: "A breakdown of our published paper comparing a classical set cover + TSP formulation against Ant Colony Optimization for last-mile delivery — what we built, what we found, and why the answer isn't one or the other."
 cover: /assets/img/aco-delivery.png

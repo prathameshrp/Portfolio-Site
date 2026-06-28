@@ -664,9 +664,11 @@
     var phrases = [
       "a software engineer",
       "a student",
-      "an art enthusiast",
-      "a poet",
-      "a writer"
+      "an AI enthusiast",
+      "a developer",
+      "backend engineer",
+      "solution engineer",
+      "Prathamesh Patil"
     ];
     var phraseIdx = 0;
     var chars = "$#@%&01ABCDEFGHIJKLMNOPQRSTUVWXYZ";
