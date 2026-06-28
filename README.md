@@ -1,18 +1,12 @@
-# B-logs by Prathamesh — developer blog
-
-A minimal-but-colorful developer blog built with **Jekyll 4**, deployed to
-**GitHub Pages** via **GitHub Actions**. Aurora dark theme, scroll animations,
-client-side search, skeleton loaders, and **runnable code playgrounds** inside
-posts.
+# B-logs by Prathamesh — developer blog site
 
 Live at: **https://prathameshrp.github.io/developer-site/**
 
 ---
 
-## ✍️ Publishing a blog post (the whole workflow)
-
+## Writing posts reference for later -
 1. Create a Markdown file in `_posts/` named `YYYY-MM-DD-your-title.md`.
-2. Add front matter:
+2. front matter format:
 
    ```yaml
    ---
@@ -24,15 +18,8 @@ Live at: **https://prathameshrp.github.io/developer-site/**
    ---
    ```
 
-3. Write your content below the front matter.
-4. `git push` to `main`. GitHub Actions builds and deploys automatically.
 
-That's it — **drop a file in, push, it's live.** Topics organize themselves: any
-tag you use shows up on the `/tags/` page and in the blog filter bar.
-
-### Runnable code playground
-
-Inside a post, make any JS snippet runnable:
+### code playground
 
 ```liquid
 {% capture demo %}
@@ -42,12 +29,8 @@ console.log("hello from the browser");
 {% include playground.html title="Try it" code=demo %}
 ```
 
-Regular fenced code blocks (```` ```js ````, ```` ```python ````, etc.) get
-syntax highlighting, a filename/language bar, and a copy button automatically.
-
 ---
-
-## 🧑‍💻 Local development
+### Run Locally
 
 ```bash
 bundle install              # one-time
@@ -81,7 +64,7 @@ assets/
 .github/workflows/       CI (PR build check) + Deploy (Pages)
 ```
 
-## 🎨 Customizing
+## Customizing
 
 - **Colors / theme:** `assets/css/base/variables.scss`
 - **Navbar links:** `_data/navigation.yml`
@@ -89,14 +72,3 @@ assets/
 - **Home hero / stats / stack:** `_data/home.yml`
 - **Contact form:** set a [Formspree](https://formspree.io) ID in `contact.md`
   front matter (`form_id`); leave blank to show a `mailto:` link instead.
-
-## 🚀 Deployment notes
-
-This is a **project page**, so `baseurl: /developer-site` in `_config.yml`.
-The deploy workflow also passes the Pages base path automatically.
-
-To enable Pages: repo **Settings → Pages → Build and deployment → Source:
-GitHub Actions**. Then every push to `main` ships.
-
-If you later move to a user page (`prathameshrp.github.io`) or a custom domain,
-set `baseurl: ""` and update `url` accordingly.
