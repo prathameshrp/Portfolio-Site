@@ -1,0 +1,397 @@
+// ─────────────────────────────────────────────────────────────
+// Assassin's Creed 2 – Animus Terminal Global Effects
+// Applied across all sections and pages
+// ─────────────────────────────────────────────────────────────
+
+// ── Scan Lines (CRT overlay) ─────────────────────────────────
+.animus-scanlines {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  mix-blend-mode: multiply;
+
+  [data-theme="dark"] & {
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 2px,
+      rgba(255, 255, 255, 0.015) 2px,
+      rgba(255, 255, 255, 0.015) 4px
+    );
+    mix-blend-mode: screen;
+  }
+}
+
+// ── Vignette (dark edge fade like a monitor) ─────────────────
+.animus-vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 55%,
+    rgba(0, 0, 0, 0.12) 100%
+  );
+}
+
+// ── HUD Corner Brackets Mixin ────────────────────────────────
+// Used on panels to give them the Animus targeting bracket feel
+@mixin hud-brackets($color: var(--text-mute), $size: 12px, $thickness: 1.5px, $offset: -1px) {
+  &::before, &::after {
+    content: "";
+    position: absolute;
+    width: $size;
+    height: $size;
+    border-color: $color;
+    border-style: solid;
+    pointer-events: none;
+    z-index: 3;
+    transition: border-color 0.3s var(--ease), transform 0.3s var(--ease);
+  }
+  &::before {
+    top: $offset; left: $offset;
+    border-width: $thickness 0 0 $thickness;
+  }
+  &::after {
+    bottom: $offset; right: $offset;
+    border-width: 0 $thickness $thickness 0;
+  }
+}
+
+// ── Section-Level Terminal Headers ───────────────────────────
+// Make every page-head, post-hero, etc. feel like a database terminal
+.page-head, .post__hero {
+  position: relative;
+}
+
+.page-head__title, .post__title {
+  font-family: var(--font-logo) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+// ── Terminal Telemetry Bar ────────────────────────────────────
+// Adds a subtle monospace system status line before sections
+.section-head::before {
+  content: "// DATABASE QUERY ACTIVE //";
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-mute);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  opacity: 0.6;
+}
+
+// ── Navbar Terminal Treatment ────────────────────────────────
+.navbar {
+  border-bottom: 2px solid var(--border-strong) !important;
+  
+  .navbar__link {
+    font-family: var(--font-logo);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.85rem;
+    border-radius: 0px;
+
+    &:hover {
+      background: var(--surface);
+    }
+
+    &.is-active::after {
+      border-radius: 0px;
+      height: 2px;
+      background: var(--accent);
+    }
+  }
+
+  .navbar__logo {
+    border-radius: 2px;
+    box-shadow: none;
+  }
+
+  .navbar__title {
+    font-family: var(--font-logo);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+}
+
+// ── Post Cards: HUD Brackets & Terminal Info ─────────────────
+.post-card {
+  border-radius: 0px !important;
+  position: relative;
+  @include hud-brackets(var(--border-strong), 14px, 2px, -2px);
+
+  &:hover {
+    &::before, &::after {
+      border-color: var(--accent);
+    }
+    &::before { transform: translate(-2px, -2px); }
+    &::after  { transform: translate(2px, 2px); }
+  }
+}
+
+.post-card__media-hud {
+  border-radius: 0px !important;
+}
+
+.post-card__body {
+  position: relative;
+
+  // Corner data coordinates
+  &::after {
+    content: "◇ MEMORY SHARD";
+    position: absolute;
+    bottom: 8px;
+    right: 12px;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--text-mute);
+    opacity: 0.4;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+}
+
+// ── Project Cards: Terminal Treatment ─────────────────────────
+.project-card {
+  border-radius: 0px !important;
+  position: relative;
+  @include hud-brackets(var(--border-strong), 12px, 1.5px, -1px);
+
+  &:hover {
+    &::before, &::after {
+      border-color: var(--accent);
+    }
+    &::before { transform: translate(-2px, -2px); }
+    &::after  { transform: translate(2px, 2px); }
+  }
+}
+
+// ── Stats: Terminal Treatment ────────────────────────────────
+.stat {
+  border-radius: 0px !important;
+  position: relative;
+  @include hud-brackets(var(--border), 10px, 1.5px, -1px);
+}
+
+// ── CTA Band: Terminal Treatment ─────────────────────────────
+.cta-band__inner {
+  border-radius: 0px !important;
+}
+
+// ── Post Layout: Database File ───────────────────────────────
+.post__hero {
+  position: relative;
+  
+  &::before {
+    content: "// FILE ACCESSED // MEMORY SEQUENCE LOADED //";
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+    opacity: 0.65;
+  }
+}
+
+.post__back {
+  font-family: var(--font-mono) !important;
+  font-size: 0.78rem !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  
+  &::before {
+    content: "◇ ";
+  }
+}
+
+.post__cover {
+  border-radius: 0px !important;
+  border: 2px solid var(--text) !important;
+  position: relative;
+  @include hud-brackets(var(--text-mute), 16px, 2px, -2px);
+  
+  img {
+    border-radius: 0px !important;
+  }
+}
+
+.post__toc {
+  .post__toc-title {
+    font-family: var(--font-logo) !important;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.8rem !important;
+    
+    &::before {
+      content: "◇ ";
+      color: var(--accent);
+    }
+  }
+}
+
+.post__pager-link {
+  border-radius: 0px !important;
+  border: 2px solid var(--border) !important;
+  position: relative;
+  
+  &:hover {
+    border-color: var(--text) !important;
+  }
+  
+  strong {
+    font-family: var(--font-logo);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 0.88rem;
+  }
+}
+
+// ── Page Shell: Database Section ─────────────────────────────
+.page-shell {
+  position: relative;
+  
+  .page-head {
+    &::before {
+      content: "// SYSTEM MODULE // DATABASE ACTIVE //";
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+      opacity: 0.6;
+    }
+  }
+}
+
+// ── Blockquote: Intercepted Transmission ─────────────────────
+.prose blockquote {
+  border-radius: 0px !important;
+  border-left: 3px solid var(--accent) !important;
+  position: relative;
+  
+  &::before {
+    content: "◇ INTERCEPTED";
+    position: absolute;
+    top: -0.6em;
+    left: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: var(--bg);
+    padding: 0 0.4rem;
+  }
+}
+
+// ── Tables: Database Output ──────────────────────────────────
+.prose table {
+  border-radius: 0px !important;
+  border: 2px solid var(--text) !important;
+  
+  th {
+    font-family: var(--font-logo) !important;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.82rem;
+  }
+}
+
+// ── Inline Code: Memory Address ──────────────────────────────
+.prose :not(pre) > code {
+  border-radius: 2px !important;
+  border: 1px solid var(--border-strong) !important;
+}
+
+// ── Images in Prose: Archived Visual ─────────────────────────
+.prose img {
+  border-radius: 0px !important;
+  border: 2px solid var(--text) !important;
+}
+
+// ── Chips/Tags: Diamond Bullets ──────────────────────────────
+.chip {
+  border-radius: 2px !important;
+  font-family: var(--font-mono) !important;
+  text-transform: uppercase;
+  
+  &::before {
+    content: "◇ ";
+    font-size: 0.6em;
+    opacity: 0.6;
+  }
+}
+
+// ── Footer: System Terminal ──────────────────────────────────
+.footer {
+  border-top: 2px solid var(--border-strong) !important;
+  
+  .footer__brand-name {
+    font-family: var(--font-logo);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+}
+
+// ── Global Prose Heading Diamond Decorators ───────────────────
+.prose h2 {
+  position: relative;
+  
+  &::before {
+    content: "◇";
+    margin-right: 0.5rem;
+    color: var(--accent);
+    font-size: 0.75em;
+  }
+}
+
+// ── HR: Animus Divider ───────────────────────────────────────
+.prose hr {
+  background: none !important;
+  border: none !important;
+  height: auto !important;
+  text-align: center;
+  margin-block: 3rem !important;
+  
+  &::after {
+    content: "◇ ◇ ◇";
+    display: block;
+    font-size: 0.7rem;
+    color: var(--text-mute);
+    letter-spacing: 1em;
+    opacity: 0.5;
+  }
+}
+
+// ── List Bullets: Diamond Instead of Circles ─────────────────
+.prose ul li::before {
+  border-radius: 0px !important;
+  background: var(--accent) !important;
+  width: 5px !important;
+  height: 5px !important;
+  transform: rotate(45deg);
+  top: 0.7em !important;
+}
+
+// ── Search Dialog: Terminal Query ─────────────────────────────
+.search-dialog {
+  border-radius: 0px !important;
+  border: 2px solid var(--text) !important;
+}

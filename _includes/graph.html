@@ -64,16 +64,19 @@
 
   <div class="constellation__details" data-graph-details>
     <div class="details-card">
-      <div class="details-telemetry">
-        <span class="telemetry-label">// STAR NODE TELEMETRY ACTIVE //</span>
-        <span class="telemetry-coords" data-details-coords>COORD: [0, 0, 0]</span>
-      </div>
-      <span class="details-date"></span>
-      <h2 class="details-title"></h2>
-      <p class="details-excerpt"></p>
-      <div class="details-tags"></div>
-      <div class="details-actions">
-        <a class="btn btn--primary details-link" href="#">Read Full Post {% include icon.html name="arrow" %}</a>
+      <div class="details-image-container" data-details-image-container></div>
+      <div class="details-body">
+        <div class="details-telemetry">
+          <span class="telemetry-label">// STAR NODE TELEMETRY ACTIVE //</span>
+          <span class="telemetry-coords" data-details-coords>COORD: [0, 0, 0]</span>
+        </div>
+        <span class="details-date"></span>
+        <h2 class="details-title"></h2>
+        <p class="details-excerpt"></p>
+        <div class="details-tags"></div>
+        <div class="details-actions">
+          <a class="btn btn--primary details-link" href="#">Read Full Post {% include icon.html name="arrow" %}</a>
+        </div>
       </div>
     </div>
   </div>
@@ -114,7 +117,7 @@
   {
     "nodes": [
       {%- for post in site.posts -%}
-      {"id":"post-{{ forloop.index }}","type":"post","label":{{ post.title | jsonify }},"url":{{ post.url | relative_url | jsonify }},"date":{{ post.date | date: "%b %-d, %Y" | jsonify }},"tags":{{ post.tags | jsonify }},"weight":{{ post.tags | size }},"excerpt":{{ post.excerpt | jsonify }}}{%- unless forloop.last -%},{%- endunless -%}
+      {"id":"post-{{ forloop.index }}","type":"post","label":{{ post.title | jsonify }},"url":{{ post.url | relative_url | jsonify }},"date":{{ post.date | date: "%b %-d, %Y" | jsonify }},"tags":{{ post.tags | jsonify }},"weight":{{ post.tags | size }},"excerpt":{{ post.excerpt | jsonify }},"image":{% if post.image %}{{ post.image | relative_url | jsonify }}{% else %}null{% endif %}}{%- unless forloop.last -%},{%- endunless -%}
       {%- endfor -%}
       {%- if all_tags.size > 0 and site.posts.size > 0 -%},{%- endif -%}
       {%- for t in all_tags -%}

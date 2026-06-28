@@ -202,13 +202,41 @@
   var detailsExcerpt = detailsPanel ? detailsPanel.querySelector('.details-excerpt') : null;
   var detailsTags = detailsPanel ? detailsPanel.querySelector('.details-tags') : null;
   var detailsLink = detailsPanel ? detailsPanel.querySelector('.details-link') : null;
-  var detailsNext = detailsPanel ? detailsPanel.querySelector('.details-next') : null;
   var detailsCoords = detailsPanel ? detailsPanel.querySelector('[data-details-coords]') : null;
+  var detailsImageContainer = detailsPanel ? detailsPanel.querySelector('[data-details-image-container]') : null;
 
   var menuEl = document.querySelector('[data-graph-menu]');
   var menuButtons = menuEl ? menuEl.querySelectorAll('.menu-item') : [];
 
   var currentActivePost = null;
+
+  // Generate a deterministic placeholder SVG based on the post title
+  function generatePlaceholderSVG(title) {
+    var hash = 0;
+    for (var i = 0; i < title.length; i++) {
+      hash = ((hash << 5) - hash) + title.charCodeAt(i);
+      hash |= 0;
+    }
+    var hue = Math.abs(hash % 40) + 340; // warm red-brown range
+    var sat = 25 + Math.abs((hash >> 8) % 20);
+    var shapes = '';
+    for (var s = 0; s < 6; s++) {
+      var sx = Math.abs((hash >> (s * 4)) % 420);
+      var sy = Math.abs((hash >> (s * 3 + 2)) % 140);
+      var sr = 15 + Math.abs((hash >> (s * 2 + 1)) % 30);
+      shapes += '<circle cx="' + sx + '" cy="' + sy + '" r="' + sr + '" fill="hsl(' + ((hue + s * 25) % 360) + ',' + sat + '%,70%)" opacity="0.25"/>';
+    }
+    // Add a grid pattern overlay
+    for (var g = 0; g < 420; g += 60) {
+      shapes += '<line x1="' + g + '" y1="0" x2="' + g + '" y2="140" stroke="currentColor" stroke-width="0.5" opacity="0.08"/>';
+    }
+    for (var h = 0; h < 140; h += 35) {
+      shapes += '<line x1="0" y1="' + h + '" x2="420" y2="' + h + '" stroke="currentColor" stroke-width="0.5" opacity="0.08"/>';
+    }
+    // Add title text
+    shapes += '<text x="210" y="80" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="currentColor" opacity="0.35" letter-spacing="0.15em">' + esc(title.toUpperCase().substring(0, 30)) + '</text>';
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 140" style="color:var(--text-mute);background:var(--surface)">' + shapes + '</svg>';
+  }
 
   function showDetailsForPost(post) {
     if (!post) {
@@ -236,6 +264,14 @@
       if (detailsLink) detailsLink.href = post.url;
       if (detailsCoords) {
         detailsCoords.textContent = 'COORD: [' + Math.round(post.x) + ', ' + Math.round(post.y) + ', ' + Math.round(post.z) + ']';
+      }
+      // Populate image or placeholder
+      if (detailsImageContainer) {
+        if (post.image) {
+          detailsImageContainer.innerHTML = '<img src="' + esc(post.image) + '" alt="' + esc(post.label) + '">';
+        } else {
+          detailsImageContainer.innerHTML = generatePlaceholderSVG(post.label);
+        }
       }
       if (detailsTags) {
         detailsTags.innerHTML = '';

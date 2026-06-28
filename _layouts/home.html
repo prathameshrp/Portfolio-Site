@@ -7,30 +7,27 @@ layout: default
 </section>
 
 <section class="home-about-section">
-  <div class="container container--narrow" style="max-width: 720px; margin: 0 auto;">
-    <div class="about-card">
-      <div class="about-telemetry">// DOSSIER SYSTEM // USER_PROFILE ACTIVE</div>
-      {%- assign about_page = site.html_pages | where: "url", "/about/" | first -%}
-      {%- if about_page -%}
-        <div class="about-content prose">
-          {{ about_page.content | markdownify }}
-        </div>
-      {%- endif -%}
-      <div class="about-footer" style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; border-top: 1px solid var(--border); padding-top: 1rem; flex-wrap: wrap; gap: 1rem;">
-        <div class="about-footer-social" style="display: flex; gap: 0.8rem;">
-          {%- for s in site.data.social -%}
-            {%- if s.url and s.url != "" -%}
-              <a href="{{ s.url }}" class="icon-btn" aria-label="{{ s.name }}" target="_blank" rel="noopener">
-                {% include icon.html name=s.icon %}
-              </a>
-            {%- endif -%}
-          {%- endfor -%}
-        </div>
-        <div class="about-footer-copyright" style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--text-mute);">
-          &copy; {{ 'now' | date: "%Y" }} {{ site.author.name }}.
-        </div>
+  <div class="about-inner">
+    <h2 class="about-heading">About</h2>
+    {%- assign about_page = site.html_pages | where: "url", "/about/" | first -%}
+    {%- if about_page -%}
+      <div class="about-content prose">
+        {{ about_page.content | markdownify }}
+      </div>
+    {%- endif -%}
+    <div class="about-footer">
+      <div style="display: flex; gap: 0.8rem;">
+        {%- for s in site.data.social -%}
+          {%- if s.url and s.url != "" -%}
+            <a href="{{ s.url }}" class="icon-btn" aria-label="{{ s.name }}" target="_blank" rel="noopener">
+              {% include icon.html name=s.icon %}
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--text-mute);">
+        &copy; {{ 'now' | date: "%Y" }} {{ site.author.name }}.
       </div>
     </div>
   </div>
 </section>
-
