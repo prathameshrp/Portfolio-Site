@@ -1,142 +1,141 @@
 // ─────────────────────────────────────────────────────────────
-// BrushBuddy — Witch Hat Atelier companion
-// A fluffy sigil-marked creature that lives on the home page,
-// wanders around, and reaches toward the user's cursor.
+// BrushBuddy — Witch Hat Atelier companion (accurate design)
+// A fluffy cream-colored worm creature that curls into a donut,
+// pokes its head up, and reaches tiny paws toward the cursor.
 // ─────────────────────────────────────────────────────────────
 (function () {
   'use strict';
-
-  // Only inject on pages that have the grimoire section (home page)
   if (!document.querySelector('.grimoire-section')) return;
 
-  // ── Messages it shows when excited ────────────────────────────
-  var MESSAGES = [
-    'ᚠ hello! ᚠ',
-    '✦ found you! ✦',
-    '★ hi hi! ★',
-    'ᚢ play? ᚢ',
-    '✧ friend! ✧',
-    '~ ehehe ~',
-    '◇ reached! ◇',
-  ];
+  var MESSAGES = ['hello!', 'ehehe~', 'found you!', 'hi hi!', 'play?', 'squish!', '...!'];
   var msgIdx = 0;
 
-  // ── Build the SVG creature ─────────────────────────────────────
-  var SVG_NS = 'http://www.w3.org/2000/svg';
-
+  // ── Build SVG ────────────────────────────────────────────────
   var el = document.createElement('div');
   el.id = 'brushbuddy';
   el.setAttribute('aria-hidden', 'true');
 
   el.innerHTML = [
-    '<svg class="bb-svg" viewBox="-44 -44 88 88" xmlns="http://www.w3.org/2000/svg">',
+    // viewBox is wide enough for the donut body + head poking up
+    '<svg class="bb-svg" viewBox="-55 -65 110 130" xmlns="http://www.w3.org/2000/svg">',
 
-    // ── Defs ──────────────────────────────────────────────────
     '<defs>',
-    '<radialGradient id="bb-body-g" cx="38%" cy="30%">',
-    '  <stop offset="0%"   stop-color="#f0e6ff"/>',
-    '  <stop offset="55%"  stop-color="#c4a0ff"/>',
-    '  <stop offset="100%" stop-color="#8a5df0"/>',
-    '</radialGradient>',
-    '<radialGradient id="bb-ear-g" cx="40%" cy="35%">',
-    '  <stop offset="0%"   stop-color="#e0ccff"/>',
-    '  <stop offset="100%" stop-color="#7c4de0"/>',
-    '</radialGradient>',
-    '<filter id="bb-glow" x="-60%" y="-60%" width="220%" height="220%">',
-    '  <feGaussianBlur stdDeviation="3.5" result="b"/>',
-    '  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>',
+
+    // Fuzzy soft-edge filter (expands edge with a blur halo)
+    '<filter id="bb-fluff" x="-40%" y="-40%" width="180%" height="180%">',
+    '  <feGaussianBlur in="SourceAlpha" stdDeviation="3.2" result="b"/>',
+    '  <feFlood flood-color="#f5f0e4" result="c"/>',
+    '  <feComposite in="c" in2="b" operator="in" result="halo"/>',
+    '  <feMerge><feMergeNode in="halo"/><feMergeNode in="SourceGraphic"/></feMerge>',
     '</filter>',
-    '<filter id="bb-soft" x="-20%" y="-20%" width="140%" height="140%">',
-    '  <feGaussianBlur stdDeviation="1.2"/>',
+    '<filter id="bb-fluff-sm" x="-50%" y="-50%" width="200%" height="200%">',
+    '  <feGaussianBlur in="SourceAlpha" stdDeviation="1.8" result="b"/>',
+    '  <feFlood flood-color="#f0ead8" result="c"/>',
+    '  <feComposite in="c" in2="b" operator="in" result="halo"/>',
+    '  <feMerge><feMergeNode in="halo"/><feMergeNode in="SourceGraphic"/></feMerge>',
     '</filter>',
+
+    // Body gradient — cream top, tan underside
+    '<radialGradient id="bb-cream" cx="42%" cy="30%" r="65%">',
+    '  <stop offset="0%"   stop-color="#fdfaf2"/>',
+    '  <stop offset="55%"  stop-color="#ede5cf"/>',
+    '  <stop offset="100%" stop-color="#d8caa8"/>',
+    '</radialGradient>',
+    '<radialGradient id="bb-under" cx="50%" cy="45%">',
+    '  <stop offset="0%"   stop-color="#cfc0a0"/>',
+    '  <stop offset="100%" stop-color="#b8a880"/>',
+    '</radialGradient>',
+    // Head gradient — slightly lighter/rounder look
+    '<radialGradient id="bb-head-g" cx="38%" cy="28%" r="70%">',
+    '  <stop offset="0%"   stop-color="#fefcf5"/>',
+    '  <stop offset="50%"  stop-color="#f0e8d2"/>',
+    '  <stop offset="100%" stop-color="#ddd0b0"/>',
+    '</radialGradient>',
+
     '</defs>',
 
-    // ── Aura glow halo behind body ────────────────────────────
-    '<ellipse cx="0" cy="6" rx="28" ry="26" fill="rgba(167,139,250,0.08)" filter="url(#bb-soft)"/>',
+    // ── Ground shadow ───────────────────────────────────────────
+    '<ellipse cx="0" cy="62" rx="40" ry="7" fill="rgba(0,0,0,0.10)"/>',
 
-    // ── Tiny witch hat ────────────────────────────────────────
-    // Hat brim
-    '<ellipse cx="0" cy="-32" rx="14" ry="3.5" fill="#140828" stroke="rgba(167,139,250,0.6)" stroke-width="0.7"/>',
-    // Hat cone
-    '<polygon points="0,-54 -10,-33 10,-33" fill="#140828" stroke="rgba(167,139,250,0.5)" stroke-width="0.7"/>',
-    // Hat band star
-    '<text x="0" y="-30" text-anchor="middle" font-size="5" fill="rgba(251,146,60,0.9)">✦</text>',
+    // ── Body: donut/coil ring ───────────────────────────────────
+    // The body is a thick tube that wraps in a ring, seen from slightly above.
+    // Rendered as: bottom arc first (goes behind head), then top arc (in front)
 
-    // ── Fluffy ears (behind body) ─────────────────────────────
-    '<ellipse cx="-20" cy="-16" rx="9" ry="11" fill="url(#bb-ear-g)" opacity="0.95"/>',
-    '<ellipse cx="20" cy="-16" rx="9" ry="11" fill="url(#bb-ear-g)" opacity="0.95"/>',
-    // Inner ear tint
-    '<ellipse cx="-20" cy="-16" rx="5" ry="7" fill="rgba(255,190,240,0.35)"/>',
-    '<ellipse cx="20" cy="-16" rx="5" ry="7" fill="rgba(255,190,240,0.35)"/>',
-    // Ear tuft marks
-    '<line x1="-20" y1="-21" x2="-20" y2="-24" stroke="rgba(220,180,255,0.6)" stroke-width="1.5" stroke-linecap="round"/>',
-    '<line x1="20" y1="-21" x2="20" y2="-24" stroke="rgba(220,180,255,0.6)" stroke-width="1.5" stroke-linecap="round"/>',
+    // Outer fluffy ring (whole donut shape)
+    '<ellipse class="bb-ring" cx="0" cy="42" rx="46" ry="20"',
+    '  fill="url(#bb-under)" filter="url(#bb-fluff)"/>',
+    // Top surface of ring
+    '<ellipse class="bb-ring" cx="0" cy="38" rx="44" ry="18" fill="url(#bb-cream)"/>',
+    // Donut hole (darker - depth illusion)
+    '<ellipse cx="0" cy="38" rx="22" ry="9" fill="#c4b490"/>',
 
-    // ── Main fluffy body ──────────────────────────────────────
-    // Extra fluff bumps around edge
-    '<circle cx="-21" cy="6"  r="7"  fill="url(#bb-ear-g)" opacity="0.6"/>',
-    '<circle cx="21"  cy="6"  r="7"  fill="url(#bb-ear-g)" opacity="0.6"/>',
-    '<circle cx="-15" cy="20" r="6"  fill="url(#bb-ear-g)" opacity="0.5"/>',
-    '<circle cx="15"  cy="20" r="6"  fill="url(#bb-ear-g)" opacity="0.5"/>',
-    '<circle cx="0"   cy="24" r="6"  fill="url(#bb-ear-g)" opacity="0.45"/>',
-    // Core body
-    '<ellipse cx="0" cy="5" rx="20" ry="19" fill="url(#bb-body-g)" filter="url(#bb-glow)"/>',
+    // Fluff bumps around the ring (suggest fuzzy texture)
+    '<circle cx="-44" cy="36" r="6"  fill="#f5efdf" filter="url(#bb-fluff-sm)"/>',
+    '<circle cx="44"  cy="36" r="6"  fill="#f5efdf" filter="url(#bb-fluff-sm)"/>',
+    '<circle cx="-40" cy="50" r="5"  fill="#ede5cb" filter="url(#bb-fluff-sm)"/>',
+    '<circle cx="40"  cy="50" r="5"  fill="#ede5cb" filter="url(#bb-fluff-sm)"/>',
+    '<circle cx="-20" cy="56" r="4.5" fill="#ede5cb" filter="url(#bb-fluff-sm)"/>',
+    '<circle cx="20"  cy="56" r="4.5" fill="#ede5cb" filter="url(#bb-fluff-sm)"/>',
+    '<circle cx="0"   cy="58" r="5"  fill="#ede5cb" filter="url(#bb-fluff-sm)"/>',
 
-    // ── Spinning sigil on belly ───────────────────────────────
-    '<g class="bb-sigil-ring">',
-    '  <circle cx="0" cy="9" r="10" fill="none" stroke="rgba(34,211,238,0.25)" stroke-width="0.9" stroke-dasharray="3 4"/>',
-    '</g>',
-    '<circle cx="0" cy="9" r="6.5" fill="none" stroke="rgba(167,139,250,0.3)" stroke-width="0.7"/>',
-    '<text x="0" y="12" text-anchor="middle" font-size="7" fill="rgba(34,211,238,0.65)" font-family="serif">✦</text>',
-
-    // ── Eyes ──────────────────────────────────────────────────
-    // Eye sockets
-    '<circle cx="-7" cy="-3" r="5.5" fill="#08030f"/>',
-    '<circle cx="7"  cy="-3" r="5.5" fill="#08030f"/>',
-    // Iris glow
-    '<circle class="bb-eye-glow" cx="-7" cy="-3" r="2.2" fill="rgba(34,211,238,0.85)"/>',
-    '<circle class="bb-eye-glow" cx="7"  cy="-3" r="2.2" fill="rgba(34,211,238,0.85)"/>',
-    // Pupil specular
-    '<circle cx="-5.5" cy="-5" r="0.9" fill="white" opacity="0.95"/>',
-    '<circle cx="8.5"  cy="-5" r="0.9" fill="white" opacity="0.95"/>',
-
-    // ── Blush patches ─────────────────────────────────────────
-    '<ellipse cx="-12" cy="4" rx="4" ry="2.5" fill="rgba(255,160,200,0.25)"/>',
-    '<ellipse cx="12"  cy="4" rx="4" ry="2.5" fill="rgba(255,160,200,0.25)"/>',
-
-    // ── Mouth ─────────────────────────────────────────────────
-    '<path class="bb-mouth" d="M-5,7 Q0,11 5,7" stroke="rgba(167,139,250,0.85)" stroke-width="1.3" fill="none" stroke-linecap="round"/>',
-
-    // ── Arms (in groups so we can rotate around shoulder) ─────
-    // LEFT arm — shoulder at (-20, 4)
+    // ── Tiny paw arms (sit inside donut ring) ──────────────────
+    // Left paw
     '<g class="bb-arm-l">',
-    '  <line x1="-20" y1="4" x2="-32" y2="4" stroke="rgba(196,160,255,0.9)" stroke-width="4.5" stroke-linecap="round"/>',
-    '  <circle cx="-32" cy="4" r="4" fill="rgba(196,160,255,0.9)"/>',
-    '  <!-- fingers -->',
-    '  <line x1="-32" y1="4" x2="-36" y2="0.5" stroke="rgba(220,190,255,0.75)" stroke-width="1.8" stroke-linecap="round"/>',
-    '  <line x1="-32" y1="4" x2="-36.5" y2="5" stroke="rgba(220,190,255,0.75)" stroke-width="1.8" stroke-linecap="round"/>',
+    '  <ellipse cx="-20" cy="26" rx="9" ry="7" fill="#f5efdf" filter="url(#bb-fluff-sm)"/>',
+    '  <!-- tiny toe nubs -->',
+    '  <ellipse cx="-24" cy="22" rx="3.5" ry="2.5" fill="#eee6d2"/>',
+    '  <ellipse cx="-20" cy="20" rx="3.5" ry="2.5" fill="#eee6d2"/>',
+    '  <ellipse cx="-15" cy="21" rx="3.5" ry="2.5" fill="#eee6d2"/>',
     '</g>',
-
-    // RIGHT arm — shoulder at (20, 4)
+    // Right paw
     '<g class="bb-arm-r">',
-    '  <line x1="20" y1="4" x2="32" y2="4" stroke="rgba(196,160,255,0.9)" stroke-width="4.5" stroke-linecap="round"/>',
-    '  <circle cx="32" cy="4" r="4" fill="rgba(196,160,255,0.9)"/>',
-    '  <!-- fingers -->',
-    '  <line x1="32" y1="4" x2="36" y2="0.5" stroke="rgba(220,190,255,0.75)" stroke-width="1.8" stroke-linecap="round"/>',
-    '  <line x1="32" y1="4" x2="36.5" y2="5" stroke="rgba(220,190,255,0.75)" stroke-width="1.8" stroke-linecap="round"/>',
+    '  <ellipse cx="20"  cy="26" rx="9" ry="7" fill="#f5efdf" filter="url(#bb-fluff-sm)"/>',
+    '  <ellipse cx="15"  cy="22" rx="3.5" ry="2.5" fill="#eee6d2"/>',
+    '  <ellipse cx="20"  cy="20" rx="3.5" ry="2.5" fill="#eee6d2"/>',
+    '  <ellipse cx="25"  cy="21" rx="3.5" ry="2.5" fill="#eee6d2"/>',
     '</g>',
 
-    // ── Sparkle particles (shown when excited) ────────────────
+    // ── Head — pokes up from center of the donut ────────────────
+    '<g class="bb-head">',
+    // Neck connecting head to body ring (fills the donut hole)
+    '<ellipse cx="0" cy="22" rx="16" ry="12" fill="#ede5cf"/>',
+    // Main head shape — slightly teardrop, wider at top
+    '<ellipse cx="0" cy="0" rx="22" ry="26" fill="url(#bb-head-g)" filter="url(#bb-fluff)"/>',
+
+    // ── Eyes (the most important part — large, round, white sclera + dark) ──
+    // Left eye
+    '<circle cx="-9"  cy="-4" r="11" fill="white"/>',
+    '<circle cx="-9"  cy="-4" r="8"  fill="#1a1008"/>',
+    // Left iris shine — gives it depth
+    '<circle cx="-6.5" cy="-7" r="3"  fill="white" opacity="0.9"/>',
+    '<circle cx="-11" cy="-1" r="1.2" fill="white" opacity="0.5"/>',
+
+    // Right eye
+    '<circle cx="9"   cy="-4" r="11" fill="white"/>',
+    '<circle cx="9"   cy="-4" r="8"  fill="#1a1008"/>',
+    // Right iris shine
+    '<circle cx="11.5" cy="-7" r="3"  fill="white" opacity="0.9"/>',
+    '<circle cx="7"   cy="-1" r="1.2" fill="white" opacity="0.5"/>',
+
+    // ── Mouth — tiny, subtle ────────────────────────────────────
+    '<path class="bb-mouth" d="M-4,8 Q0,11 4,8" stroke="#9a8060" stroke-width="1.4" fill="none" stroke-linecap="round"/>',
+
+    // Cheek blush (very subtle)
+    '<ellipse cx="-16" cy="5" rx="5" ry="3" fill="rgba(240,180,140,0.20)"/>',
+    '<ellipse cx="16"  cy="5" rx="5" ry="3" fill="rgba(240,180,140,0.20)"/>',
+
+    '</g>',
+
+    // ── Sparkles (excited) ──────────────────────────────────────
     '<g class="bb-sparkles" opacity="0">',
-    '  <text x="30"  y="-26" font-size="9"  fill="rgba(251,146,60,0.95)"   font-family="serif">✦</text>',
-    '  <text x="-36" y="-20" font-size="7"  fill="rgba(34,211,238,0.95)"  font-family="serif">★</text>',
-    '  <text x="24"  y="30"  font-size="6"  fill="rgba(167,139,250,0.9)"  font-family="serif">✧</text>',
-    '  <text x="-30" y="28"  font-size="8"  fill="rgba(251,146,60,0.9)"   font-family="serif">✦</text>',
+    '  <text x="32"  y="-32" font-size="11" fill="rgba(251,200,60,0.95)"  font-family="serif">✦</text>',
+    '  <text x="-40" y="-28" font-size="8"  fill="rgba(200,220,255,0.95)" font-family="serif">★</text>',
+    '  <text x="28"  y="62"  font-size="7"  fill="rgba(255,220,160,0.9)"  font-family="serif">✧</text>',
+    '  <text x="-34" y="60"  font-size="10" fill="rgba(251,200,60,0.9)"   font-family="serif">✦</text>',
     '</g>',
 
     '</svg>',
-    // Speech bubble
-    '<div class="bb-bubble" id="bb-bubble">✦ hello! ✦</div>',
+    '<div class="bb-bubble" id="bb-bubble">hello!</div>',
   ].join('\n');
 
   document.body.appendChild(el);
@@ -144,166 +143,143 @@
   // ── DOM refs ───────────────────────────────────────────────────
   var armL     = el.querySelector('.bb-arm-l');
   var armR     = el.querySelector('.bb-arm-r');
+  var head     = el.querySelector('.bb-head');
   var sparkles = el.querySelector('.bb-sparkles');
   var mouth    = el.querySelector('.bb-mouth');
   var bubble   = el.querySelector('.bb-bubble');
 
   // ── State ──────────────────────────────────────────────────────
-  var bx = 0, by = 0;           // buddy center (viewport px)
-  var tx = 0, ty = 0;           // movement target
-  var mx = -9999, my = -9999;   // mouse (viewport px)
-  var armLRot = 20;             // SVG rotation deg (from default left-pointing)
-  var armRRot = -20;            // SVG rotation deg (from default right-pointing)
-  var wanderTimer = 1000;       // ms until next wander pick
-  var homeTimer   = 0;          // ms since cursor last nearby; return home after 10s
+  var bx = 0, by = 0;
+  var tx = 0, ty = 0;
+  var mx = -9999, my = -9999;
+
+  // Arm offset (translation, not rotation — paws just reach out)
+  var armLdx = 0, armLdy = 0;
+  var armRdx = 0, armRdy = 0;
+  var targetArmLdx = 0, targetArmLdy = 0;
+  var targetArmRdx = 0, targetArmRdy = 0;
+
+  // Head tilt (slight rotation toward cursor)
+  var headTilt = 0, targetHeadTilt = 0;
+
+  var wanderTimer = 1500;
+  var homeTimer   = 0;
   var isExcited   = false;
   var lastTime    = 0;
 
-  // ── Home position: sit on the witch hat ASCII art ──────────────
+  // ── Home position ──────────────────────────────────────────────
   function getHomePos() {
     var art = document.querySelector('.witch-ascii');
     if (art) {
       var r = art.getBoundingClientRect();
-      return { x: r.left + r.width * 0.55, y: r.top + r.height * 0.2 };
+      // Sit on top of the witch hat (which itself is below .witch-ascii text)
+      return { x: r.left + r.width * 0.5, y: r.bottom - 20 };
     }
-    return { x: 100, y: window.innerHeight - 130 };
+    return { x: 90, y: window.innerHeight - 100 };
   }
 
-  // Initialize
   var home = getHomePos();
   bx = home.x; by = home.y;
-  tx = bx + 40; ty = by - 20;
+  tx = bx; ty = by;
 
-  // ── Fade in ────────────────────────────────────────────────────
-  setTimeout(function () { el.classList.add('bb-visible'); }, 800);
+  setTimeout(function () { el.classList.add('bb-visible'); }, 600);
 
-  // ── Mouse tracking ─────────────────────────────────────────────
-  document.addEventListener('mousemove', function (e) {
-    mx = e.clientX;
-    my = e.clientY;
-  });
+  document.addEventListener('mousemove', function (e) { mx = e.clientX; my = e.clientY; });
+  document.addEventListener('mouseleave', function () { mx = -9999; my = -9999; });
 
-  // Reset mouse when leaving window
-  document.addEventListener('mouseleave', function () {
-    mx = -9999; my = -9999;
-  });
-
-  // ── Pick a random wander target ────────────────────────────────
-  function newWanderTarget() {
-    var margin = 80;
-    var W = window.innerWidth;
-    var H = window.innerHeight;
-    tx = margin + Math.random() * (W - margin * 2);
-    ty = margin + Math.random() * (H - margin * 2);
-    wanderTimer = 2800 + Math.random() * 4000;
+  function newWander() {
+    var m = 80;
+    tx = m + Math.random() * (window.innerWidth  - m * 2);
+    ty = m + Math.random() * (window.innerHeight - m * 2);
+    wanderTimer = 3000 + Math.random() * 4500;
   }
 
-  // ── Lerp a rotation angle, handling 360° wrap ─────────────────
-  function lerpAngle(cur, tgt, t) {
-    var diff = tgt - cur;
-    while (diff >  180) diff -= 360;
-    while (diff < -180) diff += 360;
-    return cur + diff * t;
-  }
+  function lerp(a, b, t) { return a + (b - a) * t; }
 
-  // ── Main animation loop ────────────────────────────────────────
   function tick(ts) {
     var dt = lastTime ? Math.min(ts - lastTime, 60) : 16;
     lastTime = ts;
 
-    var ATTRACT_DIST = 210;
-    var EXCITED_DIST = 85;
+    var ATTRACT = 200;
+    var EXCITED = 80;
     var dist = Math.hypot(mx - bx, my - by);
+    var moveSpeed;
 
-    var targetArmL, targetArmR, moveSpeed;
-
-    if (dist < ATTRACT_DIST) {
-      // ── Cursor nearby: reach toward it ────────────────────────
+    if (dist < ATTRACT) {
       homeTimer = 0;
-      tx = mx;
-      ty = my;
-      moveSpeed = 0.055;
+      tx = mx; ty = my;
+      moveSpeed = 0.05;
 
-      // Shoulder positions in viewport space
-      var lsx = bx - 20, lsy = by + 4;
-      var rsx = bx + 20, rsy = by + 4;
+      // Paw nubs push slightly toward cursor (max 12px reach)
+      var reach = Math.max(0, (ATTRACT - dist) / ATTRACT);
+      var angle = Math.atan2(my - by, mx - bx);
+      var maxReach = 13;
+      targetArmLdx = Math.cos(angle) * reach * maxReach;
+      targetArmLdy = Math.sin(angle) * reach * maxReach;
+      targetArmRdx = targetArmLdx;
+      targetArmRdy = targetArmLdy;
 
-      // Angle from shoulder to cursor (degrees, screen-space Y-down)
-      var angleL = Math.atan2(my - lsy, mx - lsx) * 180 / Math.PI;
-      var angleR = Math.atan2(my - rsy, mx - rsx) * 180 / Math.PI;
+      // Head tilts slightly toward cursor
+      targetHeadTilt = Math.atan2(my - by, mx - bx) * 18 / Math.PI;
+      targetHeadTilt = Math.max(-18, Math.min(18, targetHeadTilt));
 
-      // Left arm default points LEFT (180°): rotate = target - 180
-      targetArmL = angleL - 180;
-      // Right arm default points RIGHT (0°): rotate = target - 0
-      targetArmR = angleR;
-
-      isExcited = dist < EXCITED_DIST;
+      isExcited = dist < EXCITED;
     } else {
-      // ── Wander / return home ───────────────────────────────────
-      moveSpeed = 0.016;
       homeTimer += dt;
-
-      if (homeTimer > 10000) {
-        // Return to sit on hat
+      if (homeTimer > 9000) {
         var h = getHomePos();
-        tx = h.x;
-        ty = h.y;
-        wanderTimer = 9999;
+        tx = h.x; ty = h.y;
+        wanderTimer = 99999;
       } else {
         wanderTimer -= dt;
-        if (wanderTimer <= 0) newWanderTarget();
+        if (wanderTimer <= 0) newWander();
       }
-
-      // Arms droop naturally at rest
-      targetArmL = 22;   // slightly drooping left
-      targetArmR = -22;  // slightly drooping right
+      moveSpeed = 0.015;
+      targetArmLdx = 0; targetArmLdy = 0;
+      targetArmRdx = 0; targetArmRdy = 0;
+      targetHeadTilt = 0;
       isExcited = false;
     }
 
-    // Lerp arm rotations
-    armLRot = lerpAngle(armLRot, targetArmL, 0.14);
-    armRRot = lerpAngle(armRRot, targetArmR, 0.14);
+    // Lerp everything
+    armLdx = lerp(armLdx, targetArmLdx, 0.12);
+    armLdy = lerp(armLdy, targetArmLdy, 0.12);
+    armRdx = lerp(armRdx, targetArmRdx, 0.12);
+    armRdy = lerp(armRdy, targetArmRdy, 0.12);
+    headTilt = lerp(headTilt, targetHeadTilt, 0.1);
 
-    // Apply SVG rotations (around the respective shoulder joint)
-    armL.setAttribute('transform', 'rotate(' + armLRot.toFixed(2) + ', -20, 4)');
-    armR.setAttribute('transform', 'rotate(' + armRRot.toFixed(2) + ', 20, 4)');
+    // Apply paw translations
+    armL.setAttribute('transform', 'translate(' + armLdx.toFixed(2) + ',' + armLdy.toFixed(2) + ')');
+    armR.setAttribute('transform', 'translate(' + armRdx.toFixed(2) + ',' + armRdy.toFixed(2) + ')');
+    // Head tilt
+    head.setAttribute('transform', 'rotate(' + headTilt.toFixed(2) + ', 0, 10)');
 
-    // Lerp buddy position
+    // Move buddy
     bx += (tx - bx) * moveSpeed;
     by += (ty - by) * moveSpeed;
+    bx = Math.max(55, Math.min(window.innerWidth  - 55, bx));
+    by = Math.max(65, Math.min(window.innerHeight - 65, by));
+    el.style.transform = 'translate(' + (bx - 55).toFixed(1) + 'px,' + (by - 65).toFixed(1) + 'px)';
 
-    // Clamp inside viewport with padding
-    var pad = 50;
-    bx = Math.max(pad, Math.min(window.innerWidth  - pad, bx));
-    by = Math.max(pad, Math.min(window.innerHeight - pad, by));
-
-    // Apply transform (44px = half of 88px element)
-    el.style.transform = 'translate(' + (bx - 44).toFixed(1) + 'px, ' + (by - 44).toFixed(1) + 'px)';
-
-    // ── Excitement effects ─────────────────────────────────────
+    // Excitement state
     if (isExcited) {
       el.classList.add('bb-excited');
       sparkles.setAttribute('opacity', '1');
-      mouth.setAttribute('d', 'M-6,6 Q0,12 6,6');
+      mouth.setAttribute('d', 'M-5,7 Q0,13 5,7');
       bubble.textContent = MESSAGES[msgIdx % MESSAGES.length];
     } else {
       el.classList.remove('bb-excited');
       sparkles.setAttribute('opacity', '0');
-      mouth.setAttribute('d', 'M-5,7 Q0,11 5,7');
+      mouth.setAttribute('d', 'M-4,8 Q0,11 4,8');
     }
 
     requestAnimationFrame(tick);
   }
 
-  // ── Cycle messages on repeated excitement ──────────────────────
-  var msgCooldown = 0;
   setInterval(function () {
-    if (isExcited) {
-      msgIdx = (msgIdx + 1) % MESSAGES.length;
-    }
-  }, 1800);
+    if (isExcited) msgIdx = (msgIdx + 1) % MESSAGES.length;
+  }, 1600);
 
-  newWanderTarget();
+  newWander();
   requestAnimationFrame(tick);
-
 })();

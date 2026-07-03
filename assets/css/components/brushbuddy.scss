@@ -1,21 +1,20 @@
 // ─────────────────────────────────────────────────────────────
-// BrushBuddy — Witch Hat Atelier companion creature
-// Floats on the home page, reacts to cursor proximity
+// BrushBuddy CSS — Witch Hat Atelier worm companion
 // ─────────────────────────────────────────────────────────────
 
 #brushbuddy {
   position: fixed;
   top: 0;
   left: 0;
-  width: 88px;
-  height: 88px;
+  // viewBox is -55 -65 110 130  →  110 × 130 px logical
+  width: 110px;
+  height: 130px;
   pointer-events: none;
   z-index: 9992;
   will-change: transform;
   user-select: none;
-  // starts hidden, fades in after JS init
   opacity: 0;
-  transition: opacity 1.2s ease;
+  transition: opacity 1.4s ease;
 
   &.bb-visible {
     opacity: 1;
@@ -23,93 +22,71 @@
 }
 
 .bb-svg {
-  width: 88px;
-  height: 88px;
+  width: 110px;
+  height: 130px;
   overflow: visible;
-  animation: bb-idle-float 3.6s ease-in-out infinite;
 }
 
-// ── Idle float ───────────────────────────────────────────────
-@keyframes bb-idle-float {
-  0%,  100% { transform: translateY(0px) rotate(0deg); }
-  30%        { transform: translateY(-5px) rotate(1.5deg); }
-  70%        { transform: translateY(-3px) rotate(-1deg); }
+// ── Idle: gentle body-breathing float ───────────────────────
+// The donut ring and head bob slightly, like a resting creature
+.bb-svg {
+  animation: bb-breathe 4s ease-in-out infinite;
+}
+
+@keyframes bb-breathe {
+  0%,  100% { transform: translateY(0px) scaleX(1); }
+  40%        { transform: translateY(-4px) scaleX(1.015); }
+  70%        { transform: translateY(-2px) scaleX(0.99); }
 }
 
 // ── Excited wiggle ───────────────────────────────────────────
 #brushbuddy.bb-excited .bb-svg {
-  animation: bb-excited 0.28s ease-in-out infinite;
+  animation: bb-excited 0.32s ease-in-out infinite;
 }
 
 @keyframes bb-excited {
-  0%   { transform: translateY(0)   rotate(-5deg) scale(1.05); }
-  25%  { transform: translateY(-4px) rotate(5deg)  scale(1.08); }
-  50%  { transform: translateY(-6px) rotate(-4deg) scale(1.1); }
-  75%  { transform: translateY(-3px) rotate(4deg)  scale(1.07); }
-  100% { transform: translateY(0)   rotate(-5deg) scale(1.05); }
+  0%   { transform: translateY(0)    scale(1.04) rotate(-3deg); }
+  25%  { transform: translateY(-5px) scale(1.08) rotate(3deg); }
+  50%  { transform: translateY(-7px) scale(1.10) rotate(-2deg); }
+  75%  { transform: translateY(-4px) scale(1.06) rotate(2deg); }
+  100% { transform: translateY(0)    scale(1.04) rotate(-3deg); }
 }
 
 // ── Sparkle particles ────────────────────────────────────────
-.bb-sparkles {
-  pointer-events: none;
-}
-
 .bb-sparkles text {
-  animation: bb-sparkle 1.6s ease-in-out infinite;
+  animation: bb-sparkle 1.5s ease-in-out infinite;
   transform-box: fill-box;
   transform-origin: center;
 }
-.bb-sparkles text:nth-child(1) { animation-delay: 0s;    animation-duration: 1.4s; }
-.bb-sparkles text:nth-child(2) { animation-delay: -0.4s; animation-duration: 1.8s; }
-.bb-sparkles text:nth-child(3) { animation-delay: -0.8s; animation-duration: 1.3s; }
-.bb-sparkles text:nth-child(4) { animation-delay: -1.1s; animation-duration: 2.0s; }
+.bb-sparkles text:nth-child(1) { animation-delay: 0s;    animation-duration: 1.3s; }
+.bb-sparkles text:nth-child(2) { animation-delay: -0.35s; animation-duration: 1.7s; }
+.bb-sparkles text:nth-child(3) { animation-delay: -0.7s;  animation-duration: 1.4s; }
+.bb-sparkles text:nth-child(4) { animation-delay: -1.0s;  animation-duration: 1.9s; }
 
 @keyframes bb-sparkle {
-  0%   { transform: scale(0.6) rotate(0deg);   opacity: 0; }
-  30%  { transform: scale(1.2) rotate(90deg);  opacity: 1; }
-  70%  { transform: scale(1.0) rotate(200deg); opacity: 0.8; }
-  100% { transform: scale(0.4) rotate(360deg); opacity: 0; }
+  0%   { transform: scale(0.5) rotate(0deg);    opacity: 0; }
+  30%  { transform: scale(1.3) rotate(80deg);   opacity: 1; }
+  70%  { transform: scale(1.0) rotate(200deg);  opacity: 0.7; }
+  100% { transform: scale(0.3) rotate(360deg);  opacity: 0; }
 }
 
-// ── Sigil ring on belly ──────────────────────────────────────
-.bb-sigil-ring {
-  animation: bb-sigil-spin 8s linear infinite;
-  transform-box: fill-box;
-  transform-origin: center;
-}
-
-@keyframes bb-sigil-spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
-// ── Eye glow pulse ───────────────────────────────────────────
-.bb-eye-glow {
-  animation: bb-eye-pulse 2.5s ease-in-out infinite;
-}
-
-@keyframes bb-eye-pulse {
-  0%,  100% { opacity: 0.7; r: 2; }
-  50%        { opacity: 1;   r: 2.5; }
-}
-
-// ── Tooltip message bubble ───────────────────────────────────
+// ── Speech bubble ─────────────────────────────────────────────
 .bb-bubble {
   position: absolute;
-  top: -38px;
+  top: -32px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(20, 8, 40, 0.92);
-  border: 1px solid rgba(167, 139, 250, 0.45);
+  background: rgba(18, 8, 35, 0.90);
+  border: 1px solid rgba(200, 180, 120, 0.5);
   border-radius: 10px;
-  padding: 4px 10px;
+  padding: 3px 10px;
   font-family: var(--font-mono, monospace);
-  font-size: 0.62rem;
-  color: rgba(220, 200, 255, 0.9);
+  font-size: 0.6rem;
+  color: rgba(240, 228, 190, 0.95);
   white-space: nowrap;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.35s ease;
 
   &::after {
     content: "";
@@ -118,7 +95,7 @@
     left: 50%;
     transform: translateX(-50%);
     border: 5px solid transparent;
-    border-top-color: rgba(167, 139, 250, 0.45);
+    border-top-color: rgba(200, 180, 120, 0.5);
     border-bottom: 0;
   }
 }
@@ -127,7 +104,7 @@
   opacity: 1;
 }
 
-// ── Mobile: hide on very small screens ──────────────────────
+// ── Mobile: hide ──────────────────────────────────────────────
 @media (max-width: 480px) {
   #brushbuddy {
     display: none;
