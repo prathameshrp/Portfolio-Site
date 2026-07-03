@@ -1,7 +1,8 @@
 .card-grid {
   display: grid; gap: 1.4rem;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
 }
+@media (max-width: 640px) { .card-grid { grid-template-columns: 1fr; } }
 .card-grid__real { display: contents; }
 
 // ── Post card ──────────────────────────────────────────────────

@@ -388,6 +388,21 @@
   50%       { transform: translateY(-6px); }
 }
 
+// Brushbug sleeping SVG
+.brushbug-svg {
+  width: 140px;
+  height: auto;
+  animation: brushbug-breathe 4s ease-in-out infinite;
+  opacity: 0.88;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.35));
+}
+
+@keyframes brushbug-breathe {
+  0%, 100% { transform: translateY(0) scaleX(1); }
+  40%       { transform: translateY(-2px) scaleX(1.01); }
+  60%       { transform: translateY(-1px) scaleX(0.995); }
+}
+
 .sigil-ring {
   width: 180px;
   height: 180px;

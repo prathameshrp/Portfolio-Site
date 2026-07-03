@@ -166,18 +166,78 @@ layout: default
 
     <!-- Left: Witch Hat ASCII + sigil art -->
     <div class="grimoire-art" aria-hidden="true">
-      <pre class="witch-ascii">
-         .
-        /|\
-       / | \          (o.o)
-      /  |  \        ( - - )~~~_
-     / .-'-. \        (______)_)\
-    /.'     '.\
-   /_____________\
-  /_______________\
-        | |
-        |_|
+      <pre class="witch-ascii" aria-label="Witch hat ASCII art">
+        .
+       /|\
+      / | \
+     /  |  \
+    / .-'-. \
+   /.'     '.\
+  /_____________\
+ /_______________\
+       | |
+       |_|
       </pre>
+      <!-- Brushbug sleeping next to the hat -->
+      <svg class="brushbug-svg" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg" aria-label="Sleeping brushbug" role="img">
+        <defs>
+          <radialGradient id="bb-body" cx="38%" cy="30%">
+            <stop offset="0%" stop-color="#fdfaf2"/>
+            <stop offset="60%" stop-color="#ede5cf"/>
+            <stop offset="100%" stop-color="#d0be98"/>
+          </radialGradient>
+          <radialGradient id="bb-belly" cx="50%" cy="50%">
+            <stop offset="0%" stop-color="#e8dfc5"/>
+            <stop offset="100%" stop-color="#c9b990"/>
+          </radialGradient>
+          <filter id="bb-soft" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="b"/>
+            <feFlood flood-color="#f5f0e4" result="c"/>
+            <feComposite in="c" in2="b" operator="in" result="h"/>
+            <feMerge><feMergeNode in="h"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <!-- Ground shadow -->
+        <ellipse cx="60" cy="76" rx="45" ry="5" fill="rgba(0,0,0,0.18)"/>
+        <!-- Thick tail curling out behind (brushbuddy has a thick brush-like tail) -->
+        <path d="M 30,58 Q 10,52 8,44 Q 6,36 16,34 Q 26,32 30,42 Q 32,50 40,52" stroke="url(#bb-body)" stroke-width="10" stroke-linecap="round" fill="none" filter="url(#bb-soft)"/>
+        <!-- Tail tip bristles (the "brush" part) -->
+        <line x1="8" y1="44" x2="4" y2="38" stroke="#ddd0b0" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="8" y1="44" x2="3" y2="44" stroke="#ddd0b0" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="8" y1="44" x2="5" y2="50" stroke="#ddd0b0" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Body: curled round oval -->
+        <ellipse cx="65" cy="58" rx="30" ry="18" fill="url(#bb-body)" filter="url(#bb-soft)"/>
+        <!-- Belly underside -->
+        <ellipse cx="65" cy="64" rx="22" ry="10" fill="url(#bb-belly)"/>
+        <!-- Stubby back leg -->
+        <ellipse cx="85" cy="70" rx="8" ry="5" fill="#ede5cf" filter="url(#bb-soft)"/>
+        <ellipse cx="80" cy="72" rx="5" ry="3.5" fill="#ddd0b0"/>
+        <!-- Stubby front legs tucked in -->
+        <ellipse cx="46" cy="68" rx="7" ry="4.5" fill="#ede5cf" filter="url(#bb-soft)"/>
+        <ellipse cx="42" cy="70" rx="4.5" ry="3" fill="#ddd0b0"/>
+        <!-- Neck -->
+        <ellipse cx="55" cy="48" rx="10" ry="9" fill="url(#bb-body)" filter="url(#bb-soft)"/>
+        <!-- Head -->
+        <ellipse cx="50" cy="38" rx="14" ry="16" fill="url(#bb-body)" filter="url(#bb-soft)"/>
+        <!-- Ear (small round nub) -->
+        <ellipse cx="43" cy="25" rx="6" ry="7" fill="#ede5cf" filter="url(#bb-soft)"/>
+        <ellipse cx="43" cy="25" rx="3.5" ry="4.5" fill="rgba(230,190,190,0.3)"/>
+        <!-- Sleeping eyes (closed curved lines) -->
+        <path d="M 44,35 Q 47,33 50,35" stroke="#8a7355" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+        <path d="M 52,33 Q 55,31 58,33" stroke="#8a7355" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+        <!-- Nose dot -->
+        <circle cx="50" cy="39" r="1.2" fill="#9a8060"/>
+        <!-- Whiskers -->
+        <line x1="50" y1="40" x2="38" y2="37" stroke="#c8b090" stroke-width="0.9" stroke-linecap="round" opacity="0.7"/>
+        <line x1="50" y1="41" x2="37" y2="42" stroke="#c8b090" stroke-width="0.9" stroke-linecap="round" opacity="0.7"/>
+        <line x1="50" y1="40" x2="62" y2="37" stroke="#c8b090" stroke-width="0.9" stroke-linecap="round" opacity="0.7"/>
+        <line x1="50" y1="41" x2="62" y2="42" stroke="#c8b090" stroke-width="0.9" stroke-linecap="round" opacity="0.7"/>
+        <!-- Tiny "Zzz" -->
+        <text x="68" y="28" font-family="monospace" font-size="7" fill="rgba(167,139,250,0.6)">z</text>
+        <text x="73" y="23" font-family="monospace" font-size="9" fill="rgba(167,139,250,0.5)">z</text>
+        <text x="79" y="17" font-family="monospace" font-size="11" fill="rgba(167,139,250,0.4)">z</text>
+      </svg>
+
       <div class="sigil-ring" id="sigilCanvas">
         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="sigil-svg">
           <circle cx="100" cy="100" r="90" stroke="rgba(34,211,238,0.15)" stroke-width="1" fill="none"/>

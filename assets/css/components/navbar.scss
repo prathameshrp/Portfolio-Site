@@ -33,7 +33,7 @@
   }
 }
 
-.navbar__actions { display: flex; align-items: center; gap: .5rem; }
+.navbar__actions { display: flex; align-items: center; gap: .5rem; flex-shrink: 0; }
 .navbar__links + .navbar__actions { margin-left: .5rem; }
 
 // theme toggle shows one icon at a time
@@ -64,7 +64,10 @@
 .navbar__progress.is-active { opacity: 1; }
 
 @media (max-width: 760px) {
+  .navbar__inner { gap: .5rem; }
+  .navbar__brand { flex: 1; }
   .navbar__links { display: none; }
+  .navbar__actions { margin-left: auto; }
   .navbar__burger { display: inline-grid; }
   .navbar__mobile[hidden] { display: none; }
   .navbar__mobile { display: flex; }
