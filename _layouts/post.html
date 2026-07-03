@@ -4,75 +4,88 @@ layout: default
 {%- assign words = content | strip_html | number_of_words -%}
 {%- assign rt = words | divided_by: 200 | plus: 1 -%}
 
-<article class="post">
-  <header class="post__hero">
-    <div class="container container--narrow">
-      <a class="post__back" href="{{ '/blog/' | relative_url }}">&larr; All posts</a>
-      <div class="post__tags reveal">
-        {%- for t in page.tags -%}
-          <a class="chip" href="{{ '/tags/' | relative_url }}#{{ t | slugify }}">{{ t }}</a>
-        {%- endfor -%}
-      </div>
-      <h1 class="post__title reveal">{{ page.title }}</h1>
-      <div class="post__meta reveal">
-        <span>{{ page.date | date: "%B %-d, %Y" }}</span>
-        <span class="dot">&middot;</span>
-        <span>{% include icon.html name="clock" %}{{ rt }} min read</span>
-        <span class="dot">&middot;</span>
-        <span>{{ site.author.name }}</span>
-      </div>
-    </div>
-  </header>
-
-  {%- if page.cover -%}
-  <div class="container container--wide">
-    <div class="post__cover reveal">
-      <img src="{{ page.cover | relative_url }}" alt="{{ page.title }}" loading="lazy">
-    </div>
-  </div>
-  {%- endif -%}
-
-  <div class="container post__layout">
-    <aside class="post__toc" data-toc aria-label="Table of contents">
-      <span class="post__toc-title">On this page</span>
-      <nav data-toc-list></nav>
-    </aside>
-
-    <div class="prose post__content" data-post-content>
-      {{ content }}
-    </div>
-  </div>
-
-  <footer class="post__footer">
-    <div class="container container--narrow">
-      <div class="post__share">
-        <span>Found this useful? Share it.</span>
-        <div class="post__share-links">
-          <a class="icon-btn" target="_blank" rel="noopener"
-             href="https://twitter.com/intent/tweet?text={{ page.title | uri_escape }}&url={{ site.url }}{{ page.url | relative_url }}">
-            {% include icon.html name="twitter" %}
-          </a>
-          <a class="icon-btn" target="_blank" rel="noopener"
-             href="https://www.linkedin.com/sharing/share-offsite/?url={{ site.url }}{{ page.url | relative_url }}">
-            {% include icon.html name="linkedin" %}
-          </a>
+<section class="page-shell" style="margin-top: 2rem;">
+  <div class="container">
+    <a class="post__back" href="{{ '/blog/' | relative_url }}" style="display: inline-block; margin-bottom: 1rem;">&larr; All posts</a>
+    
+    <div class="terminal-window reveal" style="height: auto; margin-bottom: 2rem;">
+      <div class="terminal-bar">
+        <div class="window-dots">
+          <div class="window-dot window-dot--red"></div>
+          <div class="window-dot window-dot--yellow"></div>
+          <div class="window-dot window-dot--green"></div>
         </div>
+        <div class="terminal-title">prathameshrp@devlog:~/posts/{{ page.title | slugify }}</div>
       </div>
+      <div class="terminal-body" style="padding: 1.5rem 1.75rem;">
+        <p style="margin-bottom: 1.5rem; font-family: var(--font-mono); font-size: 0.86rem; color: var(--text-soft);"><span class="t-prompt">~$</span> <span class="t-cmd">cat {{ page.title | slugify }}.md</span></p>
+        
+        <article class="post">
+          <header class="post__hero" style="padding: 1rem 0 2rem; text-align: left;">
+            <div class="post__tags" style="justify-content: flex-start; margin: 0 0 1rem;">
+              {%- for t in page.tags -%}
+                <a class="chip" href="{{ '/tags/' | relative_url }}#{{ t | slugify }}">{{ t }}</a>
+              {%- endfor -%}
+            </div>
+            <h1 class="post__title reveal" style="max-width: 100%; margin: 0;">{{ page.title }}</h1>
+            <div class="post__meta reveal" style="justify-content: flex-start; margin-top: 1rem;">
+              <span>{{ page.date | date: "%B %-d, %Y" }}</span>
+              <span class="dot">&middot;</span>
+              <span>{% include icon.html name="clock" %}{{ rt }} min read</span>
+              <span class="dot">&middot;</span>
+              <span>{{ site.author.name }}</span>
+            </div>
+          </header>
 
-      <nav class="post__pager">
-        {%- if page.previous -%}
-        <a class="post__pager-link post__pager-link--prev" href="{{ page.previous.url | relative_url }}">
-          <span>&larr; Previous</span>
-          <strong>{{ page.previous.title }}</strong>
-        </a>
-        {%- endif -%}
-        {%- if page.next -%}
-        <a class="post__pager-link post__pager-link--next" href="{{ page.next.url | relative_url }}">
-          <span>Next &rarr;</span>
-          <strong>{{ page.next.title }}</strong>
-        </a>
-        {%- endif -%}
-      </nav>
+          {%- if page.cover -%}
+          <div class="post__cover reveal" style="margin: 1rem 0 2.5rem; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border);">
+            <img src="{{ page.cover | relative_url }}" alt="{{ page.title }}" loading="lazy" style="width: 100%; max-height: 400px; object-fit: cover;">
+          </div>
+          {%- endif -%}
+
+          <div class="post__layout" style="display: grid; grid-template-columns: 1fr; gap: 3rem; padding-top: 0;">
+            <aside class="post__toc" data-toc aria-label="Table of contents">
+              <span class="post__toc-title">On this page</span>
+              <nav data-toc-list></nav>
+            </aside>
+
+            <div class="prose post__content" data-post-content>
+              {{ content }}
+            </div>
+          </div>
+
+          <footer class="post__footer" style="margin-top: 3rem;">
+            <div class="post__share">
+              <span>Found this useful? Share it.</span>
+              <div class="post__share-links">
+                <a class="icon-btn" target="_blank" rel="noopener"
+                   href="https://twitter.com/intent/tweet?text={{ page.title | uri_escape }}&url={{ site.url }}{{ page.url | relative_url }}">
+                  {% include icon.html name="twitter" %}
+                </a>
+                <a class="icon-btn" target="_blank" rel="noopener"
+                   href="https://www.linkedin.com/sharing/share-offsite/?url={{ site.url }}{{ page.url | relative_url }}">
+                  {% include icon.html name="linkedin" %}
+                </a>
+              </div>
+            </div>
+
+            <nav class="post__pager" style="margin-top: 2rem;">
+              {%- if page.previous -%}
+              <a class="post__pager-link post__pager-link--prev" href="{{ page.previous.url | relative_url }}">
+                <span>&larr; Previous</span>
+                <strong>{{ page.previous.title }}</strong>
+              </a>
+              {%- endif -%}
+              {%- if page.next -%}
+              <a class="post__pager-link post__pager-link--next" href="{{ page.next.url | relative_url }}">
+                <span>Next &rarr;</span>
+                <strong>{{ page.next.title }}</strong>
+              </a>
+              {%- endif -%}
+            </nav>
+          </footer>
+        </article>
+      </div>
     </div>
-  </footer>
-</article>
+  </div>
+</section>

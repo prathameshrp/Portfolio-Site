@@ -5,6 +5,7 @@ order: 2
 tech: [Python, Flask, QML, Groq, Chart.js]
 url: https://github.com/prathameshrp/Raphael
 url_live: ""
+cover: /assets/img/raphael.png
 ---
 
 Raphael sits on top of your desktop as a frosted-glass overlay, watches your

@@ -2,32 +2,215 @@
 layout: default
 ---
 
-<section id="timeline-wrapper" data-timeline-section>
-  {% include graph.html %}
-</section>
+<div class="container" style="margin-top: 2rem;">
+  <!-- Mock Terminal Section -->
+  <div class="terminal-mock-container reveal">
+    <!-- Left Column (Terminal Controls / Commands list) -->
+    <div class="terminal-window" data-terminal-pane="commands">
+      <div class="terminal-bar">
+        <div class="window-dots">
+          <div class="window-dot window-dot--red"></div>
+          <div class="window-dot window-dot--yellow"></div>
+          <div class="window-dot window-dot--green"></div>
+        </div>
+        <div class="terminal-title">prathameshrp@devlog:~</div>
+      </div>
+      <div class="terminal-body" style="padding: 1rem 1.25rem;">
 
-<section class="home-about-section">
-  <div class="about-inner">
-    <h2 class="about-heading">About</h2>
-    {%- assign about_page = site.html_pages | where: "url", "/about/" | first -%}
-    {%- if about_page -%}
-      <div class="about-content prose">
-        {{ about_page.content | markdownify }}
+        <div class="terminal-cmd-list">
+          <div class="terminal-cmd-item is-active" data-terminal-cmd="about">
+            <span class="terminal-cmd-prompt">~$</span>
+            <span class="terminal-cmd-text">cat about.md</span>
+            <span class="terminal-cmd-desc">who am I?</span>
+          </div>
+          <div class="terminal-cmd-item" data-terminal-cmd="neofetch">
+            <span class="terminal-cmd-prompt">~$</span>
+            <span class="terminal-cmd-text">neofetch</span>
+            <span class="terminal-cmd-desc">system info</span>
+          </div>
+          <div class="terminal-cmd-item" data-terminal-cmd="whoami">
+            <span class="terminal-cmd-prompt">~$</span>
+            <span class="terminal-cmd-text">whoami</span>
+            <span class="terminal-cmd-desc">current user</span>
+          </div>
+        </div>
       </div>
-    {%- endif -%}
-    <div class="about-footer">
-      <div style="display: flex; gap: 0.8rem;">
-        {%- for s in site.data.social -%}
-          {%- if s.url and s.url != "" -%}
-            <a href="{{ s.url }}" class="icon-btn" aria-label="{{ s.name }}" target="_blank" rel="noopener">
-              {% include icon.html name=s.icon %}
-            </a>
+    </div>
+
+    <!-- Right Column (Terminal Viewer Screen) -->
+    <div class="terminal-window" data-terminal-pane="viewer" style="height: 480px; display: flex; flex-direction: column;">
+      <div class="terminal-bar">
+        <div class="window-dots">
+          <div class="window-dot window-dot--red"></div>
+          <div class="window-dot window-dot--yellow"></div>
+          <div class="window-dot window-dot--green"></div>
+        </div>
+        <div class="terminal-title" id="terminal-viewer-title">cat about.md</div>
+      </div>
+      
+      <div class="terminal-body" id="terminal-viewer-body" style="flex-grow: 1;">
+        <!-- Default Panel (About.md) -->
+        <div class="terminal-panel" id="panel-about">
+          {%- assign about_page = site.html_pages | where: "url", "/about/" | first -%}
+          {%- if about_page -%}
+            <div class="prose" style="font-size: 0.94rem; line-height: 1.6; font-family: var(--font-sans); color: var(--text-soft);">
+              {{ about_page.content | markdownify }}
+            </div>
           {%- endif -%}
-        {%- endfor -%}
+        </div>
+
+        <!-- System info panel -->
+        <div class="terminal-panel" id="panel-neofetch" style="display: none;">
+          <pre style="margin: 0; font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.5; color: var(--text-soft); background: transparent; border: 0; padding: 0;">
+<span class="t-orange">prathamesh@pop-os</span>
+---------------------
+<span class="t-prompt">OS</span>: Pop!_OS 22.04 LTS x86_64
+<span class="t-prompt">Host</span>: ASUS VivoBook 15
+<span class="t-prompt">Kernel</span>: 6.8.0-76060800-generic
+<span class="t-prompt">Shell</span>: bash 5.2.21
+<span class="t-prompt">Terminal</span>: kitty
+<span class="t-prompt">Editor</span>: VS Code + Neovim
+<span class="t-prompt">Languages</span>: Python, JavaScript, C, Java
+<span class="t-prompt">Currently</span>: B.Tech CSE, 2nd Year
+<span class="t-prompt">Into</span>: AI/ML, Systems, Backend
+<span class="t-prompt">Building</span>: things that make devs&#39; lives easier
+          </pre>
+        </div>
+
+        <!-- Whoami panel -->
+        <div class="terminal-panel" id="panel-whoami" style="display: none;">
+          <p class="t-white"><strong>guest@prathameshrp.is-a.dev</strong></p>
+          <p>Authorized access level: Guest Reader.</p>
+          <p>Current role: Pair Programming Partner.</p>
+          <p>Welcome! Feel free to explore my blog and projects below.</p>
+        </div>
       </div>
-      <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--text-mute);">
-        &copy; {{ 'now' | date: "%Y" }} {{ site.author.name }}.
+
+      <!-- Mobile buttons inside terminal viewer -->
+      <div class="terminal-mobile-tabs">
+        <button class="terminal-mobile-btn is-active" data-mobile-cmd="about">about.md</button>
+        <button class="terminal-mobile-btn" data-mobile-cmd="neofetch">neofetch</button>
+        <button class="terminal-mobile-btn" data-mobile-cmd="whoami">whoami</button>
       </div>
     </div>
   </div>
-</section>
+
+  <!-- Divider Orange -->
+  <div class="neon-divider neon-divider--orange reveal"></div>
+
+  <!-- Now Section -->
+  <section class="reveal">
+    <div class="cli-section-header">
+      <span class="cli-prompt">~$</span>
+      <span class="cli-command">cat now.md</span>
+    </div>
+    <div class="now-grid">
+      <div class="now-card">
+        <span class="now-card-label">working on</span>
+        <span class="now-card-title">Software Engineering, writing cleaner code.</span>
+      </div>
+      <div class="now-card">
+        <span class="now-card-label">tinkering with</span>
+        <span class="now-card-title">Self-hosting, AI, and Deep Learning.</span>
+      </div>
+      <div class="now-card">
+        <span class="now-card-label">writing about</span>
+        <span class="now-card-title">Performance, backend systems, and frameworks.</span>
+      </div>
+      <div class="now-card">
+        <span class="now-card-label">using</span>
+        <span class="now-card-title">MacBook, Linux servers, and JetBrains Mono.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider Teal -->
+  <div class="neon-divider neon-divider--teal reveal"></div>
+
+  <!-- Projects Section -->
+  <section class="reveal">
+    <div class="cli-section-header">
+      <span class="cli-prompt">~$</span>
+      <span class="cli-command">ls projects/ --sort=stars</span>
+      <a href="{{ '/projects/' | relative_url }}" class="cli-view-all">See all &rarr;</a>
+    </div>
+    <div class="project-grid">
+      {%- assign projects = site.projects | sort: "order" | limit: 2 -%}
+      {%- for project in projects -%}
+        {% include project-card.html project=project index=forloop.index %}
+      {%- endfor -%}
+    </div>
+  </section>
+
+  <!-- Divider Purple -->
+  <div class="neon-divider neon-divider--purple reveal"></div>
+
+  <!-- Featured Posts Section -->
+  <section class="reveal">
+    <div class="cli-section-header">
+      <span class="cli-prompt">~$</span>
+      <span class="cli-command">ls posts/ --featured</span>
+      <a href="{{ '/blog/' | relative_url }}" class="cli-view-all">View all &rarr;</a>
+    </div>
+    <div class="card-grid">
+      {%- for post in site.posts limit: 3 -%}
+        {% include post-card.html post=post %}
+      {%- endfor -%}
+    </div>
+  </section>
+</div>
+
+<!-- Sliding Marquee Banner -->
+<div class="marquee-container reveal">
+  <div class="marquee-track">
+    <!-- Sliding tags list (doubled for infinite scroll) -->
+    <span class="marquee-item">SMART HOMES</span>
+    <span class="marquee-item">IoT</span>
+    <span class="marquee-item">DEVREL</span>
+    <span class="marquee-item">OPEN SOURCE</span>
+    <span class="marquee-item">EXPLORING AI</span>
+    <span class="marquee-item">PROXMOX</span>
+    <span class="marquee-item">ROUTERS</span>
+    <span class="marquee-item">SYSTEM ADMINISTRATION</span>
+    <span class="marquee-item">DATABASES</span>
+    <span class="marquee-item">LINUX</span>
+    <span class="marquee-item">NETWORKING</span>
+    <span class="marquee-item">WEB DEV</span>
+    <!-- Repeat list -->
+    <span class="marquee-item">SMART HOMES</span>
+    <span class="marquee-item">IoT</span>
+    <span class="marquee-item">DEVREL</span>
+    <span class="marquee-item">OPEN SOURCE</span>
+    <span class="marquee-item">EXPLORING AI</span>
+    <span class="marquee-item">PROXMOX</span>
+    <span class="marquee-item">ROUTERS</span>
+    <span class="marquee-item">SYSTEM ADMINISTRATION</span>
+    <span class="marquee-item">DATABASES</span>
+    <span class="marquee-item">LINUX</span>
+    <span class="marquee-item">NETWORKING</span>
+    <span class="marquee-item">WEB DEV</span>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Newsletter Section -->
+  <section class="reveal" style="margin-bottom: 4rem;">
+    <div class="cli-section-header">
+      <span class="cli-prompt">~$</span>
+      <span class="cli-command">cat newsletter.md</span>
+    </div>
+    <div class="newsletter-box">
+      <p class="newsletter-box__text">I write a weekly newsletter about databases, self-hosting, AI, and whatever else I am building.</p>
+      <a href="https://substack.com" target="_blank" rel="noopener" class="btn btn--primary" style="background: var(--accent-2); border-color: var(--accent-2); color: #000; font-weight: 600;">Subscribe on Substack &rarr;</a>
+    </div>
+  </section>
+
+  <!-- ASCII Art Cat Footer -->
+  <div class="footer-cat reveal">
+    <pre>
+   /\_/\
+  ( o.o )
+   > ^ <
+    </pre>
+  </div>
+</div>

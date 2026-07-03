@@ -3,17 +3,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0c0c15">
 
-  {%- comment -%} Apply saved theme before paint to avoid flash {%- endcomment -%}
   <script>
-    (function () {
-      try {
-        var t = localStorage.getItem('theme');
-        if (!t) t = 'light';
-        document.documentElement.setAttribute('data-theme', t);
-      } catch (e) {
-        document.documentElement.setAttribute('data-theme', 'light');
-      }
-    })();
+    document.documentElement.setAttribute('data-theme', 'dark');
   </script>
 
   {%- seo -%}

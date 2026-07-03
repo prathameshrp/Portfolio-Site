@@ -1,0 +1,378 @@
+// ─────────────────────────────────────────────────────────────
+// Layout for Joe Karlsson style Terminal and CLI sections
+// ─────────────────────────────────────────────────────────────
+
+// Terminal Mock Container
+.terminal-mock-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 2fr 3fr;
+  }
+}
+
+// Terminal Window Panel
+.terminal-window {
+  background: #050505;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 480px;
+  position: relative;
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+
+  &:hover {
+    border-color: rgba(34, 211, 238, 0.3);
+    box-shadow: var(--shadow-glow);
+  }
+}
+
+// Title Bar
+.terminal-bar {
+  background: #0c0c0e;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  height: 38px;
+  padding: 0 14px;
+}
+
+// Window Dots
+.window-dots {
+  display: flex;
+  gap: 6px;
+}
+.window-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  
+  &--red { background: #ff5f56; }
+  &--yellow { background: #ffbd2e; }
+  &--green { background: #27c93f; }
+}
+
+// Title Label
+.terminal-title {
+  color: var(--text-soft);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  flex-grow: 1;
+  text-align: center;
+  margin-right: 36px; // compensates for dots width
+}
+
+// Terminal Body
+.terminal-body {
+  padding: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  line-height: 1.6;
+  overflow-y: auto;
+  flex-grow: 1;
+  color: var(--text-soft);
+
+  // Custom Scrollbars
+  &::-webkit-scrollbar { width: 6px; }
+  &::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
+
+  // Output formatting
+  p { color: var(--text-soft); margin-bottom: 0.8rem; }
+  strong { color: var(--text); }
+  
+  .t-prompt {
+    color: var(--accent);
+    font-weight: bold;
+    margin-right: 0.4rem;
+  }
+
+  .t-cmd {
+    color: var(--accent-2);
+    font-weight: bold;
+  }
+
+  .t-green { color: #27c93f; }
+  .t-orange { color: var(--accent); }
+  .t-purple { color: var(--accent-3); }
+  .t-blue { color: #3b82f6; }
+  .t-white { color: var(--text); }
+}
+
+// Terminal Interactive Command List (Left Column)
+.terminal-cmd-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+.terminal-cmd-item {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: var(--radius-sm);
+  transition: background var(--dur) var(--ease), transform var(--dur) var(--ease);
+
+  &:hover {
+    background: rgba(34, 211, 238, 0.06);
+    transform: translateX(4px);
+    .terminal-cmd-text {
+      color: var(--text);
+    }
+  }
+
+  &.is-active {
+    background: rgba(34, 211, 238, 0.1);
+    .terminal-cmd-text {
+      color: var(--accent-2);
+    }
+  }
+}
+.terminal-cmd-prompt {
+  color: var(--accent);
+  font-weight: bold;
+  margin-right: 0.6rem;
+}
+.terminal-cmd-text {
+  color: var(--text-soft);
+  transition: color var(--dur) var(--ease);
+}
+.terminal-cmd-desc {
+  color: var(--text-mute);
+  font-size: 0.76rem;
+  margin-left: auto;
+}
+
+// Mobile buttons inside viewer terminal
+.terminal-mobile-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0.8rem 1rem;
+  background: #09090b;
+  border-top: 1px solid var(--border);
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+.terminal-mobile-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-soft);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 0.35rem 0.6rem;
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), color var(--dur) var(--ease);
+
+  &:hover, &.is-active {
+    background: rgba(34, 211, 238, 0.1);
+    border-color: var(--accent-2);
+    color: var(--accent-2);
+  }
+}
+
+// Neon dividers
+.neon-divider {
+  height: 2px;
+  width: 100%;
+  margin: 4rem 0;
+  
+  &--orange { background: var(--neon-orange-line); }
+  &--teal { background: var(--neon-teal-line); }
+  &--purple { background: var(--neon-purple-line); }
+}
+
+// CLI section header
+.cli-section-header {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+
+  .cli-prompt {
+    color: var(--accent);
+    font-weight: bold;
+  }
+  .cli-command {
+    color: var(--text);
+    font-weight: bold;
+  }
+  .cli-view-all {
+    margin-left: auto;
+    font-family: var(--font-sans);
+    font-size: 0.84rem;
+    color: var(--text-soft);
+    text-decoration: none;
+    transition: color var(--dur) var(--ease);
+    
+    &:hover {
+      color: var(--accent-2);
+    }
+  }
+}
+
+// Now section cards grid
+.now-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+
+  @media (min-width: 576px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 992px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.now-card {
+  background: #050505;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+
+  &:hover {
+    border-color: rgba(34, 211, 238, 0.4);
+    box-shadow: var(--shadow-sm);
+  }
+}
+.now-card-label {
+  color: var(--text-mute);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+}
+.now-card-title {
+  color: var(--text);
+  font-size: 0.94rem;
+  font-weight: 500;
+  line-height: 1.4;
+
+  a {
+    color: var(--accent-2);
+    text-decoration: underline;
+    
+    &:hover {
+      color: var(--text);
+    }
+  }
+}
+
+// Project grid overrides for terminal theme
+.project-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+// Sliding tags marquee
+.marquee-container {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  background: #000000;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 1.25rem 0;
+  margin: 5rem 0;
+  white-space: nowrap;
+}
+.marquee-track {
+  display: inline-flex;
+  gap: 2.5rem;
+  animation: marquee-scroll 35s linear infinite;
+  width: max-content;
+}
+.marquee-item {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  letter-spacing: 0.06em;
+
+  &::after {
+    content: "•";
+    color: var(--accent-2);
+  }
+}
+
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+// Newsletter section styled mock
+.newsletter-box {
+  background: #050505;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2.2rem;
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  box-shadow: var(--shadow);
+  
+  &__text {
+    color: var(--text-soft);
+    font-size: 0.94rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+}
+
+// Footer ASCII Cat
+.footer-cat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: -2rem;
+  margin-bottom: 1.5rem;
+  
+  pre {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    line-height: 1.1;
+    color: var(--text-mute);
+    margin: 0;
+  }
+}
+
+// Hide default shell on mobile
+@media (max-width: 767px) {
+  .terminal-mock-container {
+    .terminal-window:first-child {
+      display: none; // hides the left commands pane on mobile
+    }
+  }
+}

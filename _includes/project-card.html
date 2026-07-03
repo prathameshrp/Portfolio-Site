@@ -1,18 +1,25 @@
 {%- assign project = include.project -%}
-<article class="project-card reveal">
-  <div class="project-card__top">
-    <span class="project-card__index">_{{ include.index }}</span>
-    {%- if project.url and project.url != "" -%}
-      <a class="icon-btn" href="{{ project.url }}" target="_blank" rel="noopener" aria-label="Visit {{ project.title }}">
-        {% include icon.html name="arrow-up-right" %}
-      </a>
-    {%- endif -%}
-  </div>
-  <h3 class="project-card__title">{{ project.title }}</h3>
-  <p class="project-card__desc">{{ project.description }}</p>
-  <div class="project-card__stack">
-    {%- for tech in project.tech -%}
-      <span class="chip chip--ghost">{{ tech }}</span>
-    {%- endfor -%}
+<article class="project-card reveal" style="overflow: hidden; display: flex; flex-direction: column; padding: 0; border: 1px solid var(--border); border-radius: var(--radius-lg); background: #050505;">
+  {%- if project.cover -%}
+    <div class="project-card__cover" style="height: 160px; overflow: hidden; position: relative; border-bottom: 1px solid var(--border);">
+      <img src="{{ project.cover | relative_url }}" alt="{{ project.title }}" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+  {%- endif -%}
+  <div class="project-card__body" style="padding: 1.25rem; display: flex; flex-direction: column; flex-grow: 1; gap: 0.8rem;">
+    <div class="project-card__top" style="display: flex; align-items: center; justify-content: space-between; width: 100%; margin: 0; padding: 0; background: transparent; border: 0;">
+      <span class="project-card__index" style="font-family: var(--font-mono); color: var(--text-mute); font-size: 0.8rem;">_{{ include.index }}</span>
+      {%- if project.url and project.url != "" -%}
+        <a class="icon-btn" href="{{ project.url }}" target="_blank" rel="noopener" aria-label="Visit {{ project.title }}" style="padding: 0; border: 0; background: transparent;">
+          {% include icon.html name="arrow-up-right" %}
+        </a>
+      {%- endif -%}
+    </div>
+    <h3 class="project-card__title" style="margin: 0; font-size: 1.1rem; font-weight: 600; font-family: var(--font-sans); color: var(--text);">{{ project.title }}</h3>
+    <p class="project-card__desc" style="color: var(--text-soft); font-size: 0.84rem; margin: 0; line-height: 1.5; flex-grow: 1;">{{ project.description }}</p>
+    <div class="project-card__stack" style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: auto; padding: 0; border: 0; background: transparent;">
+      {%- for tech in project.tech -%}
+        <span class="chip chip--ghost" style="font-size: 0.72rem; padding: 0.25rem 0.5rem; background: var(--surface); color: var(--text-soft); border: 1px solid var(--border);">{{ tech }}</span>
+      {%- endfor -%}
+    </div>
   </div>
 </article>

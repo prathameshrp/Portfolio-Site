@@ -5,6 +5,7 @@ order: 4
 tech: [JavaScript, Canvas API, Computer Graphics]
 url: https://github.com/prathameshrp/CG_MINI_PROJECT_PAINT_APP
 url_live: ""
+cover: /assets/img/cgpaint.png
 ---
 
 cgPaint is a paint app built as a computer graphics mini project. Every

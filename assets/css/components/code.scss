@@ -51,7 +51,7 @@ figure.highlight {
 .prose figure.highlight pre,
 .code-block pre {
   margin: 0; padding: 1.1rem 1.2rem; overflow-x: auto;
-  font-size: .86rem; line-height: 1.7; color: #e6e6f0;
+  font-size: .86rem; line-height: 1.7; color: var(--code-fg);
   background: transparent !important;
 }
 .prose pre code { background: transparent; padding: 0; border: 0; color: inherit; font-size: inherit; }
@@ -60,26 +60,26 @@ figure.highlight {
 .code-block pre::-webkit-scrollbar,
 .prose pre::-webkit-scrollbar { height: 8px; }
 .code-block pre::-webkit-scrollbar-thumb,
-.prose pre::-webkit-scrollbar-thumb { background: rgba(255,255,255,.12); border-radius: 8px; }
+.prose pre::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 8px; }
 
-// ── Rouge token theme (aurora dark) ────────────────────────────
+// ── Rouge token theme ──────────────────────────────────────────
 .highlight {
-  .c, .cm, .c1, .cs, .cd { color: #6b6f8a; font-style: italic; }
+  .c, .cm, .c1, .cs, .cd { color: var(--syntax-comment); font-style: italic; }
   .err { color: #ff6b81; }
-  .k, .kc, .kd, .kn, .kp, .kr, .kt { color: #c792ff; }
-  .o, .ow { color: #89ddff; }
-  .p { color: #b6b8cc; }
+  .k, .kc, .kd, .kn, .kp, .kr, .kt { color: var(--syntax-keyword); }
+  .o, .ow { color: var(--syntax-operator); }
+  .p { color: var(--syntax-punctuation); }
   .gd { color: #ff6b81; } .gi { color: #28c840; }
-  .s, .s1, .s2, .sb, .sc, .sd, .se, .sh, .si, .sx, .sr, .ss, .dl { color: #c3e88d; }
-  .m, .mf, .mh, .mi, .mo, .mb, .il { color: #f78c6c; }
-  .na { color: #ffcb6b; }
-  .nt { color: #ff6b81; }
-  .nf, .fm { color: #82aaff; }
-  .nc, .nn { color: #ffcb6b; }
-  .nb, .bp { color: #89ddff; }
-  .nv, .vc, .vg, .vi { color: #f07178; }
-  .nl { color: #89ddff; }
-  .gh, .gu { color: #82aaff; font-weight: 700; }
+  .s, .s1, .s2, .sb, .sc, .sd, .se, .sh, .si, .sx, .sr, .ss, .dl { color: var(--syntax-string); }
+  .m, .mf, .mh, .mi, .mo, .mb, .il { color: var(--syntax-number); }
+  .na { color: var(--syntax-attribute); }
+  .nt { color: var(--syntax-tag); }
+  .nf, .fm { color: var(--syntax-function); }
+  .nc, .nn { color: var(--syntax-class); }
+  .nb, .bp { color: var(--syntax-builtin); }
+  .nv, .vc, .vg, .vi { color: var(--syntax-variable); }
+  .nl { color: var(--syntax-operator); }
+  .gh, .gu { color: var(--syntax-function); font-weight: 700; }
 }
 
 // ── Runnable playground ────────────────────────────────────────

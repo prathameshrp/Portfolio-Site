@@ -5,6 +5,7 @@ order: 3
 tech: [Python, Flask, MediaPipe, OpenCV, Node.js, Express]
 url: https://github.com/prathameshrp/virtual-tryon
 url_live: ""
+cover: /assets/img/tryon.png
 ---
 
 Captures a webcam frame every 500ms, detects shoulder and hip landmarks with

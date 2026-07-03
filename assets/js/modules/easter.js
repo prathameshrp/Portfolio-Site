@@ -2,7 +2,7 @@
 (function () {
   // ── Console banner ──────────────────────────────────────────
   try {
-    var brand = 'B-logs';
+    var brand = 'DevLog';
     console.log(
       '%c </> %c ' + brand + ' %c\n' +
       '%cYou found the console. Curious people make the best engineers.\n' +

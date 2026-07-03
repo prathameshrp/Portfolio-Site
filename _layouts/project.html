@@ -1,21 +1,40 @@
 ---
 layout: default
 ---
-<section class="page-shell">
-  <div class="container container--narrow">
-    <a class="post__back" href="{{ '/projects/' | relative_url }}">&larr; All projects</a>
-    <header class="page-head reveal">
-      <h1 class="page-head__title">{{ page.title }}</h1>
-      {%- if page.description -%}<p class="page-head__subtitle">{{ page.description }}</p>{%- endif -%}
-      <div class="project-card__stack">
-        {%- for tech in page.tech -%}<span class="chip chip--ghost">{{ tech }}</span>{%- endfor -%}
+<section class="page-shell" style="margin-top: 2rem;">
+  <div class="container">
+    <a class="post__back" href="{{ '/projects/' | relative_url }}" style="display: inline-block; margin-bottom: 1rem;">&larr; All projects</a>
+    
+    <div class="terminal-window reveal" style="height: auto; margin-bottom: 2rem;">
+      <div class="terminal-bar">
+        <div class="window-dots">
+          <div class="window-dot window-dot--red"></div>
+          <div class="window-dot window-dot--yellow"></div>
+          <div class="window-dot window-dot--green"></div>
+        </div>
+        <div class="terminal-title">prathameshrp@devlog:~/projects/{{ page.title | slugify }}</div>
       </div>
-      {%- if page.url_live -%}
-      <a class="btn btn--primary" href="{{ page.url_live }}" target="_blank" rel="noopener">
-        Visit project {% include icon.html name="arrow-up-right" %}
-      </a>
-      {%- endif -%}
-    </header>
-    <div class="prose reveal">{{ content }}</div>
+      <div class="terminal-body" style="padding: 1.5rem 1.75rem;">
+        <p style="margin-bottom: 1.5rem; font-family: var(--font-mono); font-size: 0.86rem; color: var(--text-soft);"><span class="t-prompt">~$</span> <span class="t-cmd">cat {{ page.title | slugify }}.md</span></p>
+        
+        <header class="page-head reveal" style="padding: 1rem 0 2rem; border-bottom: 1px solid var(--border); margin-bottom: 2rem; text-align: left;">
+          <h1 class="page-head__title" style="margin: 0; font-size: clamp(1.8rem, 4.5vw, 2.6rem); font-family: var(--font-display); font-weight: 600; color: var(--text);">{{ page.title }}</h1>
+          {%- if page.description -%}<p class="page-head__subtitle" style="color: var(--text-soft); margin-top: 0.75rem; font-size: 1rem;">{{ page.description }}</p>{%- endif -%}
+          <div class="project-card__stack" style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem;">
+            {%- for tech in page.tech -%}
+              <span class="chip chip--ghost" style="font-size: 0.72rem; padding: 0.25rem 0.5rem; background: var(--surface); color: var(--text-soft); border: 1px solid var(--border);">{{ tech }}</span>
+            {%- endfor -%}
+          </div>
+          {%- if page.url_live and page.url_live != "" -%}
+          <div style="margin-top: 1.25rem;">
+            <a class="btn btn--primary" href="{{ page.url_live }}" target="_blank" rel="noopener" style="background: var(--accent-2); border-color: var(--accent-2); color: #000; font-weight: 600;">
+              Visit project {% include icon.html name="arrow-up-right" %}
+            </a>
+          </div>
+          {%- endif -%}
+        </header>
+        <div class="prose reveal">{{ content }}</div>
+      </div>
+    </div>
   </div>
 </section>

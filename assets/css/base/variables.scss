@@ -1,75 +1,110 @@
 // ─────────────────────────────────────────────────────────────
-// Design tokens — aurora theme (dark default, light toggle)
+// Design tokens — Joe Karlsson style pitch-black theme (dark default, light toggle)
 // ─────────────────────────────────────────────────────────────
 
 :root {
-  // Accents (Assassin's Creed 2 Crimson and Gold)
-  --accent: #9a1823;        // crimson red
-  --accent-2: #9a1823;      // crimson red
-  --accent-3: #8c826c;      // gold / taupe
-  --accent-grad: linear-gradient(120deg, #9a1823 0%, #c22936 100%);
-  --accent-grad-soft: linear-gradient(120deg, rgba(154, 24, 35, .08), rgba(194, 41, 54, .08));
+  // Accents (Neon color set)
+  --accent: #f97316;        // neon orange
+  --accent-2: #22d3ee;      // neon teal
+  --accent-3: #a855f7;      // neon purple
+  --accent-grad: linear-gradient(120deg, #f97316 0%, #22d3ee 100%);
+  --accent-grad-soft: linear-gradient(120deg, rgba(249, 115, 22, 0.08), rgba(34, 211, 238, 0.08));
+
+  // Neon Gradient lines
+  --neon-orange-line: linear-gradient(90deg, #f97316 0%, rgba(249, 115, 22, 0) 100%);
+  --neon-teal-line: linear-gradient(90deg, #22d3ee 0%, rgba(34, 211, 238, 0) 100%);
+  --neon-purple-line: linear-gradient(90deg, #a855f7 0%, rgba(168, 85, 247, 0) 100%);
 
   // Type
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
-  --font-serif: "Cormorant Garamond", Georgia, serif;
-  --font-display: "Cormorant Garamond", Georgia, serif;
-  --font-logo: "Cinzel", "Space Grotesk", sans-serif;
+  --font-serif: "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Inter", system-ui, -apple-system, sans-serif;
+  --font-logo: "Inter", system-ui, -apple-system, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
 
   // Spacing / sizing
-  --radius: 12px;
-  --radius-sm: 8px;
-  --radius-lg: 20px;
-  --container: 1120px;
+  --radius: 8px;
+  --radius-sm: 4px;
+  --radius-lg: 12px;
+  --container: 1140px;
   --container-narrow: 760px;
   --container-wide: 1320px;
 
   // Motion
-  --ease: cubic-bezier(.22, 1, .36, 1);
-  --dur: .55s;
+  --ease: cubic-bezier(.2, 0.8, 0.2, 1);
+  --dur: .25s;
 
-  // Shadows (pop-art flat solid style)
-  --shadow-sm: 3px 3px 0px var(--text);
-  --shadow: 6px 6px 0px var(--text-mute);
-  --shadow-glow: 6px 6px 0px var(--accent);
+  // Shadows
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
+  --shadow-glow: 0 0 15px rgba(34, 211, 238, 0.15);
 }
 
-// Warm Beige Renaissance (Default)
+// Light Theme
 [data-theme="light"] {
-  --bg: #f5f2eb;
-  --bg-soft: #faf8f5;
-  --surface: rgba(42, 38, 33, .035);
-  --surface-2: rgba(42, 38, 33, .06);
-  --border: rgba(42, 38, 33, .08);
-  --border-strong: rgba(42, 38, 33, .14);
-  --text: #2a2621;
-  --text-soft: #5c564e;
-  --text-mute: #8c826c;
-  --code-bg: #eae3d6;
-  --aurora-opacity: 0.15;
-  --grid-color: rgba(42, 38, 33, .03);
+  --bg: #f8fafc;            // slate-50
+  --bg-soft: #ffffff;
+  --surface: #f1f5f9;       // slate-100
+  --surface-2: #e2e8f0;     // slate-200
+  --border: #cbd5e1;
+  --border-strong: #94a3b8;
+  --text: #0f172a;          // slate-900
+  --text-soft: #475569;     // slate-600
+  --text-mute: #94a3b8;     // slate-400
+  --code-bg: #e2e8f0;       // slate-200
+  --code-fg: #0f172a;       // slate-900
+  --aurora-opacity: 0;
+  --grid-color: rgba(0, 0, 0, .01);
+
+  // Syntax highlighting for light theme (GitHub Light style)
+  --syntax-comment: #6a737d;
+  --syntax-keyword: #d73a49;
+  --syntax-operator: #d73a49;
+  --syntax-punctuation: #24292e;
+  --syntax-string: #032f62;
+  --syntax-number: #005cc5;
+  --syntax-attribute: #6f42c1;
+  --syntax-tag: #22863a;
+  --syntax-function: #6f42c1;
+  --syntax-class: #6f42c1;
+  --syntax-builtin: #e36209;
+  --syntax-variable: #e36209;
 }
 
-// Dark Renaissance
+// Dark Theme (Pitch-Black default)
 [data-theme="dark"] {
-  --bg: #151412;
-  --bg-soft: #1e1c19;
-  --surface: rgba(255, 255, 255, .035);
-  --surface-2: rgba(255, 255, 255, .06);
-  --border: rgba(255, 255, 255, .08);
-  --border-strong: rgba(255, 255, 255, .15);
-  --text: #ebdcd0;
-  --text-soft: #a89e95;
-  --text-mute: #7d756c;
-  --code-bg: #0d0c0b;
-  --aurora-opacity: .4;
-  --grid-color: rgba(255, 255, 255, .025);
+  --bg: #000000;            // pitch-black
+  --bg-soft: #050505;
+  --surface: #0a0a0c;
+  --surface-2: #121214;
+  --border: #1e293b;
+  --border-strong: #334155;
+  --text: #f1f5f9;          // slate-100
+  --text-soft: #94a3b8;     // slate-400
+  --text-mute: #64748b;     // slate-500
+  --code-bg: #0d0d0f;
+  --code-fg: #f1f5f9;
+  --aurora-opacity: 0;
+  --grid-color: rgba(255, 255, 255, .01);
 
-  // Overrides for dark crimson accent
-  --accent: #d42c38;
-  --accent-2: #d42c38;
-  --accent-3: #aa977a;
-  --accent-grad: linear-gradient(120deg, #d42c38 0%, #e04853 100%);
-  --accent-grad-soft: linear-gradient(120deg, rgba(212, 44, 56, .1), rgba(224, 72, 83, .1));
+  // Overrides for dark theme neon set
+  --accent: #f97316;
+  --accent-2: #22d3ee;
+  --accent-3: #a855f7;
+  --accent-grad: linear-gradient(120deg, #f97316 0%, #22d3ee 100%);
+  --accent-grad-soft: linear-gradient(120deg, rgba(249, 115, 22, 0.1), rgba(34, 211, 238, 0.1));
+
+  // Syntax highlighting for dark theme (VS Code Dark / One Dark style)
+  --syntax-comment: #677182;
+  --syntax-keyword: #c792ff;
+  --syntax-operator: #89ddff;
+  --syntax-punctuation: #abb2bf;
+  --syntax-string: #98c379;
+  --syntax-number: #d19a66;
+  --syntax-attribute: #d19a66;
+  --syntax-tag: #e06c75;
+  --syntax-function: #61afef;
+  --syntax-class: #e5c07b;
+  --syntax-builtin: #56b6c2;
+  --syntax-variable: #e06c75;
 }

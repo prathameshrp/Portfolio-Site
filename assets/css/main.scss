@@ -14,10 +14,11 @@
 @use "components/forms";
 @use "components/search";
 @use "components/graph";
-@use "components/cursor";
-@use "components/fx";
+// @use "components/cursor";
+// @use "components/fx";
 
 @use "layouts/home";
 @use "layouts/blog";
 @use "layouts/project";
 @use "layouts/post";
+@use "layouts/terminal";

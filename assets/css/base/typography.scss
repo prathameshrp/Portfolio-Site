@@ -1,8 +1,8 @@
-h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.12; letter-spacing: -.02em; font-weight: 600; }
+h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.2; letter-spacing: -.02em; font-weight: 600; }
 
-h1 { font-size: clamp(2.2rem, 6vw, 3.6rem); }
-h2 { font-size: clamp(1.7rem, 4vw, 2.4rem); }
-h3 { font-size: clamp(1.25rem, 2.4vw, 1.5rem); }
+h1 { font-size: clamp(1.8rem, 4.5vw, 2.6rem); }
+h2 { font-size: clamp(1.4rem, 3vw, 1.8rem); }
+h3 { font-size: clamp(1.15rem, 2vw, 1.35rem); }
 
 p { color: var(--text-soft); }
 
@@ -40,9 +40,9 @@ a.chip:hover, .chip:hover { transform: translateY(-2px); border-color: var(--bor
 
 // ── Long-form prose ────────────────────────────────────────────
 .prose {
-  font-family: var(--font-serif);
-  font-size: 1.22rem;
-  line-height: 1.8;
+  font-family: var(--font-sans);
+  font-size: 1.02rem;
+  line-height: 1.65;
   color: var(--text-soft);
 
   > * + * { margin-top: 1.5rem; }
