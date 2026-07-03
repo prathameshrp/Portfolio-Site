@@ -3,6 +3,7 @@ title: "Building a Real-Time Virtual Try-On with MediaPipe and a Webcam"
 date: 2025-04-08 10:00:00 +0530
 tags: [Python, Computer Vision, MediaPipe, Flask, Node.js]
 excerpt: "How I built a real-time clothing overlay that detects your pose landmarks and drapes a shirt over you, live from a webcam feed."
+cover: /assets/img/tryon-post.png
 ---
 
 Most virtual try-on demos you see online are either pre-recorded, server-heavy,
