@@ -160,57 +160,63 @@ layout: default
   </section>
 </div>
 
-<!-- Sliding Marquee Banner -->
-<div class="marquee-container reveal">
-  <div class="marquee-track">
-    <!-- Sliding tags list (doubled for infinite scroll) -->
-    <span class="marquee-item">SMART HOMES</span>
-    <span class="marquee-item">IoT</span>
-    <span class="marquee-item">DEVREL</span>
-    <span class="marquee-item">OPEN SOURCE</span>
-    <span class="marquee-item">EXPLORING AI</span>
-    <span class="marquee-item">PROXMOX</span>
-    <span class="marquee-item">ROUTERS</span>
-    <span class="marquee-item">SYSTEM ADMINISTRATION</span>
-    <span class="marquee-item">DATABASES</span>
-    <span class="marquee-item">LINUX</span>
-    <span class="marquee-item">NETWORKING</span>
-    <span class="marquee-item">WEB DEV</span>
-    <!-- Repeat list -->
-    <span class="marquee-item">SMART HOMES</span>
-    <span class="marquee-item">IoT</span>
-    <span class="marquee-item">DEVREL</span>
-    <span class="marquee-item">OPEN SOURCE</span>
-    <span class="marquee-item">EXPLORING AI</span>
-    <span class="marquee-item">PROXMOX</span>
-    <span class="marquee-item">ROUTERS</span>
-    <span class="marquee-item">SYSTEM ADMINISTRATION</span>
-    <span class="marquee-item">DATABASES</span>
-    <span class="marquee-item">LINUX</span>
-    <span class="marquee-item">NETWORKING</span>
-    <span class="marquee-item">WEB DEV</span>
+<!-- ───────────── Grimoire Section ───────────── -->
+<div class="grimoire-section reveal">
+  <div class="grimoire-inner">
+
+    <!-- Left: Witch Hat ASCII + sigil art -->
+    <div class="grimoire-art" aria-hidden="true">
+      <pre class="witch-ascii">
+        .
+       /|\
+      / | \
+     /  |  \
+    / .-'-. \
+   /.'     '.\
+  /_____________\
+ /_______________\
+       | |
+       |_|
+      </pre>
+      <div class="sigil-ring" id="sigilCanvas">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="sigil-svg">
+          <circle cx="100" cy="100" r="90" stroke="rgba(34,211,238,0.15)" stroke-width="1" fill="none"/>
+          <circle cx="100" cy="100" r="70" stroke="rgba(251,146,60,0.12)" stroke-width="1" fill="none" stroke-dasharray="4 6"/>
+          <circle cx="100" cy="100" r="50" stroke="rgba(167,139,250,0.15)" stroke-width="1" fill="none"/>
+          <!-- Pentagram-like lines -->
+          <polygon points="100,18 180,140 28,58 172,58 20,140" stroke="rgba(34,211,238,0.2)" stroke-width="0.8" fill="none"/>
+          <!-- Rune marks -->
+          <text x="100" y="104" text-anchor="middle" font-family="monospace" font-size="11" fill="rgba(34,211,238,0.45)" letter-spacing="2">✦ COCO ✦</text>
+          <text x="100" y="88" text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(251,146,60,0.4)">· · ATELIER · ·</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Right: Animated quote + notes CTA -->
+    <div class="grimoire-content">
+      <p class="grimoire-label">~$ open grimoire.md</p>
+      <blockquote class="grimoire-quote" id="grimoireQuote">
+        <span class="typewriter" data-text="&quot;Magic isn't something only a chosen few can use. It's just knowledge waiting to be discovered.&quot;"></span>
+        <cite>— Witch Hat Atelier</cite>
+      </blockquote>
+
+      <p class="grimoire-body">
+        Every spell starts as a note. I keep mine at my programming notes site —
+        a living grimoire of things I've learned, built, and broken.
+        No newsletter. Just raw knowledge, indexed.
+      </p>
+
+      <a href="https://notes.0xprathamesh.is-a.dev" target="_blank" rel="noopener" class="grimoire-btn">
+        <span class="grimoire-btn__icon">📖</span>
+        <span>Open the Grimoire</span>
+        <span class="grimoire-btn__arrow">→</span>
+      </a>
+
+      <div class="grimoire-runes" aria-hidden="true">
+        <span>ᚠ</span><span>ᚢ</span><span>ᚦ</span><span>ᚨ</span><span>ᚱ</span><span>ᚲ</span><span>ᚷ</span><span>ᚹ</span>
+      </div>
+    </div>
+
   </div>
 </div>
 
-<div class="container">
-  <!-- Newsletter Section -->
-  <section class="reveal" style="margin-bottom: 4rem;">
-    <div class="cli-section-header">
-      <span class="cli-prompt">~$</span>
-      <span class="cli-command">cat newsletter.md</span>
-    </div>
-    <div class="newsletter-box">
-      <p class="newsletter-box__text">I write a weekly newsletter about databases, self-hosting, AI, and whatever else I am building.</p>
-      <a href="https://substack.com" target="_blank" rel="noopener" class="btn btn--primary" style="background: var(--accent-2); border-color: var(--accent-2); color: #000; font-weight: 600;">Subscribe on Substack &rarr;</a>
-    </div>
-  </section>
-
-  <!-- ASCII Art Cat Footer -->
-  <div class="footer-cat reveal">
-    <pre>
-   /\_/\
-  ( o.o )
-   > ^ <
-    </pre>
-  </div>
-</div>

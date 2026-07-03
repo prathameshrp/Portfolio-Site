@@ -55,5 +55,45 @@
         runCommand(cmd);
       });
     });
+
+    // ── Typewriter for grimoire quote ───────────────────────────
+    var twEl = document.querySelector('.typewriter');
+    if (twEl) {
+      var fullText = twEl.getAttribute('data-text') || '';
+      twEl.textContent = '';
+      var twStarted = false;
+
+      function startTypewriter() {
+        if (twStarted) return;
+        twStarted = true;
+        var i = 0;
+        var speed = 28;
+        function type() {
+          if (i < fullText.length) {
+            twEl.textContent += fullText.charAt(i);
+            i++;
+            setTimeout(type, speed);
+          } else {
+            twEl.classList.add('is-done');
+          }
+        }
+        type();
+      }
+
+      // Start when in viewport
+      if ('IntersectionObserver' in window) {
+        var obs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              startTypewriter();
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.4 });
+        obs.observe(twEl);
+      } else {
+        startTypewriter();
+      }
+    }
   });
 })();
