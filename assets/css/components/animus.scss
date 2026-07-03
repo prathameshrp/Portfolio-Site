@@ -73,7 +73,11 @@
   position: relative;
 }
 
-.page-head__title, .post__title {
+// ── Section-Level Terminal Headers ───────────────────────────
+// Make post/project page-head feel like a database terminal — NOT tags
+.post .page-head__title,
+.post__title,
+.layout-project .page-head__title {
   font-family: var(--font-logo) !important;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -326,8 +330,8 @@
   border: 2px solid var(--text) !important;
 }
 
-// ── Chips/Tags: Diamond Bullets ──────────────────────────────
-.chip {
+// ── Chips/Tags: Diamond Bullets (not in tag cloud, not chip--ghost) ──
+.chip:not(.tag-cloud .chip):not(.chip--ghost) {
   border-radius: 2px !important;
   font-family: var(--font-mono) !important;
   text-transform: uppercase;
