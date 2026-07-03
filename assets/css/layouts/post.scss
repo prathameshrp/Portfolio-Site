@@ -10,29 +10,48 @@
 
 .post__layout {
   display: grid; grid-template-columns: 1fr; gap: 3rem;
-  max-width: var(--container-narrow); padding-top: 2.5rem;
+  max-width: var(--container); padding-top: 2rem;
 }
-.post__content { min-width: 0; max-width: 680px; }
+.post__content { min-width: 0; max-width: 72ch; }
 
-// TOC — floats to the side on wide screens
+// TOC — sticky right sidebar on wide screens
 .post__toc {
   display: none;
 }
 @media (min-width: 1100px) {
-  .post__layout { max-width: var(--container); grid-template-columns: 220px minmax(0,1fr); }
-  .post__content { max-width: 680px; justify-self: flex-start; }
+  // content left, TOC right
+  .post__layout { grid-template-columns: minmax(0, 1fr) 220px; }
+  .post__content { max-width: 72ch; }
   .post__toc {
-    display: block; position: sticky; top: 100px; align-self: start; order: -1;
-    font-size: .85rem; max-height: calc(100vh - 140px); overflow-y: auto;
+    display: block;
+    position: sticky;
+    top: 88px;
+    align-self: start;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    // ensure TOC never gets pushed first
+    order: 2;
   }
+  .post__content { order: 1; }
 }
 .post__toc-title { font-family: var(--font-mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .1em; color: var(--text-mute); display: block; margin-bottom: .8rem; }
+.post__toc {
+  // scrollbar styling
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+  padding-left: 1rem;
+  border-left: 1px solid var(--border);
+  font-size: .82rem;
+  &::-webkit-scrollbar { width: 3px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+}
 .post__toc a {
-  display: block; padding: .3rem 0 .3rem .7rem; color: var(--text-mute);
-  border-left: 2px solid var(--border); transition: color .2s var(--ease), border-color .2s var(--ease);
-  &:hover { color: var(--text); }
+  display: block; padding: .28rem 0 .28rem .7rem; color: var(--text-mute);
+  border-left: 2px solid transparent; transition: color .2s var(--ease), border-color .2s var(--ease);
+  &:hover { color: var(--text); border-left-color: var(--border-strong); }
   &.is-active { color: var(--accent-2); border-left-color: var(--accent-2); }
-  &.toc--h3 { padding-left: 1.4rem; font-size: .82rem; }
+  &.toc--h3 { padding-left: 1.4rem; font-size: .78rem; }
 }
 
 .post__footer { margin-top: 4rem; }

@@ -43,15 +43,15 @@ layout: default
           </div>
           {%- endif -%}
 
-          <div class="post__layout" style="display: grid; grid-template-columns: 1fr; gap: 3rem; padding-top: 0;">
+          <div class="post__layout">
+            <div class="prose post__content" data-post-content>
+              {{ content }}
+            </div>
+
             <aside class="post__toc" data-toc aria-label="Table of contents">
               <span class="post__toc-title">On this page</span>
               <nav data-toc-list></nav>
             </aside>
-
-            <div class="prose post__content" data-post-content>
-              {{ content }}
-            </div>
           </div>
 
           <footer class="post__footer" style="margin-top: 3rem;">
