@@ -45,7 +45,7 @@
 
 @media (max-width: 880px) {
   .hero__inner { grid-template-columns: 1fr; }
-  .hero__terminal { order: -1; max-width: 480px; }
+  .hero__terminal { order: -1; max-width: 480px; margin: 0 auto; width: 100%; }
 }
 
 // Stack strip under the constellation

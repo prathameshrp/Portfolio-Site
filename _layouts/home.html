@@ -7,10 +7,6 @@ layout: default
   <section class="hero reveal">
     <div class="hero__inner">
       <div class="hero__content">
-        <div class="hero__badge">
-          <span class="hero__badge-dot"></span>
-          <span>Available for collaborations</span>
-        </div>
         <h1 class="hero__title">
           Hi, I am <br>
           <span class="hero__rotator" data-rotator data-words='["Prathamesh Patil", "a software engineer", "a systems developer", "a backend engineer"]'>
@@ -33,9 +29,7 @@ layout: default
             <div class="terminal__dot"></div>
             <span class="terminal__name">guest@prathamesh.dev:~</span>
           </div>
-          <div class="terminal__body" data-terminal data-lines='["$ curl -s https://0xprathamesh.is-a.dev/info.json", "{", "  \"name\": \"Prathamesh Patil\",", "  \"role\": \"Software Engineer\",", "  \"focus\": [\"Systems\", \"Backend\", \"AI\"],", "  \"status\": \"Building clean code...\"", "}"]'>
-            <span class="t-current t-prompt">$ curl -s https://0xprathamesh.is-a.dev/info.json</span>
-          </div>
+          <div class="terminal__body" data-terminal data-lines='["$ curl -s https://0xprathamesh.is-a.dev/info.json", "{", "  \"name\": \"Prathamesh Patil\",", "  \"role\": \"Software Engineer\",", "  \"focus\": [\"Systems\", \"Backend\", \"AI\"],", "  \"status\": \"Building clean code...\"", "}"]'><span class="t-current t-prompt">$ curl -s https://0xprathamesh.is-a.dev/info.json</span></div>
         </div>
       </div>
     </div>
@@ -182,97 +176,100 @@ layout: default
 <div class="grimoire-section reveal">
   <div class="grimoire-inner">
 
-    <!-- Left: Witch Hat ASCII + sigil art -->
+    <!-- Left: Animated Techno-Magical Grimoire Book Visual -->
     <div class="grimoire-art" aria-hidden="true">
-      <pre class="witch-ascii" aria-label="Witch hat ASCII art">
-        .
-       /|\
-      / | \
-     /  |  \
-    / .-'-. \
-   /.'     '.\
-  /_____________\
- /_______________\
-       | |
-       |_|
-      </pre>
-      <!-- Brushbug sleeping next to the hat -->
-      <svg class="brushbug-svg" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg" aria-label="Sleeping brushbug" role="img">
-        <defs>
-          <radialGradient id="bb-body" cx="38%" cy="30%">
-            <stop offset="0%" stop-color="#fdfaf2"/>
-            <stop offset="60%" stop-color="#ede5cf"/>
-            <stop offset="100%" stop-color="#d0be98"/>
-          </radialGradient>
-          <radialGradient id="bb-belly" cx="50%" cy="50%">
-            <stop offset="0%" stop-color="#e8dfc5"/>
-            <stop offset="100%" stop-color="#c9b990"/>
-          </radialGradient>
-          <filter id="bb-soft" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="b"/>
-            <feFlood flood-color="#f5f0e4" result="c"/>
-            <feComposite in="c" in2="b" operator="in" result="h"/>
-            <feMerge><feMergeNode in="h"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-        </defs>
-        <!-- Ground shadow -->
-        <ellipse cx="60" cy="76" rx="45" ry="5" fill="rgba(0,0,0,0.18)"/>
-        <!-- Thick tail curling out behind -->
-        <path d="M 30,58 Q 10,52 8,44 Q 6,36 16,34 Q 26,32 30,42 Q 32,50 40,52" stroke="url(#bb-body)" stroke-width="10" stroke-linecap="round" fill="none" filter="url(#bb-soft)"/>
-        <!-- Tail tip bristles -->
-        <line x1="8" y1="44" x2="4" y2="38" stroke="#ddd0b0" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="8" y1="44" x2="3" y2="44" stroke="#ddd0b0" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="8" y1="44" x2="5" y2="50" stroke="#ddd0b0" stroke-width="2.5" stroke-linecap="round"/>
-        <!-- Body -->
-        <ellipse cx="65" cy="58" rx="30" ry="18" fill="url(#bb-body)" filter="url(#bb-soft)"/>
-        <!-- Belly underside -->
-        <ellipse cx="65" cy="64" rx="22" ry="10" fill="url(#bb-belly)"/>
-        <!-- Stubby back leg -->
-        <ellipse cx="85" cy="70" rx="8" ry="5" fill="#ede5cf" filter="url(#bb-soft)"/>
-        <ellipse cx="80" cy="72" rx="5" ry="3.5" fill="#ddd0b0"/>
-        <!-- Stubby front legs -->
-        <ellipse cx="46" cy="68" rx="7" ry="4.5" fill="#ede5cf" filter="url(#bb-soft)"/>
-        <ellipse cx="42" cy="70" rx="4.5" ry="3" fill="#ddd0b0"/>
-        <!-- Neck -->
-        <ellipse cx="55" cy="48" rx="10" ry="9" fill="url(#bb-body)" filter="url(#bb-soft)"/>
-        <!-- Head -->
-        <ellipse cx="50" cy="38" rx="14" ry="16" fill="url(#bb-body)" filter="url(#bb-soft)"/>
-        <!-- Ear -->
-        <ellipse cx="43" cy="25" rx="6" ry="7" fill="#ede5cf" filter="url(#bb-soft)"/>
-        <ellipse cx="43" cy="25" rx="3.5" ry="4.5" fill="rgba(230,190,190,0.3)"/>
-        <!-- Sleeping eyes -->
-        <path d="M 44,35 Q 47,33 50,35" stroke="#8a7355" stroke-width="1.4" fill="none" stroke-linecap="round"/>
-        <path d="M 52,33 Q 55,31 58,33" stroke="#8a7355" stroke-width="1.4" fill="none" stroke-linecap="round"/>
-        <!-- Nose dot -->
-        <circle cx="50" cy="39" r="1.2" fill="#9a8060"/>
-        <!-- Whiskers -->
-        <line x1="50" y1="40" x2="38" y2="37" stroke="#c8b090" stroke-width="0.9" stroke-linecap="round" opacity="0.7"/>
-        <line x1="50" y1="41" x2="37" y2="42" stroke="#c8b090" stroke-width="0.9" stroke-linecap="round" opacity="0.7"/>
-        <line x1="50" y1="40" x2="62" y2="37" stroke="#c8b090" stroke-width="0.9" stroke-linecap="round" opacity="0.7"/>
-        <line x1="50" y1="41" x2="62" y2="42" stroke="#c8b090" stroke-width="0.9" stroke-linecap="round" opacity="0.7"/>
-        <!-- Tiny "Zzz" -->
-        <text x="68" y="28" font-family="monospace" font-size="7" fill="rgba(167,139,250,0.6)">z</text>
-        <text x="73" y="23" font-family="monospace" font-size="9" fill="rgba(167,139,250,0.5)">z</text>
-        <text x="79" y="17" font-family="monospace" font-size="11" fill="rgba(167,139,250,0.4)">z</text>
-      </svg>
+      <div class="grimoire-visual-container">
+        <!-- Concentric Rotating Sigil Ring -->
+        <div class="sigil-ring-container">
+          <svg class="sigil-ring-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="100" cy="100" r="95" stroke="rgba(167, 139, 250, 0.2)" stroke-width="1.2" fill="none" />
+            <circle cx="100" cy="100" r="82" stroke="rgba(34, 211, 238, 0.15)" stroke-width="0.8" stroke-dasharray="4 6" fill="none" />
+            <circle cx="100" cy="100" r="65" stroke="rgba(167, 139, 250, 0.1)" stroke-width="1" stroke-dasharray="15 5" fill="none" />
+            <!-- Runic or code letters around the perimeter -->
+            <path id="textPath-grimoire" d="M 100, 18 A 82,82 0 1,1 99.9,18" fill="none" />
+            <text font-family="monospace" font-size="7" fill="rgba(167, 139, 250, 0.45)" letter-spacing="3.5">
+              <textPath href="#textPath-grimoire">
+                &lt;/&gt; CODE &bull; SPELLS &bull; NOTES &bull; SYSTEMS &bull; FUNCTIONS &bull;
+              </textPath>
+            </text>
+          </svg>
+        </div>
+        
+        <!-- Floating Open Book/Grimoire -->
+        <svg class="grimoire-book-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="book-cover" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#4c1d95" />
+              <stop offset="100%" stop-color="#1e1b4b" />
+            </linearGradient>
+            <linearGradient id="book-pages" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#2e1065" />
+              <stop offset="45%" stop-color="#0f172a" />
+              <stop offset="55%" stop-color="#0f172a" />
+              <stop offset="100%" stop-color="#1e1b4b" />
+            </linearGradient>
+            <radialGradient id="page-glow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="rgba(34, 211, 238, 0.25)" />
+              <stop offset="100%" stop-color="rgba(34, 211, 238, 0)" />
+            </radialGradient>
+          </defs>
+          <!-- Soft glow behind the book -->
+          <circle cx="60" cy="60" r="45" fill="url(#page-glow)" />
+          
+          <!-- Open Book Shape -->
+          <!-- Book Shadow -->
+          <path d="M 20,80 Q 60,88 100,80 Q 60,72 20,80" fill="rgba(0,0,0,0.5)" />
+          
+          <!-- Cover backing -->
+          <path d="M 15,73 Q 60,84 105,73 L 105,33 Q 60,44 15,33 Z" fill="url(#book-cover)" stroke="#6d28d9" stroke-width="1.5" />
+          
+          <!-- Pages block -->
+          <path d="M 19,69 Q 60,80 101,69 L 101,29 Q 60,40 19,29 Z" fill="url(#book-pages)" stroke="rgba(167, 139, 250, 0.3)" stroke-width="1" />
+          
+          <!-- Left page background glow -->
+          <path d="M 19,29 Q 60,40 60,38 L 60,78 Q 60,80 19,69 Z" fill="rgba(167, 139, 250, 0.05)" />
+          
+          <!-- Center Spine Shadow/Line -->
+          <line x1="60" y1="38" x2="60" y2="78" stroke="#4f46e5" stroke-width="1.5" opacity="0.6" />
+          
+          <!-- Code lines on Left Page -->
+          <path d="M 27,37 H 53 M 27,43 H 47 M 27,49 H 57 M 27,55 H 43 M 27,61 H 50" stroke="#a78bfa" stroke-width="1.8" stroke-linecap="round" opacity="0.65" />
+          <!-- Glowing prompt symbols on Left Page -->
+          <path d="M 27,37 H 30" stroke="#22d3ee" stroke-width="1.8" stroke-linecap="round" />
+          <path d="M 27,49 H 31" stroke="#fb923c" stroke-width="1.8" stroke-linecap="round" />
+          
+          <!-- Code lines on Right Page -->
+          <path d="M 67,37 H 93 M 67,43 H 83 M 67,49 H 89 M 67,55 H 77 M 67,61 H 91" stroke="#a78bfa" stroke-width="1.8" stroke-linecap="round" opacity="0.65" />
+          <path d="M 67,43 H 70" stroke="#22d3ee" stroke-width="1.8" stroke-linecap="round" />
+          <path d="M 67,55 H 71" stroke="#34d399" stroke-width="1.8" stroke-linecap="round" />
+
+          <!-- Floating magical particles -->
+          <g class="grimoire-particles">
+            <circle class="part-1" cx="30" cy="40" r="1.5" fill="#22d3ee" />
+            <circle class="part-2" cx="50" cy="50" r="1" fill="#a78bfa" />
+            <circle class="part-3" cx="70" cy="45" r="1.2" fill="#fb923c" />
+            <circle class="part-4" cx="90" cy="35" r="1.5" fill="#34d399" />
+            <circle class="part-5" cx="60" cy="30" r="1" fill="#22d3ee" />
+          </g>
+        </svg>
+      </div>
     </div>
 
     <!-- Right: Animated quote + notes CTA -->
     <div class="grimoire-content">
-      <p class="grimoire-label">~$ open grimoire.md</p>
+      <p class="grimoire-label">~$ cat notes_link.txt</p>
       <blockquote class="grimoire-quote" id="grimoireQuote">
-        <span class="typewriter" data-text="&quot;Magic isn't something only a chosen few can use. It's just knowledge waiting to be discovered.&quot;"></span>
-        <cite>— Witch Hat Atelier</cite>
+        <span class="typewriter" data-text="&quot;A computational process is indeed much like a wizard's apprentice. It is initiated by a spell, it operates by manipulating symbols, and it performs a task. A programmer is a conjurer who spells out the details of these processes.&quot;"></span>
+        <cite>— Harold Abelson &amp; Gerald Jay Sussman, SICP</cite>
       </blockquote>
 
       <p class="grimoire-body">
-        Every spell starts as a note. I keep mine at my programming notes site —
-        a living grimoire of things I've learned, built, and broken.
+        I document my technical findings, system architectures, and daily programming learnings on my personal notes site. It serves as a searchable knowledge base of things I've built, learned, and refined.
       </p>
 
       <a href="https://notes.0xprathamesh.is-a.dev" target="_blank" rel="noopener" class="grimoire-btn">
         <span class="grimoire-btn__icon">📖</span>
-        <span>Open the Grimoire</span>
+        <span>Open Notes</span>
         <span class="grimoire-btn__arrow">→</span>
       </a>
     </div>
