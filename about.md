@@ -1,7 +1,6 @@
 ---
-layout: page
+layout: about
 title: About
-subtitle: Engineer, writer, and perpetual tinkerer.
 permalink: /about/
 ---
 

@@ -21,6 +21,15 @@
   container.style.opacity = '0.7'; // overall container master opacity
   document.body.appendChild(container);
 
+  // Rune overlay — MUST be a child of <html> not <body>.
+  // body has overflow-x:hidden which creates a clipping context that
+  // silently hides position:fixed descendants in Chrome/Safari/Firefox.
+  var runeOverlay = document.createElement('div');
+  runeOverlay.id = 'rune-overlay';
+  // Use explicit props instead of inset for Firefox <87 compat
+  runeOverlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:9999;overflow:visible;';
+  document.documentElement.appendChild(runeOverlay);
+
   // Faint styles for background sigils
   var style = document.createElement('style');
   style.textContent = [
@@ -46,14 +55,15 @@
     '.sigil-cyan { stroke: #22d3ee; }',
     '.sigil-purple { stroke: #a78bfa; }',
     '.sigil-orange { stroke: #fb923c; }',
-    // Cursor rune glyphs
-    '.rune-glyph { position:fixed; pointer-events:none; font-family:monospace; font-size:13px;',
-    '  line-height:1; transform:translate(-50%,-50%); z-index:9998;',
-    '  animation: rune-fade 1.2s ease forwards; }',
+    // Cursor rune glyphs — quick flash-in, slow magical dissolve
+    '.rune-glyph { position:fixed; pointer-events:none; font-family:monospace;',
+    '  line-height:1; transform:translate(-50%,-50%); z-index:9999;',
+    '  text-shadow: 0 0 8px currentColor;',
+    '  animation: rune-fade 1.8s cubic-bezier(0.2,0,0.8,1) forwards; }',
     '@keyframes rune-fade {',
-    '  0%   { opacity:0.9; transform:translate(-50%,-50%) scale(1); }',
-    '  60%  { opacity:0.4; transform:translate(-50%,-150%) scale(0.8); }',
-    '  100% { opacity:0;   transform:translate(-50%,-220%) scale(0.5); }',
+    '  0%   { opacity:0; transform:translate(-50%,-50%) scale(0.7); }',
+    '  12%  { opacity:0.5; transform:translate(-50%,-60%) scale(1); }',
+    '  100% { opacity:0;  transform:translate(-50%,-180%) scale(0.5); }',
     '}'
   ].join('\n');
   document.head.appendChild(style);
@@ -170,43 +180,54 @@
   // Ambient spin loop
   var lastTime = 0;
   function update(time) {
-    var dt = lastTime ? (time - lastTime) / 1000 : 0.016;
+    var dt = lastTime ? Math.min((time - lastTime) / 1000, 0.05) : 0.016;
     lastTime = time;
 
     sigilEls.forEach(function (sigil) {
-      // Rotate constantly at ambient speed
-      sigil.angle += sigil.speed * 18 * dt;
+      // Always spin at ambient speed
+      sigil.angle += sigil.speed * 12 * dt;
 
-      // Settle angle towards target if active
-      var currentAngle = sigil.active ? sigil.targetAngle : sigil.angle;
-      sigil.el.style.transform = 'rotate(' + currentAngle.toFixed(2) + 'deg) scale(' + (sigil.active ? 1.05 : 0.95) + ')';
+      var displayAngle, displayScale;
+      if (sigil.active) {
+        // Cursor nearby: spin faster, grow slightly
+        sigil.angle += sigil.speed * 18 * dt; // extra boost
+        displayAngle = sigil.angle;
+        displayScale = 1.06;
+      } else {
+        // Keep targetAngle in sync so there's no jump when cursor re-enters
+        sigil.targetAngle = sigil.angle;
+        displayAngle = sigil.angle;
+        displayScale = 0.95;
+      }
+
+      sigil.el.style.transform = 'rotate(' + displayAngle.toFixed(2) + 'deg) scale(' + displayScale + ')';
     });
 
     requestAnimationFrame(update);
   }
 
   // ── Cursor rune trail ──────────────────────────────────────
+  // Appended to runeOverlay (not body) — body has overflow-x:hidden which
+  // silently clips position:fixed children in Chrome/Safari/Firefox.
   var RUNES = ['ᚠ','ᚢ','ᚦ','ᚨ','ᚱ','✦','◇','✧','·'];
-  var RUNE_COLORS = [
-    'rgba(167,139,250,0.75)','rgba(34,211,238,0.65)','rgba(251,146,60,0.6)'
-  ];
+  var RUNE_COLORS = ['#c084fc', '#22d3ee', '#fb923c'];
   var lastRuneTime = 0;
 
   document.addEventListener('mousemove', function(e) {
     var now = Date.now();
-    if (now - lastRuneTime < 120) return; // throttle to ~8 per second
+    if (now - lastRuneTime < 55) return;
     lastRuneTime = now;
 
     var r = document.createElement('span');
     r.className = 'rune-glyph';
-    r.style.left  = e.clientX + 'px';
-    r.style.top   = e.clientY + 'px';
-    r.style.color = RUNE_COLORS[Math.floor(Math.random() * RUNE_COLORS.length)];
-    r.style.fontSize = (9 + Math.random() * 6) + 'px';
-    r.textContent = RUNES[Math.floor(Math.random() * RUNES.length)];
-    document.body.appendChild(r);
+    r.style.left     = e.clientX + 'px';
+    r.style.top      = e.clientY + 'px';
+    r.style.color    = RUNE_COLORS[Math.floor(Math.random() * RUNE_COLORS.length)];
+    r.style.fontSize = (10 + Math.random() * 5) + 'px';
+    r.textContent    = RUNES[Math.floor(Math.random() * RUNES.length)];
+    runeOverlay.appendChild(r);
 
-    setTimeout(function() { if (r.parentNode) r.parentNode.removeChild(r); }, 1300);
+    setTimeout(function() { if (r.parentNode) r.parentNode.removeChild(r); }, 1900);
   });
 
   requestAnimationFrame(update);
