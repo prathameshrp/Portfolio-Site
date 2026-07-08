@@ -3,65 +3,129 @@ layout: default
 ---
 
 <div class="container" style="margin-top: 2rem;">
-  <!-- Mock Terminal Section -->
-  <div class="terminal-mock-container reveal">
-    <!-- Left Column (Terminal Controls / Commands list) -->
-    <div class="terminal-window" data-terminal-pane="commands">
-      <div class="terminal-bar">
-        <div class="window-dots">
-          <div class="window-dot window-dot--red"></div>
-          <div class="window-dot window-dot--yellow"></div>
-          <div class="window-dot window-dot--green"></div>
+  <!-- Hero Section -->
+  <section class="hero reveal">
+    <div class="hero__inner">
+      <div class="hero__content">
+        <div class="hero__badge">
+          <span class="hero__badge-dot"></span>
+          <span>Available for collaborations</span>
         </div>
-        <div class="terminal-title">prathameshrp@devlog:~</div>
+        <h1 class="hero__title">
+          Hi, I am <br>
+          <span class="hero__rotator" data-rotator data-words='["Prathamesh Patil", "a software engineer", "a systems developer", "a backend engineer"]'>
+            <span class="hero__rotator-text">Prathamesh Patil</span>
+          </span>
+        </h1>
+        <p class="hero__intro">I design high-performance backend systems, automate pipelines, and build clean, responsive web experiences.</p>
+        <div class="hero__cta">
+          <a href="#projects" class="btn btn--primary">View Projects</a>
+          <a href="/blog/" class="btn btn--ghost">Read Blog</a>
+        </div>
       </div>
-      <div class="terminal-body" style="padding: 1rem 1.25rem;">
 
-        <div class="terminal-cmd-list">
-          <div class="terminal-cmd-item is-active" data-terminal-cmd="about">
-            <span class="terminal-cmd-prompt">~$</span>
-            <span class="terminal-cmd-text">cat about.md</span>
-            <span class="terminal-cmd-desc">who am I?</span>
+      <!-- Hero Terminal Mockup -->
+      <div class="hero__terminal">
+        <div class="terminal">
+          <div class="terminal__bar">
+            <div class="terminal__dot"></div>
+            <div class="terminal__dot"></div>
+            <div class="terminal__dot"></div>
+            <span class="terminal__name">guest@prathamesh.dev:~</span>
           </div>
-          <div class="terminal-cmd-item" data-terminal-cmd="neofetch">
-            <span class="terminal-cmd-prompt">~$</span>
-            <span class="terminal-cmd-text">neofetch</span>
-            <span class="terminal-cmd-desc">system info</span>
-          </div>
-          <div class="terminal-cmd-item" data-terminal-cmd="whoami">
-            <span class="terminal-cmd-prompt">~$</span>
-            <span class="terminal-cmd-text">whoami</span>
-            <span class="terminal-cmd-desc">current user</span>
+          <div class="terminal__body" data-terminal data-lines='["$ curl -s https://0xprathamesh.is-a.dev/info.json", "{", "  \"name\": \"Prathamesh Patil\",", "  \"role\": \"Software Engineer\",", "  \"focus\": [\"Systems\", \"Backend\", \"AI\"],", "  \"status\": \"Building clean code...\"", "}"]'>
+            <span class="t-current t-prompt">$ curl -s https://0xprathamesh.is-a.dev/info.json</span>
           </div>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- Right Column (Terminal Viewer Screen) -->
-    <div class="terminal-window" data-terminal-pane="viewer" style="height: 480px; display: flex; flex-direction: column;">
-      <div class="terminal-bar">
-        <div class="window-dots">
-          <div class="window-dot window-dot--red"></div>
-          <div class="window-dot window-dot--yellow"></div>
-          <div class="window-dot window-dot--green"></div>
+  <!-- Divider Orange -->
+  <div class="neon-divider neon-divider--orange reveal"></div>
+
+  <!-- Projects Section -->
+  <section id="projects" class="reveal">
+    <div class="cli-section-header">
+      <span class="cli-prompt">~$</span>
+      <span class="cli-command">ls projects/ --sort=order</span>
+      <a href="{{ '/projects/' | relative_url }}" class="cli-view-all">See all projects &rarr;</a>
+    </div>
+    <div class="project-grid">
+      {%- assign projects = site.projects | sort: "order" | limit: 3 -%}
+      {%- for project in projects -%}
+        {% include project-card.html project=project index=forloop.index %}
+      {%- endfor -%}
+    </div>
+  </section>
+
+  <!-- Divider Teal -->
+  <div class="neon-divider neon-divider--teal reveal"></div>
+
+  <!-- Mock Terminal Section (Interactive About) -->
+  <section class="reveal">
+    <div class="cli-section-header">
+      <span class="cli-prompt">~$</span>
+      <span class="cli-command">cat about_me.sh</span>
+    </div>
+    
+    <div class="terminal-mock-container">
+      <!-- Left Column (Terminal Controls / Commands list) -->
+      <div class="terminal-window" data-terminal-pane="commands">
+        <div class="terminal-bar">
+          <div class="window-dots">
+            <div class="window-dot window-dot--red"></div>
+            <div class="window-dot window-dot--yellow"></div>
+            <div class="window-dot window-dot--green"></div>
+          </div>
+          <div class="terminal-title">prathameshrp@devlog:~</div>
         </div>
-        <div class="terminal-title" id="terminal-viewer-title">cat about.md</div>
-      </div>
-      
-      <div class="terminal-body" id="terminal-viewer-body" style="flex-grow: 1;">
-        <!-- Default Panel (About.md) -->
-        <div class="terminal-panel" id="panel-about">
-          {%- assign about_page = site.html_pages | where: "url", "/about/" | first -%}
-          {%- if about_page -%}
-            <div class="prose" style="font-size: 0.94rem; line-height: 1.6; font-family: var(--font-sans); color: var(--text-soft);">
-              {{ about_page.content | markdownify }}
+        <div class="terminal-body" style="padding: 1rem 1.25rem;">
+          <div class="terminal-cmd-list">
+            <div class="terminal-cmd-item is-active" data-terminal-cmd="about">
+              <span class="terminal-cmd-prompt">~$</span>
+              <span class="terminal-cmd-text">cat about.md</span>
+              <span class="terminal-cmd-desc">who am I?</span>
             </div>
-          {%- endif -%}
+            <div class="terminal-cmd-item" data-terminal-cmd="neofetch">
+              <span class="terminal-cmd-prompt">~$</span>
+              <span class="terminal-cmd-text">neofetch</span>
+              <span class="terminal-cmd-desc">system info</span>
+            </div>
+            <div class="terminal-cmd-item" data-terminal-cmd="whoami">
+              <span class="terminal-cmd-prompt">~$</span>
+              <span class="terminal-cmd-text">whoami</span>
+              <span class="terminal-cmd-desc">current user</span>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <!-- System info panel -->
-        <div class="terminal-panel" id="panel-neofetch" style="display: none;">
-          <pre style="margin: 0; font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.5; color: var(--text-soft); background: transparent; border: 0; padding: 0;">
+      <!-- Right Column (Terminal Viewer Screen) -->
+      <div class="terminal-window" data-terminal-pane="viewer" style="--terminal-height: 480px; display: flex; flex-direction: column;">
+        <div class="terminal-bar">
+          <div class="window-dots">
+            <div class="window-dot window-dot--red"></div>
+            <div class="window-dot window-dot--yellow"></div>
+            <div class="window-dot window-dot--green"></div>
+          </div>
+          <div class="terminal-title" id="terminal-viewer-title">cat about.md</div>
+        </div>
+        
+        <div class="terminal-body" id="terminal-viewer-body" style="flex-grow: 1;">
+          <!-- Default Panel (About.md) -->
+          <div class="terminal-panel" id="panel-about">
+            {%- assign about_page = site.html_pages | where: "url", "/about/" | first -%}
+            {%- if about_page -%}
+              <div class="prose" style="font-size: 0.94rem; line-height: 1.6; font-family: var(--font-sans); color: var(--text-soft);">
+                {{ about_page.content | markdownify }}
+              </div>
+            {%- endif -%}
+          </div>
+
+          <!-- System info panel -->
+          <div class="terminal-panel" id="panel-neofetch" style="display: none;">
+            <pre style="margin: 0; font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.5; color: var(--text-soft); background: transparent; border: 0; padding: 0;">
 <span class="t-orange">prathamesh@pop-os</span>
 ---------------------
 <span class="t-prompt">OS</span>: Pop!_OS 22.04 LTS x86_64
@@ -74,71 +138,25 @@ layout: default
 <span class="t-prompt">Currently</span>: B.Tech CSE, 2nd Year
 <span class="t-prompt">Into</span>: AI/ML, Systems, Backend
 <span class="t-prompt">Building</span>: things that make devs&#39; lives easier
-          </pre>
+            </pre>
+          </div>
+
+          <!-- Whoami panel -->
+          <div class="terminal-panel" id="panel-whoami" style="display: none;">
+            <p class="t-white"><strong>guest@prathameshrp.is-a.dev</strong></p>
+            <p>Authorized access level: Guest Reader.</p>
+            <p>Current role: Pair Programming Partner.</p>
+            <p>Welcome! Feel free to explore my blog and projects below.</p>
+          </div>
         </div>
 
-        <!-- Whoami panel -->
-        <div class="terminal-panel" id="panel-whoami" style="display: none;">
-          <p class="t-white"><strong>guest@prathameshrp.is-a.dev</strong></p>
-          <p>Authorized access level: Guest Reader.</p>
-          <p>Current role: Pair Programming Partner.</p>
-          <p>Welcome! Feel free to explore my blog and projects below.</p>
+        <!-- Mobile buttons inside terminal viewer -->
+        <div class="terminal-mobile-tabs">
+          <button class="terminal-mobile-btn is-active" data-mobile-cmd="about">about.md</button>
+          <button class="terminal-mobile-btn" data-mobile-cmd="neofetch">neofetch</button>
+          <button class="terminal-mobile-btn" data-mobile-cmd="whoami">whoami</button>
         </div>
       </div>
-
-      <!-- Mobile buttons inside terminal viewer -->
-      <div class="terminal-mobile-tabs">
-        <button class="terminal-mobile-btn is-active" data-mobile-cmd="about">about.md</button>
-        <button class="terminal-mobile-btn" data-mobile-cmd="neofetch">neofetch</button>
-        <button class="terminal-mobile-btn" data-mobile-cmd="whoami">whoami</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Divider Orange -->
-  <div class="neon-divider neon-divider--orange reveal"></div>
-
-  <!-- Now Section -->
-  <section class="reveal">
-    <div class="cli-section-header">
-      <span class="cli-prompt">~$</span>
-      <span class="cli-command">cat now.md</span>
-    </div>
-    <div class="now-grid">
-      <div class="now-card">
-        <span class="now-card-label">working on</span>
-        <span class="now-card-title">Software Engineering, writing cleaner code.</span>
-      </div>
-      <div class="now-card">
-        <span class="now-card-label">tinkering with</span>
-        <span class="now-card-title">Self-hosting, AI, and Deep Learning.</span>
-      </div>
-      <div class="now-card">
-        <span class="now-card-label">writing about</span>
-        <span class="now-card-title">Performance, backend systems, and frameworks.</span>
-      </div>
-      <div class="now-card">
-        <span class="now-card-label">using</span>
-        <span class="now-card-title">MacBook, Linux servers, and JetBrains Mono.</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Divider Teal -->
-  <div class="neon-divider neon-divider--teal reveal"></div>
-
-  <!-- Projects Section -->
-  <section class="reveal">
-    <div class="cli-section-header">
-      <span class="cli-prompt">~$</span>
-      <span class="cli-command">ls projects/ --sort=stars</span>
-      <a href="{{ '/projects/' | relative_url }}" class="cli-view-all">See all &rarr;</a>
-    </div>
-    <div class="project-grid">
-      {%- assign projects = site.projects | sort: "order" | limit: 2 -%}
-      {%- for project in projects -%}
-        {% include project-card.html project=project index=forloop.index %}
-      {%- endfor -%}
     </div>
   </section>
 
@@ -199,30 +217,30 @@ layout: default
         </defs>
         <!-- Ground shadow -->
         <ellipse cx="60" cy="76" rx="45" ry="5" fill="rgba(0,0,0,0.18)"/>
-        <!-- Thick tail curling out behind (brushbuddy has a thick brush-like tail) -->
+        <!-- Thick tail curling out behind -->
         <path d="M 30,58 Q 10,52 8,44 Q 6,36 16,34 Q 26,32 30,42 Q 32,50 40,52" stroke="url(#bb-body)" stroke-width="10" stroke-linecap="round" fill="none" filter="url(#bb-soft)"/>
-        <!-- Tail tip bristles (the "brush" part) -->
+        <!-- Tail tip bristles -->
         <line x1="8" y1="44" x2="4" y2="38" stroke="#ddd0b0" stroke-width="2.5" stroke-linecap="round"/>
         <line x1="8" y1="44" x2="3" y2="44" stroke="#ddd0b0" stroke-width="2.5" stroke-linecap="round"/>
         <line x1="8" y1="44" x2="5" y2="50" stroke="#ddd0b0" stroke-width="2.5" stroke-linecap="round"/>
-        <!-- Body: curled round oval -->
+        <!-- Body -->
         <ellipse cx="65" cy="58" rx="30" ry="18" fill="url(#bb-body)" filter="url(#bb-soft)"/>
         <!-- Belly underside -->
         <ellipse cx="65" cy="64" rx="22" ry="10" fill="url(#bb-belly)"/>
         <!-- Stubby back leg -->
         <ellipse cx="85" cy="70" rx="8" ry="5" fill="#ede5cf" filter="url(#bb-soft)"/>
         <ellipse cx="80" cy="72" rx="5" ry="3.5" fill="#ddd0b0"/>
-        <!-- Stubby front legs tucked in -->
+        <!-- Stubby front legs -->
         <ellipse cx="46" cy="68" rx="7" ry="4.5" fill="#ede5cf" filter="url(#bb-soft)"/>
         <ellipse cx="42" cy="70" rx="4.5" ry="3" fill="#ddd0b0"/>
         <!-- Neck -->
         <ellipse cx="55" cy="48" rx="10" ry="9" fill="url(#bb-body)" filter="url(#bb-soft)"/>
         <!-- Head -->
         <ellipse cx="50" cy="38" rx="14" ry="16" fill="url(#bb-body)" filter="url(#bb-soft)"/>
-        <!-- Ear (small round nub) -->
+        <!-- Ear -->
         <ellipse cx="43" cy="25" rx="6" ry="7" fill="#ede5cf" filter="url(#bb-soft)"/>
         <ellipse cx="43" cy="25" rx="3.5" ry="4.5" fill="rgba(230,190,190,0.3)"/>
-        <!-- Sleeping eyes (closed curved lines) -->
+        <!-- Sleeping eyes -->
         <path d="M 44,35 Q 47,33 50,35" stroke="#8a7355" stroke-width="1.4" fill="none" stroke-linecap="round"/>
         <path d="M 52,33 Q 55,31 58,33" stroke="#8a7355" stroke-width="1.4" fill="none" stroke-linecap="round"/>
         <!-- Nose dot -->
@@ -237,19 +255,6 @@ layout: default
         <text x="73" y="23" font-family="monospace" font-size="9" fill="rgba(167,139,250,0.5)">z</text>
         <text x="79" y="17" font-family="monospace" font-size="11" fill="rgba(167,139,250,0.4)">z</text>
       </svg>
-
-      <div class="sigil-ring" id="sigilCanvas">
-        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="sigil-svg">
-          <circle cx="100" cy="100" r="90" stroke="rgba(34,211,238,0.15)" stroke-width="1" fill="none"/>
-          <circle cx="100" cy="100" r="70" stroke="rgba(251,146,60,0.12)" stroke-width="1" fill="none" stroke-dasharray="4 6"/>
-          <circle cx="100" cy="100" r="50" stroke="rgba(167,139,250,0.15)" stroke-width="1" fill="none"/>
-          <!-- Pentagram-like lines -->
-          <polygon points="100,18 180,140 28,58 172,58 20,140" stroke="rgba(34,211,238,0.2)" stroke-width="0.8" fill="none"/>
-          <!-- Rune marks -->
-          <text x="100" y="104" text-anchor="middle" font-family="monospace" font-size="11" fill="rgba(34,211,238,0.45)" letter-spacing="2">✦ COCO ✦</text>
-          <text x="100" y="88" text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(251,146,60,0.4)">· · ATELIER · ·</text>
-        </svg>
-      </div>
     </div>
 
     <!-- Right: Animated quote + notes CTA -->
@@ -263,7 +268,6 @@ layout: default
       <p class="grimoire-body">
         Every spell starts as a note. I keep mine at my programming notes site —
         a living grimoire of things I've learned, built, and broken.
-        No newsletter. Just raw knowledge, indexed.
       </p>
 
       <a href="https://notes.0xprathamesh.is-a.dev" target="_blank" rel="noopener" class="grimoire-btn">
@@ -271,12 +275,7 @@ layout: default
         <span>Open the Grimoire</span>
         <span class="grimoire-btn__arrow">→</span>
       </a>
-
-      <div class="grimoire-runes" aria-hidden="true">
-        <span>ᚠ</span><span>ᚢ</span><span>ᚦ</span><span>ᚨ</span><span>ᚱ</span><span>ᚲ</span><span>ᚷ</span><span>ᚹ</span>
-      </div>
     </div>
 
   </div>
 </div>
-

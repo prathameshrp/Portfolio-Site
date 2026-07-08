@@ -12,7 +12,7 @@ description: A selection of things I've designed, built, and shipped.
       <p class="page-head__subtitle">A selection of things I've designed, built, and shipped — from developer tooling to full products.</p>
     </header>
 
-    <div class="terminal-window reveal" style="height: auto; margin-bottom: 2rem;">
+    <div class="terminal-window" style="height: auto; margin-bottom: 2rem;">
       <div class="terminal-bar">
         <div class="window-dots">
           <div class="window-dot window-dot--red"></div>
