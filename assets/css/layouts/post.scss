@@ -135,3 +135,46 @@
   }
 }
 
+@media (max-width: 760px) {
+  // Strip mock terminal window borders, headers, and spacing for readable blog posts on mobile
+  .site-post-wrapper {
+    padding-top: 1.5rem !important;
+    
+    .terminal-depth-plate {
+      display: none !important;
+    }
+    
+    .terminal-window {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      overflow: visible !important;
+    }
+    
+    .terminal-bar {
+      display: none !important;
+    }
+    
+    .terminal-body {
+      padding: 0 !important;
+    }
+    
+    .post-header-row {
+      gap: 1.25rem !important;
+      margin-bottom: 1.25rem !important;
+      padding-bottom: 1.25rem !important;
+    }
+    
+    .prose {
+      font-size: 1.06rem !important; // highly readable text scale
+      line-height: 1.8 !important;
+      letter-spacing: -0.01em;
+      
+      p {
+        margin-bottom: 1.4rem !important;
+      }
+    }
+  }
+}
+
