@@ -27,11 +27,6 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
-  background-image:
-    radial-gradient(1200px 600px at 90% -10%, color-mix(in oklab, var(--jinx) 22%, transparent), transparent 60%),
-    radial-gradient(900px 500px at -10% 10%, color-mix(in oklab, var(--powder) 18%, transparent), transparent 60%),
-    radial-gradient(700px 500px at 50% 110%, color-mix(in oklab, var(--teal) 18%, transparent), transparent 60%),
-    linear-gradient(180deg, transparent 0, var(--bg) 100%);
 }
 
 img, picture, svg, video { display: block; max-width: 100%; }

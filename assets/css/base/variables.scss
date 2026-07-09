@@ -1,45 +1,45 @@
 // ─────────────────────────────────────────────────────────────
-// Design tokens — Joe Karlsson style pitch-black theme (dark default, light toggle)
+// Design tokens — Muted Earthy Teal & Dark Charcoal Graphite theme (Professional Backend Engineer)
 // ─────────────────────────────────────────────────────────────
 
 :root {
-  // Lovable theme oklch colors
-  --powder: oklch(0.86 0.06 235);      /* pastel powder blue */
-  --jinx: oklch(0.72 0.22 355);        /* hot pink */
-  --teal: oklch(0.78 0.15 190);        /* electric teal */
-  --ember: oklch(0.72 0.19 55);        /* rare ember accent */
-  --ink: oklch(0.09 0.01 260);         /* deep base */
+  // Brand colors mapping
+  --powder: #cad2c5;                    /* Ash Grey */
+  --jinx: #84a98c;                      /* Muted Teal */
+  --teal: #52796f;                      /* Deep Teal */
+  --ember: #84a98c;                     /* Muted Teal (fallback) */
+  --ink: #08090d;                       /* Extra Dark base */
 
-  --background: oklch(0.14 0.012 260);
-  --foreground: oklch(0.96 0.01 240);
-  --card: oklch(0.17 0.014 260);
-  --card-foreground: oklch(0.96 0.01 240);
-  --popover: oklch(0.15 0.014 260);
-  --popover-foreground: oklch(0.96 0.01 240);
-  --primary: oklch(0.72 0.22 355);
-  --primary-foreground: oklch(0.12 0.01 260);
-  --secondary: oklch(0.86 0.06 235);
-  --secondary-foreground: oklch(0.12 0.01 260);
-  --muted: oklch(0.22 0.012 260);
-  --muted-foreground: oklch(0.72 0.02 240);
-  --accent: oklch(0.78 0.15 190);
-  --accent-foreground: oklch(0.12 0.01 260);
-  --destructive: oklch(0.65 0.22 25);
-  --destructive-foreground: oklch(0.98 0.01 240);
-  --border-color: oklch(0.32 0.02 250);
-  --input: oklch(0.28 0.02 250);
-  --ring: oklch(0.72 0.22 355);
+  --background: #0c0e12;                /* Dark Charcoal Graphite */
+  --foreground: #cad2c5;                /* Ash Grey */
+  --card: #161a22;                      /* Dark Container Slate */
+  --card-foreground: #cad2c5;
+  --popover: #161a22;
+  --popover-foreground: #cad2c5;
+  --primary: #84a98c;                   /* Muted Teal */
+  --primary-foreground: #0c0e12;
+  --secondary: #52796f;                 /* Deep Teal */
+  --secondary-foreground: #cad2c5;
+  --muted: #1e2330;
+  --muted-foreground: #84a98c;
+  --accent: #84a98c;
+  --accent-foreground: #0c0e12;
+  --destructive: #b33a3a;
+  --destructive-foreground: #cad2c5;
+  --border-color: #242c3b;              /* Dark slate border */
+  --input: #161a22;
+  --ring: #84a98c;
 
-  // General theme variables mapping (keeps original elements styling functioning)
+  // General theme variables mapping
   --bg: var(--background);
   --bg-soft: var(--card);
   --surface: var(--card);
   --surface-2: var(--muted);
   --border: var(--border-color);
-  --border-strong: oklch(0.40 0.02 250);
+  --border-strong: #435866;             /* Muted graphite border */
   --text: var(--foreground);
-  --text-soft: var(--muted-foreground);
-  --text-mute: oklch(0.55 0.02 240);
+  --text-soft: #9fb0a6;                 /* Highly readable, less green */
+  --text-mute: #5d6e64;
   --code-bg: var(--ink);
   --code-fg: var(--foreground);
 
@@ -48,13 +48,13 @@
   --accent-2: var(--teal);
   --accent-3: var(--powder);
   --accent-grad: linear-gradient(135deg, var(--jinx) 0%, var(--teal) 100%);
-  --accent-grad-soft: linear-gradient(135deg, rgba(255, 0, 110, 0.08), rgba(0, 180, 216, 0.08));
+  --accent-grad-soft: linear-gradient(135deg, rgba(132, 169, 140, 0.08), rgba(82, 121, 111, 0.08));
 
-  // Type
-  --font-display: "Pixelify Sans", "Silkscreen", ui-monospace, monospace;
+  // Type (JetBrains Mono everywhere)
+  --font-display: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
   --font-sans: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
   --font-serif: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
-  --font-logo: "Pixelify Sans", "Silkscreen", ui-monospace, monospace;
+  --font-logo: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
 
   // Spacing / sizing
@@ -83,10 +83,10 @@
   --surface: var(--card);
   --surface-2: var(--muted);
   --border: var(--border-color);
-  --border-strong: oklch(0.40 0.02 250);
+  --border-strong: #435866;
   --text: var(--foreground);
-  --text-soft: var(--muted-foreground);
-  --text-mute: oklch(0.55 0.02 240);
+  --text-soft: #9fb0a6;
+  --text-mute: #5d6e64;
   --code-bg: var(--ink);
   --code-fg: var(--foreground);
 }

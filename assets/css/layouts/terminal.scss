@@ -16,7 +16,7 @@
 
 // Terminal Window Panel
 .terminal-window {
-  background: #050505;
+  background: var(--ink);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
@@ -28,14 +28,14 @@
   transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 
   &:hover {
-    border-color: rgba(34, 211, 238, 0.3);
+    border-color: color-mix(in srgb, var(--primary) 50%, transparent);
     box-shadow: var(--shadow-glow);
   }
 }
 
 // Title Bar
 .terminal-bar {
-  background: #0c0c0e;
+  background: var(--card);
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
@@ -243,7 +243,7 @@
   }
 }
 .now-card {
-  background: #050505;
+  background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 1.25rem;
@@ -253,12 +253,12 @@
   transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 
   &:hover {
-    border-color: rgba(34, 211, 238, 0.4);
+    border-color: color-mix(in srgb, var(--primary) 50%, transparent);
     box-shadow: var(--shadow-sm);
   }
 }
 .now-card-label {
-  color: var(--text-mute);
+  color: var(--text-soft);
   font-family: var(--font-mono);
   font-size: 0.72rem;
   text-transform: uppercase;
@@ -296,9 +296,9 @@
   overflow: hidden;
   position: relative;
   width: 100%;
-  background: #000000;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--ink);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
   padding: 1.25rem 0;
   margin: 5rem 0;
   white-space: nowrap;

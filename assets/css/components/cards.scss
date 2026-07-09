@@ -74,14 +74,14 @@
   flex-direction: column;
   padding: 0;
   border-radius: var(--radius-lg);
-  background: #050505;
+  background: var(--card);
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
   transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
 
   &:hover {
     transform: translateY(-4px);
-    border-color: rgba(34, 211, 238, 0.4);
+    border-color: color-mix(in srgb, var(--primary) 60%, transparent);
     box-shadow: var(--shadow-glow);
   }
 }
