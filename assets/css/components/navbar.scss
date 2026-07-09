@@ -262,8 +262,25 @@
   80% { transform: translate(2px, 1px) rotate(0deg); }
   90% { transform: translate(-1px, -2px) rotate(1deg); }
 }
+
 .jinx-explosion-shake {
   animation: jinx-shake 0.45s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+// reading progress bar
+.navbar__progress {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 2px;
+  width: 0;
+  background: var(--jinx);
+  transition: width .1s linear;
+  opacity: 0;
+}
+
+.navbar__progress.is-active {
+  opacity: 1;
 }
 
 @media (max-width: 760px) {
@@ -320,7 +337,6 @@
     display: flex;
   }
 }
-
 
 // ── Footer ─────────────────────────────────────────────────────
 .footer {
