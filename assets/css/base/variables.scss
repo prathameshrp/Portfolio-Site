@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// Design tokens — Muted Earthy Teal & Charcoal Blue theme (Professional Backend Engineer)
+// Design tokens — Muted Earthy Teal & Dark Charcoal Graphite theme (Professional Backend Engineer)
 // ─────────────────────────────────────────────────────────────
 
 :root {
@@ -8,26 +8,26 @@
   --jinx: #84a98c;                      /* Muted Teal */
   --teal: #52796f;                      /* Deep Teal */
   --ember: #84a98c;                     /* Muted Teal (fallback) */
-  --ink: #1e282b;                       /* Dark Charcoal base */
+  --ink: #08090d;                       /* Extra Dark base */
 
-  --background: #2f3e46;                /* Charcoal Blue */
+  --background: #0c0e12;                /* Dark Charcoal Graphite */
   --foreground: #cad2c5;                /* Ash Grey */
-  --card: #354f52;                      /* Dark Slate Grey */
+  --card: #161a22;                      /* Dark Container Slate */
   --card-foreground: #cad2c5;
-  --popover: #354f52;
+  --popover: #161a22;
   --popover-foreground: #cad2c5;
   --primary: #84a98c;                   /* Muted Teal */
-  --primary-foreground: #2f3e46;
+  --primary-foreground: #0c0e12;
   --secondary: #52796f;                 /* Deep Teal */
   --secondary-foreground: #cad2c5;
-  --muted: #354f52;
+  --muted: #1e2330;
   --muted-foreground: #84a98c;
   --accent: #84a98c;
-  --accent-foreground: #2f3e46;
+  --accent-foreground: #0c0e12;
   --destructive: #b33a3a;
   --destructive-foreground: #cad2c5;
-  --border-color: #52796f;              /* Deep Teal */
-  --input: #354f52;
+  --border-color: #242c3b;              /* Dark slate border */
+  --input: #161a22;
   --ring: #84a98c;
 
   // General theme variables mapping
@@ -36,10 +36,10 @@
   --surface: var(--card);
   --surface-2: var(--muted);
   --border: var(--border-color);
-  --border-strong: #84a98c;
+  --border-strong: #435866;             /* Muted graphite border */
   --text: var(--foreground);
-  --text-soft: #a1b8a9;                 /* Soft Muted Teal/Grey blend */
-  --text-mute: #6f8c7a;
+  --text-soft: #9fb0a6;                 /* Highly readable, less green */
+  --text-mute: #5d6e64;
   --code-bg: var(--ink);
   --code-fg: var(--foreground);
 
@@ -83,10 +83,10 @@
   --surface: var(--card);
   --surface-2: var(--muted);
   --border: var(--border-color);
-  --border-strong: #84a98c;
+  --border-strong: #435866;
   --text: var(--foreground);
-  --text-soft: #a1b8a9;
-  --text-mute: #6f8c7a;
+  --text-soft: #9fb0a6;
+  --text-mute: #5d6e64;
   --code-bg: var(--ink);
   --code-fg: var(--foreground);
 }
