@@ -131,10 +131,11 @@ figure.highlight {
   &:focus { outline: none; }
 }
 .playground__console {
-  border-top: 1px solid var(--code-bar-border);
-  background: var(--code-console-bg); padding: .8rem 1.2rem;
+  border-top: 2px solid var(--border) !important;
+  background: #080810 !important;
+  padding: 1rem 1.2rem;
   font-family: var(--font-mono); font-size: .82rem; line-height: 1.6;
-  max-height: 220px; overflow-y: auto; min-height: 46px;
+  max-height: 220px; overflow-y: auto; min-height: 50px;
 }
 .playground__console:empty::before { content: "// output appears here — hit Run"; color: var(--code-muted); }
 .playground__line { white-space: pre-wrap; word-break: break-word; }

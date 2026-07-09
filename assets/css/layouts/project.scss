@@ -1,12 +1,52 @@
 .project-grid {
-  display: grid; gap: 1.4rem;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--border);
+}
+
+.project-row {
+  border-bottom: 1px solid var(--border);
+  &:hover {
+    background-color: color-mix(in oklab, var(--card) 60%, transparent) !important;
+    
+    .project-title-hover {
+      color: var(--jinx) !important;
+    }
+    
+    .project-row-cover-img {
+      transform: scale(1.05);
+    }
+    
+    .project-arrow-hover {
+      color: var(--jinx) !important;
+      transform: translate(2px, -2px);
+    }
+  }
+}
+
+// MD grid spans for project list
+@media (min-width: 768px) {
+  .project-row {
+    grid-template-columns: repeat(12, 1fr) !important;
+  }
+  .md-col-span-2 {
+    grid-column: span 2 / span 2 !important;
+  }
+  .md-col-span-6 {
+    grid-column: span 6 / span 6 !important;
+  }
+  .md-col-span-3 {
+    grid-column: span 3 / span 3 !important;
+  }
+  .md-col-span-1 {
+    grid-column: span 1 / span 1 !important;
+  }
 }
 
 .tag-archive { display: flex; flex-direction: column; gap: 2rem; }
 .tag-group__head { display: flex; align-items: center; gap: .5rem; margin-bottom: .75rem; scroll-margin-top: 90px; }
 .tag-group__name { font-family: var(--font-mono); font-size: .9rem; color: var(--text); font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
-.tag-group__count { font-family: var(--font-mono); font-size: .75rem; color: var(--text-mute); }
+.tag-group__count { font-family: var(--font-mono); font-size: .75rem; color: var(--text-soft); }
 .tag-cloud { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2rem; }
 .tag-cloud .chip { font-size: .72rem; padding: .3rem .6rem; }
 
@@ -16,5 +56,5 @@
   border: 1px solid transparent; transition: background .2s var(--ease), border-color .2s var(--ease);
   &:hover { background: var(--surface); border-color: var(--border); }
 }
-.tag-list__date { font-family: var(--font-mono); font-size: .78rem; color: var(--text-mute); min-width: 8rem; }
+.tag-list__date { font-family: var(--font-mono); font-size: .78rem; color: var(--text-soft); min-width: 8rem; }
 .tag-list__title { color: var(--text); font-weight: 500; font-size: .9rem; }

@@ -1,35 +1,50 @@
 {%- assign post = include.post -%}
 {%- assign words = post.content | strip_html | number_of_words -%}
 {%- assign rt = words | divided_by: 200 | plus: 1 -%}
+{%- assign shape_idx = include.index | default: 0 | modulo: 3 -%}
+{%- if shape_idx == 0 -%}{%- assign shape = "◈" -%}{%- elsif shape_idx == 1 -%}{%- assign shape = "◇" -%}{%- else -%}{%- assign shape = "◆" -%}{%- endif -%}
 <article class="post-card reveal" data-post-card
          data-title="{{ post.title | escape }}"
          data-tags="{% for t in post.tags %}{{ t | downcase }} {% endfor %}"
          data-excerpt="{{ post.excerpt | strip_html | strip_newlines | escape | truncate: 160 }}">
-  <a class="post-card__link" href="{{ post.url | relative_url }}">
-    <div class="post-card__media">
+  <a href="{{ post.url | relative_url }}" class="post-card__link">
+    
+    <!-- Thumbnail Image/Icon (Left side on desktop, top on mobile) -->
+    <div class="post-card-thumbnail-box bg-crosshatch">
       {%- if post.cover -%}
-        <img src="{{ post.cover | relative_url }}" alt="" loading="lazy" class="post-card__img">
+        <img src="{{ post.cover | relative_url }}" alt="{{ post.title }}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; transition: transform 0.3s ease;" class="post-card-cover-img">
       {%- else -%}
-        <div class="post-card__gradient" data-gradient="{{ post.title | size | modulo: 4 }}">
-          <div class="post-card__media-hud"></div>
+        <div style="font-size: 2rem; color: color-mix(in oklab, var(--jinx) 40%, transparent);" class="post-card-shape">
+          {{ shape }}
         </div>
       {%- endif -%}
-      <div class="post-card__media-skeleton" data-skeleton></div>
     </div>
-    <div class="post-card__body">
-      <div class="post-card__meta">
+    
+    <!-- Content details (Right side on desktop) -->
+    <div class="post-card-text-container">
+      <div style="display: flex; align-items: center; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; color: var(--text-soft); margin-bottom: 0.5rem;">
         <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
-        <span class="dot">&middot;</span>
-        <span class="post-card__rt">{% include icon.html name="clock" %}{{ rt }} min</span>
+        <span>{{ rt }} min read</span>
       </div>
-      <h3 class="post-card__title">{{ post.title }}</h3>
-      <p class="post-card__excerpt">{{ post.excerpt | strip_html | strip_newlines | truncate: 130 }}</p>
-      <div class="post-card__tags">
+      
+      <h3 style="font-size: 1.2rem; line-height: 1.35; color: var(--text); font-weight: 500; font-family: var(--font-display); margin: 0 0 0.5rem; transition: color 0.2s;" class="post-card-title-hover">
+        {{ post.title }}
+      </h3>
+      
+      <p style="font-size: 0.88rem; color: var(--text-soft); line-height: 1.5; margin: 0 0 0.75rem;">
+        {{ post.excerpt | strip_html | truncatewords: 24 }}
+      </p>
+      
+      <div style="display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center; margin-top: auto;">
         {%- for t in post.tags limit: 3 -%}
-          <span class="chip">{{ t }}</span>
+          <span class="chip" style="font-size: 10px; padding: 2px 6px;">{{ t }}</span>
         {%- endfor -%}
+        
+        <span style="display: inline-flex; align-items: center; gap: 0.25rem; font-family: var(--font-mono); font-size: 11px; color: var(--text-soft); margin-left: auto; transition: color 0.2s;" class="post-card-link-hover">
+          read article {% include icon.html name="arrow-up-right" %}
+        </span>
       </div>
-      <span class="post-card__more">Read article {% include icon.html name="arrow" %}</span>
     </div>
+    
   </a>
 </article>

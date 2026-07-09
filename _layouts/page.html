@@ -7,8 +7,25 @@ layout: default
       <h1 class="page-head__title">{{ page.title }}</h1>
       {%- if page.subtitle -%}<p class="page-head__subtitle">{{ page.subtitle }}</p>{%- endif -%}
     </header>
-    <div class="prose reveal">
-      {{ content }}
+    
+    <div style="position: relative; width: 100%;" class="reveal">
+      <!-- Depth plates -->
+      <div style="position: absolute; inset: 0; transform: translate(8px, 8px); border: 1px solid color-mix(in oklab, var(--jinx) 50%, transparent); pointer-events: none; z-index: 0;"></div>
+      <div style="position: absolute; inset: 0; transform: translate(4px, 4px); border: 1px solid color-mix(in oklab, var(--teal) 40%, transparent); pointer-events: none; z-index: 0;"></div>
+      
+      <div class="terminal-window" style="position: relative; z-index: 1; height: auto; margin-bottom: 2rem; background: var(--card); border: 1px solid var(--border);">
+        <div class="terminal-bar">
+          <div class="window-dots">
+            <div class="window-dot window-dot--red"></div>
+            <div class="window-dot window-dot--yellow"></div>
+            <div class="window-dot window-dot--green"></div>
+          </div>
+          <div class="terminal-title">prathameshrp@devlog:~/{{ page.title | downcase }}</div>
+        </div>
+        <div class="terminal-body prose" style="padding: 2.5rem clamp(1.2rem, 5vw, 3rem);">
+          {{ content }}
+        </div>
+      </div>
     </div>
   </div>
 </section>

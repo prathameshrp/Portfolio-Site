@@ -4,11 +4,24 @@ layout: default
 {%- assign words = content | strip_html | number_of_words -%}
 {%- assign rt = words | divided_by: 200 | plus: 1 -%}
 
-<section class="page-shell" style="margin-top: 2rem;">
-  <div class="container">
-    <a class="post__back" href="{{ '/blog/' | relative_url }}" style="display: inline-block; margin-bottom: 1rem;">&larr; All posts</a>
+<article class="container site-post-wrapper" style="padding-top: 4rem; padding-bottom: 6rem;">
+  
+  <!-- CLI launch prompt on top of the terminal frame -->
+  <div style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.82rem; color: var(--text-soft);" class="reveal">
+    <span style="color: var(--jinx);">~$</span>
+    <span>cat posts/{{ page.title | slugify }}.md</span>
+    <span style="display: inline-block; width: 6px; height: 12px; background: var(--powder); margin-left: 0.25rem;" class="animate-flicker"></span>
+  </div>
+
+  <div class="post-layout-container" style="display: flex; gap: 2.5rem; align-items: flex-start; position: relative;">
     
-    <div class="terminal-window" style="height: auto; margin-bottom: 2rem;">
+    <!-- Left Area: Terminal Window -->
+    <div style="position: relative; flex: 1; min-width: 0;">
+      <!-- Depth plates -->
+      <div style="position: absolute; inset: 0; transform: translate(8px, 8px); border: 1px solid color-mix(in oklab, var(--jinx) 50%, transparent); pointer-events: none; z-index: 0;"></div>
+      <div style="position: absolute; inset: 0; transform: translate(4px, 4px); border: 1px solid color-mix(in oklab, var(--teal) 40%, transparent); pointer-events: none; z-index: 0;"></div>
+
+      <div class="terminal-window" style="position: relative; z-index: 1; height: auto; background: var(--card); border: 1px solid var(--border);">
       <div class="terminal-bar">
         <div class="window-dots">
           <div class="window-dot window-dot--red"></div>
@@ -17,75 +30,103 @@ layout: default
         </div>
         <div class="terminal-title">prathameshrp@devlog:~/posts/{{ page.title | slugify }}</div>
       </div>
-      <div class="terminal-body" style="padding: 1.5rem 1.75rem;">
-        <p style="margin-bottom: 1.5rem; font-family: var(--font-mono); font-size: 0.86rem; color: var(--text-soft);"><span class="t-prompt">~$</span> <span class="t-cmd">cat {{ page.title | slugify }}.md</span></p>
-        
-        <article class="post">
-          <header class="post__hero" style="padding: 1rem 0 2rem; text-align: left;">
-            <div class="post__tags" style="justify-content: flex-start; margin: 0 0 1rem;">
-              {%- for t in page.tags -%}
-                <a class="chip" href="{{ '/tags/' | relative_url }}#{{ t | slugify }}">{{ t }}</a>
-              {%- endfor -%}
-            </div>
-            <h1 class="post__title reveal" style="max-width: 100%; margin: 0;">{{ page.title }}</h1>
-            <div class="post__meta reveal" style="justify-content: flex-start; margin-top: 1rem;">
-              <span>{{ page.date | date: "%B %-d, %Y" }}</span>
-              <span class="dot">&middot;</span>
-              <span>{% include icon.html name="clock" %}{{ rt }} min read</span>
-              <span class="dot">&middot;</span>
-              <span>{{ site.author.name }}</span>
-            </div>
-          </header>
-
+      
+      <div class="terminal-body" style="padding: 2.5rem clamp(1.2rem, 5vw, 3rem);">
+        <!-- Post Header Row (Cover left, details right) -->
+        <div class="post-header-row">
           {%- if page.cover -%}
-          <div class="post__cover reveal" style="margin: 1rem 0 2rem; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); max-height: 260px;">
-            <img src="{{ page.cover | relative_url }}" alt="{{ page.title }}" loading="lazy" style="width: 100%; height: 260px; object-fit: cover; display: block;">
-          </div>
+            <div class="post-header-cover-wrapper">
+              <img src="{{ page.cover | relative_url }}" alt="{{ page.title }}" loading="lazy">
+            </div>
           {%- endif -%}
 
-          <div class="post__layout">
-            <div class="prose post__content" data-post-content>
-              {{ content }}
-            </div>
+          <div class="post-header-info">
 
-            <aside class="post__toc" data-toc aria-label="Table of contents">
-              <span class="post__toc-title">On this page</span>
-              <nav data-toc-list></nav>
-            </aside>
-          </div>
+            <!-- Title -->
+            <h1 style="font-size: clamp(1.8rem, 4.5vw, 2.8rem); font-family: var(--font-display); font-weight: 500; line-height: 1.2; margin: 0 0 1.25rem; color: var(--text);">
+              {{ page.title }}
+            </h1>
 
-          <footer class="post__footer" style="margin-top: 3rem;">
-            <div class="post__share">
-              <span>Found this useful? Share it.</span>
-              <div class="post__share-links">
-                <a class="icon-btn" target="_blank" rel="noopener"
-                   href="https://twitter.com/intent/tweet?text={{ page.title | uri_escape }}&url={{ site.url }}{{ page.url | relative_url }}">
-                  {% include icon.html name="twitter" %}
+            <!-- Metadata Bar -->
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 1rem 0; font-family: var(--font-mono); font-size: 12px; color: var(--text-soft); margin-top: 1.5rem; margin-bottom: 0;">
+              <span style="display: inline-flex; align-items: center; gap: 0.4rem;">
+                {% include icon.html name="calendar" %}
+                {{ page.date | date: "%B %-d, %Y" }}
+              </span>
+              <span style="display: inline-flex; align-items: center; gap: 0.4rem;">
+                {% include icon.html name="clock" %}
+                {{ rt }} min read
+              </span>
+              <span style="display: inline-flex; align-items: center; gap: 0.4rem;">
+                {% include icon.html name="tag" %}
+                {%- for t in page.tags -%}
+                  <a href="{{ '/tags/' | relative_url }}#{{ t | slugify }}" style="color: var(--text-soft); text-decoration: none;" onmouseover="this.style.color='var(--jinx)'" onmouseout="this.style.color='var(--text-soft)'">{{ t }}</a>
+                  {%- unless forloop.last -%}, {% endunless -%}
+                {%- endfor -%}
+              </span>
+              
+              <div style="margin-left: auto; display: flex; align-items: center; gap: 0.5rem;" class="meta-share-buttons">
+                <a href="https://twitter.com/intent/tweet?text={{ page.title | uri_escape }}&url={{ site.url }}{{ page.url | relative_url }}" target="_blank" rel="noopener" class="chip" style="font-size: 11px; padding: 2px 6px; border-radius: 3px; display: inline-flex; align-items: center; gap: 4px;">
+                  {% include icon.html name="twitter" %} tweet
                 </a>
-                <a class="icon-btn" target="_blank" rel="noopener"
-                   href="https://www.linkedin.com/sharing/share-offsite/?url={{ site.url }}{{ page.url | relative_url }}">
-                  {% include icon.html name="linkedin" %}
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ site.url }}{{ page.url | relative_url }}" target="_blank" rel="noopener" class="chip" style="font-size: 11px; padding: 2px 6px; border-radius: 3px; display: inline-flex; align-items: center; gap: 4px;">
+                  {% include icon.html name="linkedin" %} share
                 </a>
               </div>
             </div>
+          </div>
+        </div>
 
-            <nav class="post__pager" style="margin-top: 2rem;">
-              {%- if page.previous -%}
-              <a class="post__pager-link post__pager-link--prev" href="{{ page.previous.url | relative_url }}">
-                <span>&larr; Previous</span>
-                <strong>{{ page.previous.title }}</strong>
-              </a>
-              {%- endif -%}
-              {%- if page.next -%}
-              <a class="post__pager-link post__pager-link--next" href="{{ page.next.url | relative_url }}">
-                <span>Next &rarr;</span>
-                <strong>{{ page.next.title }}</strong>
-              </a>
-              {%- endif -%}
-            </nav>
-          </footer>
-        </article>
+        <!-- Excerpt Block (introductory summary below the side-by-side header row) -->
+        {%- if page.excerpt -%}
+          <div style="margin-top: 1.5rem; margin-bottom: 2rem;" class="reveal">
+            <p style="font-size: 1.08rem; color: var(--text-soft); line-height: 1.65; border-left: 3px solid var(--jinx); padding-left: 1.25rem; margin: 0; font-style: italic;">
+              {{ page.excerpt | strip_html | strip_newlines }}
+            </p>
+          </div>
+        {%- endif -%}
+
+        <!-- Main Content Layout -->
+        <div class="prose post__content" style="width: 100%; margin-top: 2rem;" data-post-content>
+          {{ content }}
+        </div>
+
+        <!-- End Marker -->
+        <div style="margin-top: 4rem; border-top: 1px solid var(--border); padding-top: 2rem; display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 11px; color: var(--text-soft);">
+          <span style="color: var(--jinx);">~$</span>
+          <span>EOF &middot; thanks for reading.</span>
+          <span style="display: inline-block; width: 6px; height: 12px; background: var(--powder); margin-left: 0.25rem;" class="animate-flicker"></span>
+        </div>
+
+        <!-- Pagination Block / Next Post Recommendation -->
+        {%- if page.previous -%}
+          <div style="margin-top: 4rem; border-top: 1px solid var(--border); padding-top: 3rem;">
+            <div style="font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-mute); margin-bottom: 1rem;">next post</div>
+            <a href="{{ page.previous.url | relative_url }}" class="group" style="display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); padding: 1.5rem; transition: border-color 0.25s; text-decoration: none;">
+              <div>
+                <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-soft); margin-bottom: 0.5rem;">
+                  {{ page.previous.date | date: "%b %-d, %Y" }}
+                </div>
+                <h3 style="font-size: 1.35rem; color: var(--text); font-family: var(--font-display); font-weight: 500; margin: 0; transition: color 0.2s;" class="post-next-title">
+                  {{ page.previous.title }}
+                </h3>
+              </div>
+              <span class="post-next-arrow" style="color: var(--text-soft); transition: color 0.2s, transform 0.2s; display: inline-flex;">
+                {% include icon.html name="arrow-up-right" %}
+              </span>
+            </a>
+          </div>
+        {%- endif -%}
       </div>
     </div>
   </div>
-</section>
+
+  <!-- Sticky Table of Contents sidebar (placed OUTSIDE the terminal window) -->
+    <aside class="post__toc md-toc" data-toc aria-label="Table of contents" style="width: 220px; flex-shrink: 0; position: sticky; top: 100px; height: fit-content; max-height: 80vh; overflow-y: auto; z-index: 10;">
+      <span class="post__toc-title" style="font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-mute); display: block; margin-bottom: 0.75rem;">On this page</span>
+      <nav data-toc-list></nav>
+    </aside>
+
+  </div>
+
+</article>

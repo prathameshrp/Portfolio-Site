@@ -1,0 +1,223 @@
+---
+layout: default
+---
+<div class="rj-page" id="resumeJourney">
+
+  <nav class="rj-spine" id="rjSpine" aria-label="Resume chapters">
+    <div class="rj-spine__track"><div class="rj-spine__fill" id="rjSpineFill"></div></div>
+    <div class="rj-spine__nodes">
+      <button class="rj-node" data-chapter="0"><span class="rj-node__dot"></span><span class="rj-node__label">Intro</span></button>
+      <button class="rj-node" data-chapter="1"><span class="rj-node__dot"></span><span class="rj-node__label">Education</span></button>
+      <button class="rj-node" data-chapter="2"><span class="rj-node__dot"></span><span class="rj-node__label">Experience</span></button>
+      <button class="rj-node" data-chapter="3"><span class="rj-node__dot"></span><span class="rj-node__label">Projects</span></button>
+      <button class="rj-node" data-chapter="4"><span class="rj-node__dot"></span><span class="rj-node__label">Skills</span></button>
+      <button class="rj-node" data-chapter="5"><span class="rj-node__dot"></span><span class="rj-node__label">More</span></button>
+    </div>
+  </nav>
+
+  <!-- CHAPTER 0: INTRO -->
+  <section class="rj-chapter rj-chapter--intro" data-chapter="0" id="rjChapter0">
+    <div class="rj-chapter__inner">
+      <div class="rj-intro">
+        <div class="rj-intro__eyebrow"><span class="rj-tag">resume</span><span class="rj-tag rj-tag--dim">v2026</span></div>
+        <h1 class="rj-intro__name">Prathamesh<br>Patil</h1>
+        <p class="rj-intro__role">Software Engineer</p>
+        <div class="rj-intro__meta">
+          <a class="rj-meta-link" href="mailto:prathameshind305@gmail.com">prathameshind305@gmail.com</a>
+          <span class="rj-sep">&middot;</span>
+          <a class="rj-meta-link" href="https://0xprathamesh.is-a.dev" target="_blank" rel="noopener">0xprathamesh.is-a.dev</a>
+          <span class="rj-sep">&middot;</span>
+          <a class="rj-meta-link" href="https://github.com/prathameshrp" target="_blank" rel="noopener">github/prathameshrp</a>
+          <span class="rj-sep">&middot;</span>
+          <span>Pune, India</span>
+        </div>
+        <div class="rj-intro__actions">
+          <a class="rj-btn rj-btn--ghost" href="https://files.catbox.moe/yxqp8q.pdf" target="_blank" rel="noopener" style="text-decoration: none;">Print / Download PDF</a>
+          <a class="rj-btn rj-btn--primary" href="#rjChapter1">Begin journey &darr;</a>
+        </div>
+      </div>
+      <div class="rj-scroll-hint" aria-hidden="true"><span>scroll</span></div>
+    </div>
+  </section>
+
+  <!-- CHAPTER 1: EDUCATION -->
+  <section class="rj-chapter" data-chapter="1" id="rjChapter1">
+    <div class="rj-chapter__inner">
+      <div class="rj-chapter__label">01 &mdash; Education</div>
+      <div class="rj-edu rj-animate rj-animate--slide-right">
+        <div class="rj-edu__header">
+          <div>
+            <h2 class="rj-edu__school">Vishwakarma Institute of Information Technology</h2>
+            <p class="rj-edu__degree">B.Tech. in Computer Engineering</p>
+            <p class="rj-edu__date">Graduated Jun 2026 &middot; Pune, Maharashtra</p>
+          </div>
+          <div class="rj-gpa">
+            <div class="rj-gpa__label">GPA</div>
+            <div class="rj-gpa__value" data-count-to="8.88" data-count-decimals="2">0.00</div>
+          </div>
+        </div>
+        <div class="rj-edu__courses">
+          <span class="rj-chip">OOP in Java</span>
+          <span class="rj-chip">Software Engineering</span>
+          <span class="rj-chip">DSA</span>
+          <span class="rj-chip">Cloud Computing</span>
+          <span class="rj-chip">Computer Networks</span>
+          <span class="rj-chip">OS Fundamentals</span>
+          <span class="rj-chip">DBMS</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHAPTER 2: EXPERIENCE -->
+  <section class="rj-chapter" data-chapter="2" id="rjChapter2">
+    <div class="rj-chapter__inner">
+      <div class="rj-chapter__label">02 &mdash; Experience</div>
+      <div class="rj-exp rj-animate rj-animate--slide-left">
+        <div class="rj-exp__header">
+          <div>
+            <h2 class="rj-exp__company">SailPoint Technologies</h2>
+            <p class="rj-exp__role">Software Engineer Intern</p>
+            <p class="rj-exp__stack">Java &middot; TypeScript &middot; REST APIs &middot; OAuth2.0</p>
+          </div>
+          <span class="rj-exp__date">Jul 2025 &ndash; Jun 2026</span>
+        </div>
+        <div class="rj-stats">
+          <div class="rj-stat">
+            <div class="rj-stat__value" data-count-to="40" data-count-suffix="+">0</div>
+            <div class="rj-stat__label">SaaS connectors built &amp; managed</div>
+          </div>
+          <div class="rj-stat">
+            <div class="rj-stat__value rj-stat__value--text">days<span class="rj-arrow">&rarr;</span>min</div>
+            <div class="rj-stat__label">i18n localization time cut</div>
+          </div>
+        </div>
+        <ul class="rj-bullets">
+          <li>Built &amp; managed <strong>40+ SaaS connector integrations</strong> using REST APIs with multiple auth protocols, pagination styles, schema validation, and consistent error handling.</li>
+          <li>Implemented <strong>credential-provider support</strong> and thread-safe token refresh logic for connectors with high-volume account aggregation.</li>
+          <li>Designed a reusable <strong>i18n utility</strong> for connectors &mdash; cut per-connector localization from <strong>days to under a minute</strong>.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHAPTER 3: PROJECTS -->
+  <section class="rj-chapter rj-chapter--projects" data-chapter="3" id="rjChapter3">
+    <div class="rj-chapter__inner">
+      <div class="rj-chapter__label">03 &mdash; Projects</div>
+      <div class="rj-projects">
+        <div class="rj-project rj-animate rj-animate--slide-up" style="--rj-delay:0s">
+          <div class="rj-project__header">
+            <h2 class="rj-project__title">Mock Server CLI Tool</h2>
+            <span class="rj-project__date">Jun 2026</span>
+          </div>
+          <div class="rj-project__stack">
+            <span class="rj-chip rj-chip--accent">TypeScript</span>
+            <span class="rj-chip">Node.js</span>
+            <span class="rj-chip">OpenAPI</span>
+            <span class="rj-chip">OAuth2</span>
+          </div>
+          <ul class="rj-bullets">
+            <li>CLI that parses <strong>OpenAPI/Postman specs</strong> into stateful REST endpoints with in-process <strong>OAuth2/JWT (RS256)</strong>, CRUD, pagination, and AJV validation.</li>
+            <li>Bulk-generates <strong>schema-conformant test data</strong> with auto cross-resource linking, deterministic and spec-accurate.</li>
+            <li>Applied at SailPoint: engineers use <code>/mock/&lt;system&gt;</code> instead of vendor sandboxes, eliminating credential &amp; network blockers.</li>
+          </ul>
+        </div>
+        <div class="rj-project rj-animate rj-animate--slide-up" style="--rj-delay:0.1s">
+          <div class="rj-project__header">
+            <h2 class="rj-project__title">Module Dependency Graph Generator</h2>
+            <span class="rj-project__date">Nov 2024</span>
+          </div>
+          <div class="rj-project__stack">
+            <span class="rj-chip rj-chip--accent">Python</span>
+            <span class="rj-chip">Matplotlib</span>
+            <span class="rj-chip">Graphviz</span>
+            <span class="rj-chip">DSA</span>
+          </div>
+          <ul class="rj-bullets">
+            <li>Dependency visualization &amp; circular-dependency detection across C++/JS/Python/Ruby, <strong>analyzing 1000+ files</strong> via GitHub APIs.</li>
+            <li><strong>O(m+n)</strong> graph-traversal for real-time cycle detection &mdash; reduced root-cause analysis from <strong>hours to seconds</strong>.</li>
+            <li>Surfaced build-time and runtime deadlocks early, improving codebase reliability and reviewer throughput.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHAPTER 4: SKILLS -->
+  <section class="rj-chapter" data-chapter="4" id="rjChapter4">
+    <div class="rj-chapter__inner">
+      <div class="rj-chapter__label">04 &mdash; Skills</div>
+      <div class="rj-skills rj-animate rj-animate--slide-up">
+        <div class="rj-skills__group">
+          <h3 class="rj-skills__heading">Languages</h3>
+          <div class="rj-skills__chips">
+            <span class="rj-chip rj-chip--lang" style="--i:0">Java</span>
+            <span class="rj-chip rj-chip--lang" style="--i:1">JavaScript</span>
+            <span class="rj-chip rj-chip--lang" style="--i:2">TypeScript</span>
+            <span class="rj-chip rj-chip--lang" style="--i:3">Node.js</span>
+            <span class="rj-chip rj-chip--lang" style="--i:4">SQL</span>
+            <span class="rj-chip rj-chip--lang" style="--i:5">Python</span>
+          </div>
+        </div>
+        <div class="rj-skills__group">
+          <h3 class="rj-skills__heading">Technologies &amp; Tools</h3>
+          <div class="rj-skills__chips">
+            <span class="rj-chip" style="--i:6">Git</span>
+            <span class="rj-chip" style="--i:7">Linux</span>
+            <span class="rj-chip" style="--i:8">Jenkins</span>
+            <span class="rj-chip" style="--i:9">Gradle</span>
+            <span class="rj-chip" style="--i:10">REST APIs</span>
+            <span class="rj-chip" style="--i:11">OAuth2.0</span>
+            <span class="rj-chip" style="--i:12">OpenAPI</span>
+            <span class="rj-chip" style="--i:13">Postman</span>
+          </div>
+        </div>
+        <div class="rj-skills__group">
+          <h3 class="rj-skills__heading">Certifications</h3>
+          <div class="rj-skills__chips">
+            <span class="rj-chip rj-chip--cert" style="--i:14">IBM Full Stack Developer Professional</span>
+            <span class="rj-chip rj-chip--cert" style="--i:15">Machine Learning &mdash; Basics to Advanced</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHAPTER 5: ACHIEVEMENTS + RESEARCH -->
+  <section class="rj-chapter" data-chapter="5" id="rjChapter5">
+    <div class="rj-chapter__inner">
+      <div class="rj-chapter__label">05 &mdash; Achievements &amp; Research</div>
+      <div class="rj-more">
+        <div class="rj-more__row">
+          <div class="rj-achieve rj-animate rj-animate--slide-right">
+            <div class="rj-stat rj-stat--hero">
+              <div class="rj-stat__value" data-count-to="500" data-count-suffix="+">0</div>
+              <div class="rj-stat__label">DSA problems across LeetCode, Codeforces &amp; CodeChef</div>
+            </div>
+          </div>
+          <div class="rj-achieve rj-animate rj-animate--slide-left">
+            <div class="rj-achieve__badge">Technical Head</div>
+            <p class="rj-achieve__desc">Student Empowerment Cell, VIIT &middot; 2024<br>Led technical initiatives &amp; workshops to upskill students.</p>
+          </div>
+        </div>
+        <div class="rj-research rj-animate rj-animate--slide-up">
+          <h3 class="rj-research__heading">Research &amp; Patents</h3>
+          <div class="rj-citation">
+            <span class="rj-citation__type">Paper</span>
+            <p class="rj-citation__title">Extraction of Pharmaceutical Data from Medical Prescriptions using OCR</p>
+            <p class="rj-citation__meta"><em>Int. Journal For Multidisciplinary Research (IJFMR)</em>, Vol. 6, Issue 6, Nov 2024 &middot; Co-authors: S. Khod, J. Patil, M. Mali</p>
+          </div>
+          <div class="rj-citation">
+            <span class="rj-citation__type">Patent</span>
+            <p class="rj-citation__title">A Hybrid Framework of Set Cover Formulation &amp; Ant Colony Optimization for Cost-Effective, Time-Efficient Delivery</p>
+            <p class="rj-citation__meta"><em>Republic of South Africa Register of Patents</em> &middot; App. No. <code>2025/07320</code> &middot; Granted <code>2026/03/23</code> &middot; Co-inventors: S. Rathi, S. Khod, et al.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="{{ '/assets/js/modules/resume.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>

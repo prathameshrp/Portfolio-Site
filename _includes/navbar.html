@@ -1,28 +1,31 @@
 {%- assign current = page.url | downcase -%}
 <header class="navbar" data-navbar>
-  <div class="navbar__inner">
-    <a class="navbar__brand" href="{{ '/' | relative_url }}">
-      <span class="navbar__logo" aria-hidden="true">&lt;/&gt;</span>
-      <span class="navbar__title">{{ site.brand_short | default: site.title }}</span>
-    </a>
-
-    <nav class="navbar__links" aria-label="Primary">
+  <div class="navbar__inner" style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+    
+    <!-- Left: Navigation Links (Desktop) -->
+    <nav class="navbar__links" aria-label="Primary" style="margin-left: 0; margin-right: auto; display: flex; gap: 1.5rem;">
       {%- for item in site.data.navigation -%}
         {%- assign link = item.url | relative_url -%}
         {%- assign active = false -%}
         {%- if item.url == "/" and page.url == "/" -%}{%- assign active = true -%}
         {%- elsif item.url != "/" and current contains item.url -%}{%- assign active = true -%}
         {%- endif -%}
-        <a class="navbar__link{% if active %} is-active{% endif %}" href="{{ link }}">{{ item.name }}</a>
+        <a class="navbar__link{% if active %} is-active{% endif %}" href="{{ link }}">{{ item.name | downcase }}</a>
       {%- endfor -%}
     </nav>
 
-    <div class="navbar__actions">
-      <button class="icon-btn" data-search-open aria-label="Search posts">
+    <!-- Right: Brand Name (Prathamesh Patil) & Search/Burger Actions -->
+    <div class="navbar__actions" style="margin-left: auto; display: flex; align-items: center; gap: 1rem; flex-shrink: 0;">
+      <a class="navbar__brand" href="{{ '/' | relative_url }}" style="font-family: var(--font-display); font-weight: 500; font-size: 0.98rem; text-decoration: none; display: flex; align-items: center; gap: 0.4rem; color: var(--text);">
+        <span class="navbar__brand-icon" style="color: var(--jinx); line-height: 1; font-size: 1.1rem;">◤</span>
+        <span class="navbar__brand-name">Prathamesh Patil</span>
+      </a>
+
+      <button class="icon-btn" data-search-open aria-label="Search posts" style="width: 40px; height: 40px; display: inline-grid; place-items: center;">
         {% include icon.html name="search" %}
       </button>
 
-      <button class="icon-btn navbar__burger" data-nav-toggle aria-label="Menu" aria-expanded="false">
+      <button class="icon-btn navbar__burger" data-nav-toggle aria-label="Menu" aria-expanded="false" style="width: 40px; height: 40px;">
         {% include icon.html name="menu" %}
         {% include icon.html name="x" %}
       </button>
@@ -31,7 +34,7 @@
 
   <div class="navbar__mobile" data-nav-mobile hidden>
     {%- for item in site.data.navigation -%}
-      <a class="navbar__mobile-link" href="{{ item.url | relative_url }}">{{ item.name }}</a>
+      <a class="navbar__mobile-link" href="{{ item.url | relative_url }}">{{ item.name | downcase }}</a>
     {%- endfor -%}
   </div>
   <div class="navbar__progress" data-reading-progress></div>

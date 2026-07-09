@@ -3,29 +3,64 @@
 // ─────────────────────────────────────────────────────────────
 
 :root {
-  // Accents (Neon color set)
-  --accent: #f97316;        // neon orange
-  --accent-2: #22d3ee;      // neon teal
-  --accent-3: #a855f7;      // neon purple
-  --accent-grad: linear-gradient(120deg, #f97316 0%, #22d3ee 100%);
-  --accent-grad-soft: linear-gradient(120deg, rgba(249, 115, 22, 0.08), rgba(34, 211, 238, 0.08));
+  // Lovable theme oklch colors
+  --powder: oklch(0.86 0.06 235);      /* pastel powder blue */
+  --jinx: oklch(0.72 0.22 355);        /* hot pink */
+  --teal: oklch(0.78 0.15 190);        /* electric teal */
+  --ember: oklch(0.72 0.19 55);        /* rare ember accent */
+  --ink: oklch(0.09 0.01 260);         /* deep base */
 
-  // Neon Gradient lines
-  --neon-orange-line: linear-gradient(90deg, #f97316 0%, rgba(249, 115, 22, 0) 100%);
-  --neon-teal-line: linear-gradient(90deg, #22d3ee 0%, rgba(34, 211, 238, 0) 100%);
-  --neon-purple-line: linear-gradient(90deg, #a855f7 0%, rgba(168, 85, 247, 0) 100%);
+  --background: oklch(0.14 0.012 260);
+  --foreground: oklch(0.96 0.01 240);
+  --card: oklch(0.17 0.014 260);
+  --card-foreground: oklch(0.96 0.01 240);
+  --popover: oklch(0.15 0.014 260);
+  --popover-foreground: oklch(0.96 0.01 240);
+  --primary: oklch(0.72 0.22 355);
+  --primary-foreground: oklch(0.12 0.01 260);
+  --secondary: oklch(0.86 0.06 235);
+  --secondary-foreground: oklch(0.12 0.01 260);
+  --muted: oklch(0.22 0.012 260);
+  --muted-foreground: oklch(0.72 0.02 240);
+  --accent: oklch(0.78 0.15 190);
+  --accent-foreground: oklch(0.12 0.01 260);
+  --destructive: oklch(0.65 0.22 25);
+  --destructive-foreground: oklch(0.98 0.01 240);
+  --border-color: oklch(0.32 0.02 250);
+  --input: oklch(0.28 0.02 250);
+  --ring: oklch(0.72 0.22 355);
+
+  // General theme variables mapping (keeps original elements styling functioning)
+  --bg: var(--background);
+  --bg-soft: var(--card);
+  --surface: var(--card);
+  --surface-2: var(--muted);
+  --border: var(--border-color);
+  --border-strong: oklch(0.40 0.02 250);
+  --text: var(--foreground);
+  --text-soft: var(--muted-foreground);
+  --text-mute: oklch(0.55 0.02 240);
+  --code-bg: var(--ink);
+  --code-fg: var(--foreground);
+
+  // Accents for compatibility
+  --accent-1: var(--jinx);
+  --accent-2: var(--teal);
+  --accent-3: var(--powder);
+  --accent-grad: linear-gradient(135deg, var(--jinx) 0%, var(--teal) 100%);
+  --accent-grad-soft: linear-gradient(135deg, rgba(255, 0, 110, 0.08), rgba(0, 180, 216, 0.08));
 
   // Type
-  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
-  --font-serif: "Inter", system-ui, -apple-system, sans-serif;
-  --font-display: "Inter", system-ui, -apple-system, sans-serif;
-  --font-logo: "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Pixelify Sans", "Silkscreen", ui-monospace, monospace;
+  --font-sans: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+  --font-serif: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+  --font-logo: "Pixelify Sans", "Silkscreen", ui-monospace, monospace;
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
 
   // Spacing / sizing
-  --radius: 8px;
-  --radius-sm: 4px;
-  --radius-lg: 12px;
+  --radius: 3px;
+  --radius-sm: 2px;
+  --radius-lg: 4px;
   --container: 1140px;
   --container-narrow: 760px;
   --container-wide: 1320px;
@@ -35,76 +70,23 @@
   --dur: .25s;
 
   // Shadows
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
-  --shadow-glow: 0 0 15px rgba(34, 211, 238, 0.15);
+  --shadow-sm: 0 1px 0 0 rgba(255, 255, 255, 0.06);
+  --shadow: 0 2px 0 0 rgba(255, 255, 255, 0.08);
+  --shadow-glow: none;
 }
 
-// Light Theme
-[data-theme="light"] {
-  --bg: #f8fafc;            // slate-50
-  --bg-soft: #ffffff;
-  --surface: #f1f5f9;       // slate-100
-  --surface-2: #e2e8f0;     // slate-200
-  --border: #cbd5e1;
-  --border-strong: #94a3b8;
-  --text: #0f172a;          // slate-900
-  --text-soft: #475569;     // slate-600
-  --text-mute: #94a3b8;     // slate-400
-  --code-bg: #e2e8f0;       // slate-200
-  --code-fg: #0f172a;       // slate-900
-  --aurora-opacity: 0;
-  --grid-color: rgba(0, 0, 0, .01);
-
-  // Syntax highlighting for light theme (GitHub Light style)
-  --syntax-comment: #6a737d;
-  --syntax-keyword: #d73a49;
-  --syntax-operator: #d73a49;
-  --syntax-punctuation: #24292e;
-  --syntax-string: #032f62;
-  --syntax-number: #005cc5;
-  --syntax-attribute: #6f42c1;
-  --syntax-tag: #22863a;
-  --syntax-function: #6f42c1;
-  --syntax-class: #6f42c1;
-  --syntax-builtin: #e36209;
-  --syntax-variable: #e36209;
-}
-
-// Dark Theme (Pitch-Black default)
+[data-theme="light"],
 [data-theme="dark"] {
-  --bg: #000000;            // pitch-black
-  --bg-soft: #050505;
-  --surface: #0a0a0c;
-  --surface-2: #121214;
-  --border: #1e293b;
-  --border-strong: #334155;
-  --text: #f1f5f9;          // slate-100
-  --text-soft: #94a3b8;     // slate-400
-  --text-mute: #64748b;     // slate-500
-  --code-bg: #0d0d0f;
-  --code-fg: #f1f5f9;
-  --aurora-opacity: 0;
-  --grid-color: rgba(255, 255, 255, .01);
-
-  // Overrides for dark theme neon set
-  --accent: #f97316;
-  --accent-2: #22d3ee;
-  --accent-3: #a855f7;
-  --accent-grad: linear-gradient(120deg, #f97316 0%, #22d3ee 100%);
-  --accent-grad-soft: linear-gradient(120deg, rgba(249, 115, 22, 0.1), rgba(34, 211, 238, 0.1));
-
-  // Syntax highlighting for dark theme (VS Code Dark / One Dark style)
-  --syntax-comment: #677182;
-  --syntax-keyword: #c792ff;
-  --syntax-operator: #89ddff;
-  --syntax-punctuation: #abb2bf;
-  --syntax-string: #98c379;
-  --syntax-number: #d19a66;
-  --syntax-attribute: #d19a66;
-  --syntax-tag: #e06c75;
-  --syntax-function: #61afef;
-  --syntax-class: #e5c07b;
-  --syntax-builtin: #56b6c2;
-  --syntax-variable: #e06c75;
+  // Map same variables to enforce deep graphite charcoal base across both themes
+  --bg: var(--background);
+  --bg-soft: var(--card);
+  --surface: var(--card);
+  --surface-2: var(--muted);
+  --border: var(--border-color);
+  --border-strong: oklch(0.40 0.02 250);
+  --text: var(--foreground);
+  --text-soft: var(--muted-foreground);
+  --text-mute: oklch(0.55 0.02 240);
+  --code-bg: var(--ink);
+  --code-fg: var(--foreground);
 }
