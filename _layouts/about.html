@@ -4,70 +4,164 @@ layout: default
 <section class="page-shell" style="margin-top: 2rem;">
   <div class="container container--narrow">
 
-    <div class="terminal-window" style="height: auto; margin-bottom: 2rem;">
-      <div class="terminal-bar">
-        <div class="window-dots">
-          <div class="window-dot window-dot--red"></div>
-          <div class="window-dot window-dot--yellow"></div>
-          <div class="window-dot window-dot--green"></div>
-        </div>
-        <div class="terminal-title">prathameshrp@devlog:~/about</div>
-      </div>
-
-      <div class="terminal-body" style="padding: 1.5rem 1.75rem;">
-        <p style="margin-bottom: 2rem; font-family: var(--font-mono); font-size: 0.86rem; color: var(--text-soft);">
-          <span class="t-prompt">~$</span> <span class="t-cmd">cat about.md</span>
-        </p>
-
-        <div class="about-identity reveal">
-          <div class="about-avatar">
-            <span class="about-avatar__sigil">⬡</span>
-          </div>
-          <div class="about-identity__text">
-            <h1 class="about-name">Prathamesh Patil</h1>
-            <p class="about-handle"><span class="t-prompt">@</span>prathameshrp &middot; Software Engineer</p>
-            <p class="about-bio">
-              I build things, break them to understand them, then write about what I learned.
-              Mostly backend systems, APIs, and the occasional rabbit hole into compiler internals.
-            </p>
-          </div>
-        </div>
-
-        <div class="about-divider reveal"><span>interests</span></div>
-
-        <div class="about-grid reveal">
-          <div class="about-card">
-            <div class="about-card__icon">⚙</div>
-            <h3 class="about-card__title">Systems &amp; Backend</h3>
-            <p class="about-card__desc">APIs, data modeling, performance tuning, and clean robust architectures that hold up under load.</p>
-          </div>
-          <div class="about-card">
-            <div class="about-card__icon">◈</div>
-            <h3 class="about-card__title">Web &amp; Frontend</h3>
-            <p class="about-card__desc">Fast, readable interfaces built without unnecessary framework overhead. Semantics first, animations second.</p>
-          </div>
-          <div class="about-card">
-            <div class="about-card__icon">⌥</div>
-            <h3 class="about-card__title">Developer Experience</h3>
-            <p class="about-card__desc">Tooling, shell automation, and scripts that shorten the loop between idea and working code.</p>
-          </div>
-        </div>
-
-        <div class="about-divider reveal"><span>elsewhere</span></div>
-
-        <div class="about-links reveal">
-          <a class="about-link" href="https://github.com/prathameshrp" target="_blank" rel="noopener">
-            <span class="about-link__label">GitHub</span>
-            <span class="about-link__arrow">→</span>
-          </a>
-          <a class="about-link" href="/contact/">
-            <span class="about-link__label">Say Hi</span>
-            <span class="about-link__arrow">→</span>
-          </a>
-        </div>
-
-      </div>
+    <!-- CLI launch prompt on top of the terminal frame -->
+    <div style="margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.82rem; color: var(--text-soft);" class="reveal">
+      <span style="color: var(--jinx);">~$</span>
+      <span>cat about.md</span>
+      <span style="display: inline-block; width: 6px; height: 12px; background: var(--powder); margin-left: 0.25rem;" class="animate-flicker"></span>
     </div>
 
+    <div style="position: relative; width: 100%;">
+      <!-- Depth plates -->
+      <div style="position: absolute; inset: 0; transform: translate(8px, 8px); border: 1px solid color-mix(in oklab, var(--jinx) 50%, transparent); pointer-events: none; z-index: 0;"></div>
+      <div style="position: absolute; inset: 0; transform: translate(4px, 4px); border: 1px solid color-mix(in oklab, var(--teal) 40%, transparent); pointer-events: none; z-index: 0;"></div>
+
+      <div class="terminal-window" style="position: relative; z-index: 1; height: auto; margin-bottom: 2rem; background: var(--card); border: 1px solid var(--border);">
+        <div class="terminal-bar">
+          <div class="window-dots">
+            <div class="window-dot window-dot--red"></div>
+            <div class="window-dot window-dot--yellow"></div>
+            <div class="window-dot window-dot--green"></div>
+          </div>
+          <div class="terminal-title">prathameshrp@devlog:~/about</div>
+        </div>
+
+        <div class="terminal-body" style="padding: 1.5rem 1.75rem;">
+
+          <div class="about-identity reveal">
+            <div class="about-avatar">
+              <span class="about-avatar__sigil">⬡</span>
+            </div>
+            <div class="about-identity__text">
+              <h1 class="about-name">Prathamesh Patil</h1>
+              <p class="about-handle"><span class="t-prompt">@</span>prathameshrp &middot; Software Engineer</p>
+              <p class="about-bio">
+                I build things, break them to understand them, then write about what I learned.
+                Mostly backend systems, APIs, and the occasional rabbit hole into compiler internals.
+              </p>
+            </div>
+          </div>
+
+          <div class="about-divider reveal"><span>interests</span></div>
+
+          <div class="about-grid reveal">
+            <div class="about-card">
+              <div class="about-card__icon">⚙</div>
+              <h3 class="about-card__title">Systems & Backend</h3>
+              <p class="about-card__desc">APIs, data modeling, performance tuning, and clean robust architectures that
+                hold up under load.</p>
+            </div>
+            <div class="about-card">
+              <div class="about-card__icon">◈</div>
+              <h3 class="about-card__title">Web & Frontend</h3>
+              <p class="about-card__desc">Fast, readable interfaces built without unnecessary framework overhead.
+                Semantics first, animations second.</p>
+            </div>
+            <div class="about-card">
+              <div class="about-card__icon">⌥</div>
+              <h3 class="about-card__title">Developer Experience</h3>
+              <p class="about-card__desc">Tooling, shell automation, and scripts that shorten the loop between idea and
+                working code.</p>
+            </div>
+          </div>
+
+          <div class="about-divider reveal"><span>elsewhere</span></div>
+
+          <div class="about-links reveal">
+            <a class="about-link" href="https://github.com/prathameshrp" target="_blank" rel="noopener">
+              <span class="about-link__label">GitHub</span>
+              <span class="about-link__arrow">→</span>
+            </a>
+            <a class="about-link" href="/contact/">
+              <span class="about-link__label">Say Hi</span>
+              <span class="about-link__arrow">→</span>
+            </a>
+          </div>
+
+          <!-- Resume CTA -->
+          <div class="about-divider reveal"><span>resume</span></div>
+          <div class="reveal" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; margin-bottom: 1.5rem; margin-top: 1rem;">
+            <a href="{{ '/about/resume/' | relative_url }}" class="chip" style="font-size: 13px; padding: 8px 16px; border-radius: 3px; font-family: var(--font-mono); font-weight: 500; text-transform: lowercase; color: var(--text); border-color: var(--border); display: inline-flex; align-items: center; gap: 0.4rem; background: var(--surface); text-decoration: none;">
+              interactive resume journey &rarr;
+            </a>
+            <a href="https://files.catbox.moe/yxqp8q.pdf" target="_blank" rel="noopener" class="chip" style="font-size: 13px; padding: 8px 16px; border-radius: 3px; font-family: var(--font-mono); font-weight: 500; text-transform: lowercase; color: var(--foreground); border-color: var(--jinx); background: var(--jinx); display: inline-flex; align-items: center; gap: 0.4rem; text-decoration: none;">
+              print resume (pdf) &rarr;
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Resume Timeline Section -->
+<section class="resume-section">
+  <div class="resume-timeline">
+    <div class="resume-timeline__track">
+
+      <div class="resume-timeline__item reveal">
+        <div class="resume-timeline__date">Jul 2025 – Jun 2026</div>
+        <h2 class="resume-timeline__title">Software Engineer Intern</h2>
+        <p class="resume-timeline__org">SailPoint Technologies</p>
+        <div class="resume-timeline__desc">
+          <ul>
+            <li>Built & managed 40+ SaaS connector integrations using REST APIs and OAuth2.0</li>
+            <li>Implemented thread-safe token refresh for high-volume account aggregation</li>
+            <li>Designed reusable i18n utility cutting localization effort from days to under a minute</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="resume-timeline__item reveal">
+        <div class="resume-timeline__date">Jun 2026</div>
+        <h2 class="resume-timeline__title">Mock Server CLI Tool</h2>
+        <p class="resume-timeline__org">TypeScript, Node.js, OpenAPI, OAuth2</p>
+        <div class="resume-timeline__desc">
+          <ul>
+            <li>CLI mock server parsing OpenAPI/Postman specs into stateful REST endpoints with JWT auth</li>
+            <li>Bulk schema-conformant test data generation with auto cross-resource linking</li>
+            <li>Eliminated credential/network blockers for SaaS connector development</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="resume-timeline__item reveal">
+        <div class="resume-timeline__date">Nov 2024</div>
+        <h2 class="resume-timeline__title">Module Dependency Graph Generator</h2>
+        <p class="resume-timeline__org">Python, Matplotlib, Graphviz</p>
+        <div class="resume-timeline__desc">
+          <ul>
+            <li>Dependency visualization tool analyzing 1000+ files across C++/JS/Python/Ruby</li>
+            <li>O(m+n) graph-traversal algorithm detecting cycles in real-time</li>
+            <li>Reduced root-cause analysis from hours to seconds</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="resume-timeline__item reveal">
+        <div class="resume-timeline__date">2024 – Present</div>
+        <h2 class="resume-timeline__title">Technical Head</h2>
+        <p class="resume-timeline__org">Student Empowerment Cell, VIIT</p>
+        <div class="resume-timeline__desc">
+          <ul>
+            <li>Leading technical initiatives and workshops to upskill students</li>
+            <li>500+ DSA problems solved across LeetCode, Codeforces, CodeChef</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="resume-timeline__item reveal">
+        <div class="resume-timeline__date">Mar 2026</div>
+        <h2 class="resume-timeline__title">Patent Granted</h2>
+        <p class="resume-timeline__org">Republic of South Africa Register of Patents</p>
+        <div class="resume-timeline__desc">
+          <ul>
+            <li>Hybrid Framework of Set Cover Formulation & Ant Colony Optimization for Delivery</li>
+            <li>Application No. 2025/07320</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>

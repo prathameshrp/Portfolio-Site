@@ -19,25 +19,96 @@
     reveals.forEach(function (el) { io.observe(el); });
   }
 
-  // ── Word rotator ────────────────────────────────────────────
-  var rotator = document.querySelector('[data-rotator]');
-  if (rotator && !reduce) {
-    var words = [];
-    try { words = JSON.parse(rotator.getAttribute('data-words')); } catch (e) {}
-    var textEl = rotator.querySelector('.hero__rotator-text');
-    if (words.length > 1 && textEl) {
-      var wi = 0, ci = 0, deleting = false;
-      function tick() {
-        var word = words[wi];
-        textEl.textContent = word.substring(0, ci);
-        if (!deleting && ci < word.length) { ci++; }
-        else if (!deleting && ci === word.length) { deleting = true; return setTimeout(tick, 1500); }
-        else if (deleting && ci > 0) { ci--; }
-        else { deleting = false; wi = (wi + 1) % words.length; }
-        setTimeout(tick, deleting ? 45 : 95);
+  // ── Diff widget ─────────────────────────────────────────────
+  var diffOld = document.getElementById('heroDiffOld');
+  var diffNew = document.getElementById('heroDiffNew');
+
+  if (diffOld && diffNew) {
+    var pairs = [
+      ['manual test scripts in bash',     'automated OpenAPI integration tests'],
+      ['bug fixed in local dev branch',   'bug reintroduced in production merge'],
+      ['regex from ChatGPT that breaks',  'robust RFC-compliant email parser'  ],
+      ['print statements for debugging',  'actual interactive debugger breakpoints'],
+      ['legacy callback spaghetti loops', 'async/await promise pipelines'      ],
+      ['permanent temporary workaround',  'documented structural technical debt']
+    ];
+    var pi = 0;
+    var isTyping = false;
+
+    function typeDiff() {
+      if (isTyping) return;
+      isTyping = true;
+
+      var nextPair = pairs[(pi + 1) % pairs.length];
+      var oldVal1 = pairs[pi][0];
+      var newVal1 = nextPair[0];
+      var oldVal2 = pairs[pi][1];
+      var newVal2 = nextPair[1];
+
+      // Backspace simulation
+      var currentVal1 = oldVal1;
+      var currentVal2 = oldVal2;
+
+      function backspace() {
+        var changed = false;
+        if (currentVal1.length > 0) {
+          currentVal1 = currentVal1.slice(0, -1);
+          diffOld.textContent = currentVal1 || ' ';
+          changed = true;
+        }
+        if (currentVal2.length > 0) {
+          currentVal2 = currentVal2.slice(0, -1);
+          diffNew.textContent = currentVal2 || ' ';
+          changed = true;
+        }
+
+        if (changed) {
+          setTimeout(backspace, 12);
+        } else {
+          pi = (pi + 1) % pairs.length;
+          type();
+        }
       }
-      setTimeout(tick, 900);
+
+      var typeIdx1 = 0;
+      var typeIdx2 = 0;
+
+      function type() {
+        var changed = false;
+        if (typeIdx1 < newVal1.length) {
+          diffOld.textContent = newVal1.slice(0, typeIdx1 + 1);
+          typeIdx1++;
+          changed = true;
+        }
+        if (typeIdx2 < newVal2.length) {
+          diffNew.textContent = newVal2.slice(0, typeIdx2 + 1);
+          typeIdx2++;
+          changed = true;
+        }
+
+        if (changed) {
+          setTimeout(type, 18);
+        } else {
+          isTyping = false;
+        }
+      }
+
+      backspace();
     }
+
+    setInterval(typeDiff, 5200);
+  }
+
+  // ── Bottom Ticker scroll visibility ─────────────────────────
+  var ticker = document.querySelector('.skills-ticker-strip');
+  if (ticker) {
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 40) {
+        ticker.classList.add('is-hidden');
+      } else {
+        ticker.classList.remove('is-hidden');
+      }
+    }, { passive: true });
   }
 
   // ── Terminal typing ─────────────────────────────────────────
@@ -199,5 +270,27 @@
 
   function escapeHtml(s) {
     return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  // ── Home page terminal mouse parallax hover effect ──────────
+  var heroSection = document.getElementById('top');
+  var terminalCard = document.querySelector('.hero-col-right .terminal-window');
+  if (heroSection && terminalCard) {
+    heroSection.addEventListener('mousemove', function (e) {
+      var rect = heroSection.getBoundingClientRect();
+      var x = e.clientX - rect.left - rect.width / 2;
+      var y = e.clientY - rect.top - rect.height / 2;
+      
+      // Calculate rotation angles
+      var tiltX = (y / (rect.height / 2)) * -8; // max 8 deg
+      var tiltY = (x / (rect.width / 2)) * 10; // max 10 deg
+      
+      terminalCard.style.transform = 'perspective(1000px) rotateX(' + tiltX + 'deg) rotateY(' + tiltY + 'deg) translateZ(5px)';
+      terminalCard.style.transition = 'transform 0.15s cubic-bezier(0.25, 0.8, 0.25, 1)';
+    });
+    heroSection.addEventListener('mouseleave', function () {
+      terminalCard.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0)';
+      terminalCard.style.transition = 'transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)';
+    });
   }
 })();

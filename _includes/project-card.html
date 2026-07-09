@@ -1,33 +1,59 @@
 {%- assign project = include.project -%}
-<article class="project-card reveal">
-  {%- if project.cover -%}
-    <div class="project-card__cover">
-      <img src="{{ project.cover | relative_url }}" alt="{{ project.title }}" class="project-card__img" loading="lazy">
-    </div>
-  {%- endif -%}
-  <div class="project-card__body">
-    <div class="project-card__top">
-      <span class="project-card__index">_{{ include.index }}</span>
-      {%- if project.url and project.url != "" -%}
-        <a class="icon-btn project-card__link-icon" href="{{ project.url }}" target="_blank" rel="noopener" aria-label="Visit {{ project.title }}">
-          {% include icon.html name="arrow-up-right" %}
-        </a>
-      {%- endif -%}
-    </div>
-    <h3 class="project-card__title">
-      {%- if project.url_live and project.url_live != "" -%}
-        <a href="{{ project.url_live }}" target="_blank" rel="noopener">{{ project.title }}</a>
-      {%- elsif project.url and project.url != "" -%}
-        <a href="{{ project.url }}" target="_blank" rel="noopener">{{ project.title }}</a>
+{%- assign index_str = include.index | default: 1 -%}
+{%- if index_str < 10 -%}
+  {%- assign index_str = index_str | prepend: "0" | prepend: "_" -%}
+{%- else -%}
+  {%- assign index_str = index_str | prepend: "_" -%}
+{%- endif -%}
+
+{%- if project.url_live and project.url_live != "" -%}
+  {%- assign p_url = project.url_live -%}
+{%- elsif project.url and project.url != "" -%}
+  {%- assign p_url = project.url -%}
+{%- else -%}
+  {%- assign p_url = "#" -%}
+{%- endif -%}
+
+<a href="{{ p_url }}" target="_blank" rel="noopener" class="project-row reveal group" style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; padding: 2rem 0; border-bottom: 1px solid var(--border); transition: background-color 0.25s; text-decoration: none; width: 100%;">
+  
+  <!-- Index -->
+  <div style="grid-column: span 12 / span 12;" class="md-col-span-1">
+    <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-soft);">{{ index_str }}</span>
+  </div>
+
+  <!-- Cover Image Thumbnail -->
+  <div style="grid-column: span 12 / span 12;" class="md-col-span-2">
+    <div class="bg-crosshatch" style="height: 4.2rem; width: 100%; max-width: 120px; border: 1px solid var(--border); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; background: var(--surface);">
+      {%- if project.cover -%}
+        <img src="{{ project.cover | relative_url }}" alt="{{ project.title }}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; transition: transform 0.3s ease;" class="project-row-cover-img">
       {%- else -%}
-        {{ project.title }}
+        <span style="font-size: 1.5rem; color: color-mix(in oklab, var(--jinx) 30%, transparent);">◈</span>
       {%- endif -%}
-    </h3>
-    <p class="project-card__desc">{{ project.description }}</p>
-    <div class="project-card__stack">
-      {%- for tech in project.tech -%}
-        <span class="chip chip--ghost">{{ tech }}</span>
-      {%- endfor -%}
     </div>
   </div>
-</article>
+
+  <!-- Title & Description -->
+  <div style="grid-column: span 12 / span 12;" class="md-col-span-6">
+    <h3 style="font-size: clamp(1.4rem, 2.5vw, 1.8rem); font-family: var(--font-display); font-weight: 500; color: var(--text); margin: 0 0 0.5rem; transition: color 0.2s;" class="project-title-hover">
+      {{ project.title }}
+    </h3>
+    <p style="font-size: 0.88rem; color: var(--text-soft); line-height: 1.65; margin: 0; max-width: 38rem;">
+      {{ project.description }}
+    </p>
+  </div>
+
+  <!-- Tags -->
+  <div style="grid-column: span 12 / span 12; display: flex; flex-wrap: wrap; gap: 0.35rem; align-content: flex-start;" class="md-col-span-2">
+    {%- for tech in project.tech -%}
+      <span class="chip" style="font-size: 10px; padding: 2px 6px;">{{ tech }}</span>
+    {%- endfor -%}
+  </div>
+
+  <!-- Link icon -->
+  <div style="grid-column: span 12 / span 12; display: flex; justify-content: flex-end;" class="md-col-span-1">
+    <span class="project-arrow-hover" style="color: var(--text-soft); transition: color 0.2s, transform 0.2s; display: inline-flex;">
+      {% include icon.html name="arrow-up-right" %}
+    </span>
+  </div>
+  
+</a>

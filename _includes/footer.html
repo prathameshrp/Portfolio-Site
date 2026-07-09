@@ -1,35 +1,92 @@
-<footer class="footer">
-  <div class="footer__inner">
-    <div class="footer__brand">
-      <span class="footer__brand-top">
-        <span class="navbar__logo" aria-hidden="true">&lt;/&gt;</span>
-        <span class="footer__brand-name">{{ site.brand_short | default: site.title }}</span>
-      </span>
-      <p class="footer__tagline">{{ site.tagline }}</p>
+<footer id="contact" class="footer"
+  style="margin-top: 6rem; border-top: 1px solid var(--border); background: var(--card);">
+  <div class="footer__inner"
+    style="max-width: var(--container); margin-inline: auto; padding: 5rem clamp(1.1rem, 4vw, 2rem) 5rem; display: grid; grid-template-columns: 1.3fr 1fr; gap: 3rem; align-items: start;">
+
+    <!-- Left Info -->
+    <div>
+      <div
+        style="margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.55rem; font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-soft);">
+        <span style="color: var(--jinx);">~$</span>
+        <span>echo $STATUS</span>
+      </div>
+      <h2
+        style="font-size: clamp(1.8rem, 4.5vw, 3.2rem); font-family: var(--font-display); font-weight: 500; color: var(--text); line-height: 1.15; margin: 0 0 1rem;">
+        got a system that <span style="color: var(--jinx);">needs teeth</span>?
+      </h2>
+      <p
+        style="margin-top: 1rem; max-width: 32rem; font-size: 0.92rem; color: var(--text-soft); line-height: 1.65; margin-bottom: 2rem;">
+        Open to backend, infra and pipeline work. Fastest reply via email — cold outreach welcome, no recruiter
+        templates.
+      </p>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+        <a href="mailto:hi@prathamesh.dev" class="footer-btn-primary">
+          {% include icon.html name="mail" %}
+          hi@prathamesh.dev
+        </a>
+        <a href="https://github.com/prathameshrp" target="_blank" rel="noopener" class="footer-btn-outline">
+          {% include icon.html name="github" %}
+          github
+        </a>
+      </div>
     </div>
 
-    <nav class="footer__nav" aria-label="Footer">
-      {%- for item in site.data.navigation -%}
-      <a href="{{ item.url | relative_url }}">{{ item.name }}</a>
-      {%- endfor -%}
-    </nav>
-
-    <div class="footer__social">
-      {%- for s in site.data.social -%}
-      {%- if s.url and s.url != "" -%}
-      <a href="{{ s.url }}" class="icon-btn" aria-label="{{ s.name }}" target="_blank" rel="noopener">
-        {% include icon.html name=s.icon %}
-      </a>
-      {%- endif -%}
-      {%- endfor -%}
+    <!-- Right Navigation Link columns -->
+    <div
+      style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; font-family: var(--font-mono); font-size: 0.85rem; width: 100%;">
+      <div>
+        <div
+          style="margin-bottom: 0.9rem; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-mute);">
+          sitemap</div>
+        <ul style="display: flex; flex-direction: column; gap: 0.65rem; padding: 0; margin: 0;">
+          {%- for item in site.data.navigation -%}
+          <li>
+            <a href="{{ item.url | relative_url }}" style="color: var(--text-soft); transition: color 0.2s;"
+              onmouseover="this.style.color='var(--jinx)'" onmouseout="this.style.color='var(--text-soft)'">
+              {{ item.name | downcase }}
+            </a>
+          </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+      <div>
+        <div
+          style="margin-bottom: 0.9rem; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-mute);">
+          elsewhere</div>
+        <ul style="display: flex; flex-direction: column; gap: 0.65rem; padding: 0; margin: 0;">
+          <li><a href="https://notes.0xprathamesh.is-a.dev" target="_blank" rel="noopener"
+              style="color: var(--text-soft); transition: color 0.2s;" onmouseover="this.style.color='var(--jinx)'"
+              onmouseout="this.style.color='var(--text-soft)'">notes</a></li>
+          <li><a href="https://github.com/prathameshrp" target="_blank" rel="noopener"
+              style="color: var(--text-soft); transition: color 0.2s;" onmouseover="this.style.color='var(--jinx)'"
+              onmouseout="this.style.color='var(--text-soft)'">github</a></li>
+          <li><a href="{{ '/feed.xml' | relative_url }}" style="color: var(--text-soft); transition: color 0.2s;"
+              onmouseover="this.style.color='var(--jinx)'" onmouseout="this.style.color='var(--text-soft)'">rss</a></li>
+          <li><a href="{{ '/about/resume/' | relative_url }}" style="color: var(--text-soft); transition: color 0.2s;"
+              onmouseover="this.style.color='var(--jinx)'" onmouseout="this.style.color='var(--text-soft)'">résumé</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-  <div class="footer__bottom">
-    <span>&copy; {{ 'now' | date: "%Y" }} {{ site.author.name }}. Built with 💜</span>
-    <span class="footer__build">
-      <span class="footer__build-dot"></span>
-      last deployed {{ site.time | date: "%b %-d, %Y · %H:%M %Z" }}
-      <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
-    </span>
+
+  <!-- runic strip bottom -->
+  <div style="border-t: 1px solid var(--border); border-top: 1px solid var(--border); background: var(--ink);">
+    <div
+      style="max-width: var(--container); margin-inline: auto; padding: 1.5rem clamp(1.1rem, 4vw, 2rem); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; font-family: var(--font-mono); font-size: 11px; color: var(--text-soft);">
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        {% include icon.html name="terminal" %}
+        <span>build 2026 &middot; handcrafted, not generated.</span>
+      </div>
+      <div style="letter-spacing: 0.2em; font-weight: 500;">
+        <span style="color: var(--powder);">ᚠ ᚢ ᚦ</span> &middot;
+        <span style="color: var(--teal);">ᚨ ᚱ ᚲ</span> &middot;
+        <span style="color: var(--jinx);">ᚨ ᚾ ᛖ</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        {% include icon.html name="git-branch" %}
+        <span>main &middot; &copy; {{ 'now' | date: "%Y" }} prathamesh patil</span>
+      </div>
+    </div>
   </div>
 </footer>

@@ -1,0 +1,57 @@
+<section id="about" style="position: relative; padding: 5rem 0;">
+  <div class="container">
+    <div class="mb-12 flex items-end justify-between gap-6" style="margin-bottom: 3rem; display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem;">
+      <div>
+        <div class="mb-3 flex items-center gap-2 text-xs text-muted-foreground font-mono" style="margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-soft);">
+          <span style="color: var(--jinx);">~$</span>
+          <span>cat capabilities.md</span>
+        </div>
+        <h2 style="font-size: clamp(1.8rem, 4vw, 2.8rem); font-family: var(--font-display); font-weight: 500; color: var(--text); margin: 0;">what i actually do.</h2>
+      </div>
+      <div style="height: 1px; flex: 1; background: var(--border); display: none; margin-bottom: 0.75rem;" class="md-line-divider"></div>
+    </div>
+
+    <div class="features-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: var(--border);">
+      
+      <!-- Feature 1 -->
+      <div class="feature-card" style="position: relative; background: var(--bg); padding: 2.5rem; transition: background-color 0.3s;">
+        <div style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
+          <span class="feature-icon-wrapper" style="display: inline-flex; height: 2.25rem; width: 2.25rem; align-items: center; justify-content: center; border: 1px solid var(--border); transition: border-color 0.2s, color 0.2s; color: var(--text-soft);">
+            {% include icon.html name="cpu" %}
+          </span>
+          <span style="font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; color: var(--text-mute);">01</span>
+        </div>
+        <h3 style="font-size: 1.5rem; font-family: var(--font-display); color: var(--text); font-weight: 500; margin: 0 0 0.75rem;">systems & backend</h3>
+        <p style="font-size: 0.88rem; color: var(--text-soft); line-height: 1.65; margin: 0;">APIs, data modeling, performance profiling, and building clean, robust backend architectures.</p>
+        <span style="position: absolute; bottom: 1rem; right: 1rem; color: color-mix(in oklab, var(--powder) 20%, transparent); font-size: 1.5rem; pointer-events: none;">◤</span>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="feature-card" style="position: relative; background: var(--bg); padding: 2.5rem; transition: background-color 0.3s;">
+        <div style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
+          <span class="feature-icon-wrapper" style="display: inline-flex; height: 2.25rem; width: 2.25rem; align-items: center; justify-content: center; border: 1px solid var(--border); transition: border-color 0.2s, color 0.2s; color: var(--text-soft);">
+            {% include icon.html name="workflow" %}
+          </span>
+          <span style="font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; color: var(--text-mute);">02</span>
+        </div>
+        <h3 style="font-size: 1.5rem; font-family: var(--font-display); color: var(--text); font-weight: 500; margin: 0 0 0.75rem;">pipelines & automation</h3>
+        <p style="font-size: 0.88rem; color: var(--text-soft); line-height: 1.65; margin: 0;">Scripts, workflows and glue code that make repetitive things vanish from the daily loop.</p>
+        <span style="position: absolute; bottom: 1rem; right: 1rem; color: color-mix(in oklab, var(--powder) 20%, transparent); font-size: 1.5rem; pointer-events: none;">◤</span>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="feature-card" style="position: relative; background: var(--bg); padding: 2.5rem; transition: background-color 0.3s;">
+        <div style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
+          <span class="feature-icon-wrapper" style="display: inline-flex; height: 2.25rem; width: 2.25rem; align-items: center; justify-content: center; border: 1px solid var(--border); transition: border-color 0.2s, color 0.2s; color: var(--text-soft);">
+            {% include icon.html name="boxes" %}
+          </span>
+          <span style="font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; color: var(--text-mute);">03</span>
+        </div>
+        <h3 style="font-size: 1.5rem; font-family: var(--font-display); color: var(--text); font-weight: 500; margin: 0 0 0.75rem;">interfaces without bloat</h3>
+        <p style="font-size: 0.88rem; color: var(--text-soft); line-height: 1.65; margin: 0;">Fast, responsive frontends focused on readability and accessibility. No framework tax.</p>
+        <span style="position: absolute; bottom: 1rem; right: 1rem; color: color-mix(in oklab, var(--powder) 20%, transparent); font-size: 1.5rem; pointer-events: none;">◤</span>
+      </div>
+
+    </div>
+  </div>
+</section>

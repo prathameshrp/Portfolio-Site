@@ -2,277 +2,166 @@
 layout: default
 ---
 
-<div class="container" style="margin-top: 2rem;">
-  <!-- Hero Section -->
-  <section class="hero reveal">
-    <div class="hero__inner">
-      <div class="hero__content">
-        <h1 class="hero__title">
-          Hi, I am <br>
-          <span class="hero__rotator" data-rotator data-words='["Prathamesh Patil", "a software engineer", "a systems developer", "a backend engineer"]'>
-            <span class="hero__rotator-text">Prathamesh Patil</span>
-          </span>
-        </h1>
-        <p class="hero__intro">I design high-performance backend systems, automate pipelines, and build clean, responsive web experiences.</p>
-        <div class="hero__cta">
-          <a href="#projects" class="btn btn--primary">View Projects</a>
-          <a href="/blog/" class="btn btn--ghost">Read Blog</a>
-        </div>
-      </div>
-
-      <!-- Hero Terminal Mockup -->
-      <div class="hero__terminal">
-        <div class="terminal">
-          <div class="terminal__bar">
-            <div class="terminal__dot"></div>
-            <div class="terminal__dot"></div>
-            <div class="terminal__dot"></div>
-            <span class="terminal__name">guest@prathamesh.dev:~</span>
+<div class="landing">
+  
+  <!-- HERO SECTION -->
+  <section id="top" style="position: relative; overflow: hidden; display: flex; align-items: center; min-height: calc(100vh - 72px); padding: 3rem 0;">
+    <div class="container" style="width: 100%;">
+      <div class="hero-grid">
+        
+        <!-- Left Column -->
+        <div class="hero-col-left md-col-span-8">
+          <div style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-soft);">
+            <span style="color: var(--jinx);">~$</span>
+            <span>whoami</span>
+            <span style="display: inline-block; width: 6px; height: 12px; background: var(--powder); margin-left: 0.25rem;" class="animate-flicker"></span>
           </div>
-          <div class="terminal__body" data-terminal data-lines='["$ curl -s https://0xprathamesh.is-a.dev/info.json", "{", "  \"name\": \"Prathamesh Patil\",", "  \"role\": \"Software Engineer\",", "  \"focus\": [\"Systems\", \"Backend\", \"AI\"],", "  \"status\": \"Building clean code...\"", "}"]'></div>
-        </div>
-      </div>
-    </div>
-  </section>
+          
+          <h1 style="font-size: clamp(2.5rem, 6.2vw, 5.2rem); font-family: var(--font-display); font-weight: 500; line-height: 1.05; margin: 0 0 1.5rem; color: var(--text); letter-spacing: -0.01em;">
+            <span style="color: var(--powder);">i build </span>backends<br>
+            that don<span style="color: var(--jinx);">'</span>t <span style="position: relative; display: inline-block; color: var(--teal);">flinch<span style="position: absolute; -right: 1.25rem; -top: -0.5rem; right: -1.25rem; top: -0.5rem; color: var(--jinx); font-size: 1.15rem; line-height: 1;" class="animate-drift">✦</span></span><span style="color: var(--jinx);">.</span>
+          </h1>
 
-  <!-- Divider Orange -->
-  <div class="neon-divider neon-divider--orange reveal"></div>
-
-  <!-- Projects Section -->
-  <section id="projects" class="reveal">
-    <div class="cli-section-header">
-      <span class="cli-prompt">~$</span>
-      <span class="cli-command">ls projects/ --sort=order</span>
-      <a href="{{ '/projects/' | relative_url }}" class="cli-view-all">See all projects &rarr;</a>
-    </div>
-    <div class="project-grid">
-      {%- assign projects = site.projects | sort: "order" | limit: 3 -%}
-      {%- for project in projects -%}
-        {% include project-card.html project=project index=forloop.index %}
-      {%- endfor -%}
-    </div>
-  </section>
-
-  <!-- Divider Teal -->
-  <div class="neon-divider neon-divider--teal reveal"></div>
-
-  <!-- Mock Terminal Section (Interactive About) -->
-  <section class="reveal">
-    <div class="cli-section-header">
-      <span class="cli-prompt">~$</span>
-      <span class="cli-command">cat about_me.sh</span>
-    </div>
-    
-    <div class="terminal-mock-container">
-      <!-- Left Column (Terminal Controls / Commands list) -->
-      <div class="terminal-window" data-terminal-pane="commands">
-        <div class="terminal-bar">
-          <div class="window-dots">
-            <div class="window-dot window-dot--red"></div>
-            <div class="window-dot window-dot--yellow"></div>
-            <div class="window-dot window-dot--green"></div>
-          </div>
-          <div class="terminal-title">prathameshrp@devlog:~</div>
-        </div>
-        <div class="terminal-body" style="padding: 1rem 1.25rem;">
-          <div class="terminal-cmd-list">
-            <div class="terminal-cmd-item is-active" data-terminal-cmd="about">
-              <span class="terminal-cmd-prompt">~$</span>
-              <span class="terminal-cmd-text">cat about.md</span>
-              <span class="terminal-cmd-desc">who am I?</span>
+          <!-- Diff Rotator Widget -->
+          <div class="hero__diff" id="heroDiff" aria-live="polite" style="margin-top: 1.5rem; margin-bottom: 2rem; font-family: var(--font-mono); font-size: clamp(0.85rem, 1.8vw, 1rem); line-height: 1.6; border-left: 2px solid var(--border); padding-left: 0.9rem; user-select: none;">
+            <div class="hero__diff-line hero__diff-line--remove" style="display: flex; align-items: baseline; gap: 0.5rem; padding: 0.15rem 0.5rem; border-radius: 3px; color: #f87171; background: rgba(248, 113, 113, 0.06);">
+              <span style="font-weight: 700; width: 0.8em; flex-shrink: 0; color: #f87171;">-</span>
+              <span id="heroDiffOld" style="font-family: var(--font-mono);">writing spaghetti</span>
             </div>
-            <div class="terminal-cmd-item" data-terminal-cmd="neofetch">
-              <span class="terminal-cmd-prompt">~$</span>
-              <span class="terminal-cmd-text">neofetch</span>
-              <span class="terminal-cmd-desc">system info</span>
-            </div>
-            <div class="terminal-cmd-item" data-terminal-cmd="whoami">
-              <span class="terminal-cmd-prompt">~$</span>
-              <span class="terminal-cmd-text">whoami</span>
-              <span class="terminal-cmd-desc">current user</span>
+            <div class="hero__diff-line hero__diff-line--add" style="display: flex; align-items: baseline; gap: 0.5rem; padding: 0.15rem 0.5rem; border-radius: 3px; color: #4ade80; background: rgba(74, 222, 128, 0.06); margin-top: 0.25rem;">
+              <span style="font-weight: 700; width: 0.8em; flex-shrink: 0; color: #4ade80;">+</span>
+              <span id="heroDiffNew" style="font-family: var(--font-mono);">shipping clean systems</span>
             </div>
           </div>
-        </div>
-      </div>
 
-      <!-- Right Column (Terminal Viewer Screen) -->
-      <div class="terminal-window" data-terminal-pane="viewer" style="--terminal-height: 480px; display: flex; flex-direction: column;">
-        <div class="terminal-bar">
-          <div class="window-dots">
-            <div class="window-dot window-dot--red"></div>
-            <div class="window-dot window-dot--yellow"></div>
-            <div class="window-dot window-dot--green"></div>
+          <p style="font-size: clamp(0.92rem, 1.8vw, 1.02rem); color: var(--text-soft); line-height: 1.7; max-width: 38rem; margin: 1.5rem 0 2.5rem;">
+            Prathamesh Patil &mdash; Software Engineer &amp; Computer Engineering student at VIIT Pune. I build high-volume SaaS integrations, automate developer tooling, and research hybrid route-optimization systems.
+          </p>
+          
+          <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+            <a href="#work" class="chip" style="font-size: 14px; padding: 10px 20px; text-transform: lowercase; color: var(--foreground); border-color: var(--border); background: var(--jinx); display: inline-flex; align-items: center; gap: 0.5rem; border-radius: 3px; font-weight: 500;">
+              view projects {% include icon.html name="arrow-up-right" %}
+            </a>
+            <a href="/blog/" class="chip" style="font-size: 14px; padding: 10px 20px; text-transform: lowercase; color: var(--text-soft); border-color: var(--border); display: inline-flex; align-items: center; gap: 0.5rem; border-radius: 3px; font-weight: 500;">
+              read the blog {% include icon.html name="book-open" %}
+            </a>
+            <a href="https://notes.0xprathamesh.is-a.dev" target="_blank" rel="noopener" class="chip" style="font-size: 14px; padding: 10px 20px; text-transform: lowercase; color: var(--text-soft); border-color: var(--border); display: inline-flex; align-items: center; gap: 0.5rem; border-radius: 3px; font-weight: 500;">
+              explore notes {% include icon.html name="external-link" %}
+            </a>
           </div>
-          <div class="terminal-title" id="terminal-viewer-title">cat about.md</div>
         </div>
         
-        <div class="terminal-body" id="terminal-viewer-body" style="flex-grow: 1;">
-          <!-- Default Panel (About.md) -->
-          <div class="terminal-panel" id="panel-about">
-            {%- assign about_page = site.html_pages | where: "url", "/about/" | first -%}
-            {%- if about_page -%}
-              <div class="prose" style="font-size: 0.94rem; line-height: 1.6; font-family: var(--font-sans); color: var(--text-soft);">
-                {{ about_page.content | markdownify }}
+        <!-- Right Column: Neofetch Card -->
+        <div class="hero-col-right md-col-span-4 md-col-mt-0">
+          <div style="position: relative; max-width: 360px; margin: 0 auto;">
+            <!-- Depth plates -->
+            <div style="position: absolute; inset: 0; transform: translate(8px, 8px); border: 1px solid color-mix(in oklab, var(--jinx) 50%, transparent); pointer-events: none; z-index: 0;"></div>
+            <div style="position: absolute; inset: 0; transform: translate(4px, 4px); border: 1px solid color-mix(in oklab, var(--teal) 40%, transparent); pointer-events: none; z-index: 0;"></div>
+            
+            <div style="position: relative; border: 1px solid var(--border); background: var(--card); z-index: 1;">
+              <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); padding: 0.6rem 0.9rem; background: rgba(255, 255, 255, 0.02);">
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span style="display: inline-block; width: 10px; height: 10px; background: var(--jinx);"></span>
+                  <span style="display: inline-block; width: 10px; height: 10px; background: var(--powder);"></span>
+                  <span style="display: inline-block; width: 10px; height: 10px; background: var(--teal);"></span>
+                </div>
+                <span style="font-family: var(--font-mono); font-size: 10px; color: var(--text-soft);">guest@prathamesh.dev</span>
               </div>
-            {%- endif -%}
+              <div style="padding: 1.25rem; font-family: var(--font-mono); font-size: 12px; line-height: 1.7; color: var(--text);">
+                <p style="color: var(--text-soft); margin: 0 0 0.5rem;">$ neofetch</p>
+                <pre style="margin: 0; white-space: pre-wrap; font-family: var(--font-mono); color: var(--text);">os        Pop!_OS 22.04
+role      Software Engineer
+edu       B.Tech CSE @ VIIT Pune
+gpa       8.88 / 10.0
+research  Medical OCR & Routing Patents
+stack     Java &middot; TS &middot; Python &middot; SQL
+project   Mock Server CLI Tool</pre>
+                <p style="color: var(--text-soft); margin: 1rem 0 0.25rem;">$ cat status</p>
+                <p style="margin: 0; display: flex; align-items: center; gap: 0.5rem; color: var(--text); font-size: 11.5px;">
+                  <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background-color: var(--teal); box-shadow: 0 0 6px var(--teal);"></span>
+                  shipping connectors. writing specs.
+                </p>
+              </div>
+            </div>
           </div>
 
-          <!-- System info panel -->
-          <div class="terminal-panel" id="panel-neofetch" style="display: none;">
-            <pre style="margin: 0; font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.5; color: var(--text-soft); background: transparent; border: 0; padding: 0;">
-<span class="t-orange">prathamesh@pop-os</span>
----------------------
-<span class="t-prompt">OS</span>: Pop!_OS 22.04 LTS x86_64
-<span class="t-prompt">Host</span>: ASUS VivoBook 15
-<span class="t-prompt">Kernel</span>: 6.8.0-76060800-generic
-<span class="t-prompt">Shell</span>: bash 5.2.21
-<span class="t-prompt">Terminal</span>: kitty
-<span class="t-prompt">Editor</span>: VS Code + Neovim
-<span class="t-prompt">Languages</span>: Python, JavaScript, C, Java
-<span class="t-prompt">Currently</span>: B.Tech CSE, 2nd Year
-<span class="t-prompt">Into</span>: AI/ML, Systems, Backend
-<span class="t-prompt">Building</span>: things that make devs&#39; lives easier
-            </pre>
+          <!-- Current Focus Card (learning TLA+) -->
+          <div style="position: relative; max-width: 360px; margin: 2rem auto 0; padding: 1.25rem; border: 1px solid var(--border); background: var(--card); border-radius: 2px;" class="reveal">
+            <div style="display: flex; align-items: center; gap: 0.55rem; font-family: var(--font-mono); font-size: 11px; color: var(--text-soft); margin-bottom: 0.75rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">
+              <span style="color: var(--jinx);">~$</span>
+              <span>cat currently.md</span>
+            </div>
+            <h3 style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 500; color: var(--text); margin: 0 0 0.5rem;">current focus</h3>
+            <p style="font-size: 0.85rem; color: var(--text-soft); line-height: 1.6; margin: 0 0 0.75rem;">
+              Currently learning <strong><a href="https://lamport.azurewebsites.net/tla/tla.html" target="_blank" rel="noopener" style="color: var(--teal); text-decoration: none; border-bottom: 1px dotted var(--teal);" onmouseover="this.style.color='var(--jinx)'; this.style.borderBottomColor='var(--jinx)'" onmouseout="this.style.color='var(--teal)'; this.style.borderBottomColor='var(--teal)'">TLA+</a></strong> to design and formally verify complex concurrent &amp; distributed backend systems.
+            </p>
+            <span style="font-family: var(--font-mono); font-size: 10px; color: var(--text-mute);">status: exploring safety &amp; liveness invariants</span>
           </div>
-
-          <!-- Whoami panel -->
-          <div class="terminal-panel" id="panel-whoami" style="display: none;">
-            <p class="t-white"><strong>guest@prathameshrp.is-a.dev</strong></p>
-            <p>Authorized access level: Guest Reader.</p>
-            <p>Current role: Pair Programming Partner.</p>
-            <p>Welcome! Feel free to explore my blog and projects below.</p>
-          </div>
-        </div>
-
-        <!-- Mobile buttons inside terminal viewer -->
-        <div class="terminal-mobile-tabs">
-          <button class="terminal-mobile-btn is-active" data-mobile-cmd="about">about.md</button>
-          <button class="terminal-mobile-btn" data-mobile-cmd="neofetch">neofetch</button>
-          <button class="terminal-mobile-btn" data-mobile-cmd="whoami">whoami</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Divider Purple -->
-  <div class="neon-divider neon-divider--purple reveal"></div>
-
-  <!-- Featured Posts Section -->
-  <section class="reveal">
-    <div class="cli-section-header">
-      <span class="cli-prompt">~$</span>
-      <span class="cli-command">ls posts/ --featured</span>
-      <a href="{{ '/blog/' | relative_url }}" class="cli-view-all">View all &rarr;</a>
-    </div>
-    <div class="card-grid">
-      {%- for post in site.posts limit: 3 -%}
-        {% include post-card.html post=post %}
-      {%- endfor -%}
-    </div>
-  </section>
-</div>
-
-<!-- ───────────── Grimoire Section ───────────── -->
-<div class="grimoire-section reveal">
-  <div class="grimoire-inner">
-
-    <!-- Left: Animated Techno-Magical Grimoire Book Visual -->
-    <div class="grimoire-art" aria-hidden="true">
-      <div class="grimoire-visual-container">
-        <!-- Concentric Rotating Sigil Ring -->
-        <div class="sigil-ring-container">
-          <svg class="sigil-ring-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="100" cy="100" r="95" stroke="rgba(167, 139, 250, 0.2)" stroke-width="1.2" fill="none" />
-            <circle cx="100" cy="100" r="82" stroke="rgba(34, 211, 238, 0.15)" stroke-width="0.8" stroke-dasharray="4 6" fill="none" />
-            <circle cx="100" cy="100" r="65" stroke="rgba(167, 139, 250, 0.1)" stroke-width="1" stroke-dasharray="15 5" fill="none" />
-            <!-- Runic or code letters around the perimeter -->
-            <path id="textPath-grimoire" d="M 100, 18 A 82,82 0 1,1 99.9,18" fill="none" />
-            <text font-family="monospace" font-size="7" fill="rgba(167, 139, 250, 0.45)" letter-spacing="3.5">
-              <textPath href="#textPath-grimoire">
-                &lt;/&gt; CODE &bull; SPELLS &bull; NOTES &bull; SYSTEMS &bull; FUNCTIONS &bull;
-              </textPath>
-            </text>
-          </svg>
         </div>
         
-        <!-- Floating Open Book/Grimoire -->
-        <svg class="grimoire-book-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="book-cover" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#4c1d95" />
-              <stop offset="100%" stop-color="#1e1b4b" />
-            </linearGradient>
-            <linearGradient id="book-pages" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#2e1065" />
-              <stop offset="45%" stop-color="#0f172a" />
-              <stop offset="55%" stop-color="#0f172a" />
-              <stop offset="100%" stop-color="#1e1b4b" />
-            </linearGradient>
-            <radialGradient id="page-glow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="rgba(34, 211, 238, 0.25)" />
-              <stop offset="100%" stop-color="rgba(34, 211, 238, 0)" />
-            </radialGradient>
-          </defs>
-          <!-- Soft glow behind the book -->
-          <circle cx="60" cy="60" r="45" fill="url(#page-glow)" />
-          
-          <!-- Open Book Shape -->
-          <!-- Book Shadow -->
-          <path d="M 20,80 Q 60,88 100,80 Q 60,72 20,80" fill="rgba(0,0,0,0.5)" />
-          
-          <!-- Cover backing -->
-          <path d="M 15,73 Q 60,84 105,73 L 105,33 Q 60,44 15,33 Z" fill="url(#book-cover)" stroke="#6d28d9" stroke-width="1.5" />
-          
-          <!-- Pages block -->
-          <path d="M 19,69 Q 60,80 101,69 L 101,29 Q 60,40 19,29 Z" fill="url(#book-pages)" stroke="rgba(167, 139, 250, 0.3)" stroke-width="1" />
-          
-          <!-- Left page background glow -->
-          <path d="M 19,29 Q 60,40 60,38 L 60,78 Q 60,80 19,69 Z" fill="rgba(167, 139, 250, 0.05)" />
-          
-          <!-- Center Spine Shadow/Line -->
-          <line x1="60" y1="38" x2="60" y2="78" stroke="#4f46e5" stroke-width="1.5" opacity="0.6" />
-          
-          <!-- Code lines on Left Page -->
-          <path d="M 27,37 H 53 M 27,43 H 47 M 27,49 H 57 M 27,55 H 43 M 27,61 H 50" stroke="#a78bfa" stroke-width="1.8" stroke-linecap="round" opacity="0.65" />
-          <!-- Glowing prompt symbols on Left Page -->
-          <path d="M 27,37 H 30" stroke="#22d3ee" stroke-width="1.8" stroke-linecap="round" />
-          <path d="M 27,49 H 31" stroke="#fb923c" stroke-width="1.8" stroke-linecap="round" />
-          
-          <!-- Code lines on Right Page -->
-          <path d="M 67,37 H 93 M 67,43 H 83 M 67,49 H 89 M 67,55 H 77 M 67,61 H 91" stroke="#a78bfa" stroke-width="1.8" stroke-linecap="round" opacity="0.65" />
-          <path d="M 67,43 H 70" stroke="#22d3ee" stroke-width="1.8" stroke-linecap="round" />
-          <path d="M 67,55 H 71" stroke="#34d399" stroke-width="1.8" stroke-linecap="round" />
-
-          <!-- Floating magical particles -->
-          <g class="grimoire-particles">
-            <circle class="part-1" cx="30" cy="40" r="1.5" fill="#22d3ee" />
-            <circle class="part-2" cx="50" cy="50" r="1" fill="#a78bfa" />
-            <circle class="part-3" cx="70" cy="45" r="1.2" fill="#fb923c" />
-            <circle class="part-4" cx="90" cy="35" r="1.5" fill="#34d399" />
-            <circle class="part-5" cx="60" cy="30" r="1" fill="#22d3ee" />
-          </g>
-        </svg>
       </div>
     </div>
+  </section>
 
-    <!-- Right: Animated quote + notes CTA -->
-    <div class="grimoire-content">
-      <p class="grimoire-label">~$ cat notes_link.txt</p>
-      <blockquote class="grimoire-quote" id="grimoireQuote">
-        <span class="typewriter" data-text="&quot;A computational process is indeed much like a wizard's apprentice. It is initiated by a spell, it operates by manipulating symbols, and it performs a task. A programmer is a conjurer who spells out the details of these processes.&quot;"></span>
-        <cite>— Harold Abelson &amp; Gerald Jay Sussman, SICP</cite>
-      </blockquote>
+  <!-- LOGO TICKER STRIP -->
+  {% include landing-logos.html %}
 
-      <p class="grimoire-body">
-        I document my technical findings, system architectures, and daily programming learnings on my personal notes site. It serves as a searchable knowledge base of things I've built, learned, and refined.
-      </p>
+  <!-- CAPABILITIES / FEATURES -->
+  {% include landing-features.html %}
 
-      <a href="https://notes.0xprathamesh.is-a.dev" target="_blank" rel="noopener" class="grimoire-btn">
-        <span class="grimoire-btn__icon">📖</span>
-        <span>Open Notes</span>
-        <span class="grimoire-btn__arrow">→</span>
-      </a>
+  <!-- PROJECTS SECTION -->
+  <section id="work" style="position: relative; padding: 5rem 0 3rem;">
+    <div class="container">
+      <div class="mb-12 flex items-end justify-between gap-6" style="margin-bottom: 3rem; display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem;">
+        <div>
+          <div class="mb-3 flex items-center gap-2 text-xs text-muted-foreground font-mono" style="margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-soft);">
+            <span style="color: var(--jinx);">~$</span>
+            <span>ls projects/ --sort=order</span>
+          </div>
+          <h2 style="font-size: clamp(1.8rem, 4vw, 2.8rem); font-family: var(--font-display); font-weight: 500; color: var(--text); margin: 0;">selected work.</h2>
+        </div>
+        <a href="{{ '/projects/' | relative_url }}" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-soft); border-bottom: 1px solid transparent; transition: border-color 0.2s, color 0.2s;" onmouseover="this.style.color='var(--jinx)'; this.style.borderColor='var(--jinx)'" onmouseout="this.style.color='var(--text-soft)'; this.style.borderColor='transparent'">see all projects &rarr;</a>
+      </div>
+
+      <div style="display: flex; flex-direction: column; border-top: 1px solid var(--border);" class="project-grid">
+        {%- assign projects = site.projects | sort: "order" | limit: 3 -%}
+        {%- for project in projects -%}
+          {% include project-card.html project=project index=forloop.index %}
+        {%- endfor -%}
+      </div>
     </div>
+  </section>
 
-  </div>
+  <!-- QUOTE SECTION -->
+  {% include landing-quote.html %}
+
+  <!-- NOTES / WRITING SECTION -->
+  <section id="writing" style="position: relative; padding: 5rem 0 3rem;">
+    <div class="container">
+      <div class="mb-12 flex items-end justify-between gap-6" style="margin-bottom: 3rem; display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem;">
+        <div>
+          <div class="mb-3 flex items-center gap-2 text-xs text-muted-foreground font-mono" style="margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-soft);">
+            <span style="color: var(--jinx);">~$</span>
+            <span>ls posts/ --recent</span>
+          </div>
+          <h2 style="font-size: clamp(1.8rem, 4vw, 2.8rem); font-family: var(--font-display); font-weight: 500; color: var(--text); margin: 0;">from the blog.</h2>
+        </div>
+        <a href="{{ '/blog/' | relative_url }}" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-soft); border-bottom: 1px solid transparent; transition: border-color 0.2s, color 0.2s;" onmouseover="this.style.color='var(--jinx)'; this.style.borderColor='var(--jinx)'" onmouseout="this.style.color='var(--text-soft)'; this.style.borderColor='transparent'">view all posts &rarr;</a>
+      </div>
+
+      <div class="homepage-blog-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+        {%- for post in site.posts limit: 3 -%}
+          {% include post-card.html post=post index=forloop.index0 %}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  <!-- Spacer for bottom fixed marquee strip -->
+  <div style="height: 3.5rem;"></div>
+
+  <!-- FOOTER -->
+  {% include footer.html %}
+
+</div>
 </div>

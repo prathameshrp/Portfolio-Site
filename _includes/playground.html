@@ -14,6 +14,9 @@
       {% include icon.html name="play" %} Run
     </button>
   </div>
-  <textarea class="playground__editor" spellcheck="false" data-editor>{{ include.code }}</textarea>
+  <div class="playground__editor-container" style="display: grid; position: relative; width: 100%;">
+    <textarea class="playground__editor" spellcheck="false" data-editor style="grid-area: 1/1; margin: 0; padding: 1.25rem 1.5rem; background: transparent; color: transparent; caret-color: var(--text); border: 0; resize: vertical; min-height: 140px; font-family: var(--font-mono); font-size: 0.86rem; line-height: 1.7; tab-size: 2; z-index: 2; width: 100%;" onfocus="this.style.outline='none'">{{ include.code }}</textarea>
+    <pre class="playground__highlight" data-highlight style="grid-area: 1/1; margin: 0; padding: 1.25rem 1.5rem; pointer-events: none; z-index: 1; background: transparent; font-family: var(--font-mono); font-size: 0.86rem; line-height: 1.7; tab-size: 2; white-space: pre-wrap; word-wrap: break-word; color: var(--text-soft); overflow: hidden; width: 100%;"><code style="font-family: inherit; font-size: inherit; line-height: inherit; color: inherit;"></code></pre>
+  </div>
   <div class="playground__console" data-console></div>
 </div>

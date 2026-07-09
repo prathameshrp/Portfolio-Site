@@ -49,13 +49,13 @@
   gap: 6px;
 }
 .window-dot {
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 0; // Jinx flat square style
   
-  &--red { background: #ff5f56; }
-  &--yellow { background: #ffbd2e; }
-  &--green { background: #27c93f; }
+  &--red { background: var(--jinx); }
+  &--yellow { background: var(--powder); }
+  &--green { background: var(--teal); }
 }
 
 // Title Label
@@ -66,6 +66,9 @@
   flex-grow: 1;
   text-align: center;
   margin-right: 36px; // compensates for dots width
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 // Terminal Body

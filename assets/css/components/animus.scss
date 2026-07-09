@@ -83,19 +83,7 @@
   letter-spacing: 0.06em;
 }
 
-// ── Terminal Telemetry Bar ────────────────────────────────────
-// Adds a subtle monospace system status line before sections
-.section-head::before {
-  content: "// DATABASE QUERY ACTIVE //";
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  color: var(--text-mute);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-bottom: 0.5rem;
-  opacity: 0.6;
-}
+// Removed database query active prompt
 
 // ── Navbar Terminal Treatment ────────────────────────────────
 .navbar {
@@ -153,19 +141,7 @@
 .post-card__body {
   position: relative;
 
-  // Corner data coordinates
-  &::after {
-    content: "◇ MEMORY SHARD";
-    position: absolute;
-    bottom: 8px;
-    right: 12px;
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    color: var(--text-mute);
-    opacity: 0.4;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
+  // Removed memory shard prompt
 }
 
 // ── Project Cards: Terminal Treatment ─────────────────────────
@@ -199,17 +175,7 @@
 .post__hero {
   position: relative;
   
-  &::before {
-    content: "// FILE ACCESSED // MEMORY SEQUENCE LOADED //";
-    display: block;
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: var(--accent);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 0.8rem;
-    opacity: 0.65;
-  }
+  // Removed file accessed prompt
 }
 
 .post__back {
@@ -270,17 +236,7 @@
   position: relative;
   
   .page-head {
-    &::before {
-      content: "// SYSTEM MODULE // DATABASE ACTIVE //";
-      display: block;
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      color: var(--accent);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 0.6rem;
-      opacity: 0.6;
-    }
+    // Removed system module database active prompt
   }
 }
 
@@ -290,19 +246,7 @@
   border-left: 3px solid var(--accent) !important;
   position: relative;
   
-  &::before {
-    content: "◇ INTERCEPTED";
-    position: absolute;
-    top: -0.6em;
-    left: 1rem;
-    font-family: var(--font-mono);
-    font-size: 0.58rem;
-    color: var(--accent);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    background: var(--bg);
-    padding: 0 0.4rem;
-  }
+  // Removed intercepted transmission prompt
 }
 
 // ── Tables: Database Output ──────────────────────────────────
@@ -372,7 +316,7 @@
   border: none !important;
   height: auto !important;
   text-align: center;
-  margin-block: 3rem !important;
+  margin-block: 1.5rem !important;
   
   &::after {
     content: "◇ ◇ ◇";

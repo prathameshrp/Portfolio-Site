@@ -1,0 +1,18 @@
+{%- assign stack = "Java,Spring,Spring Boot,SaaS integrations,Cloudbees,Postman,Jekyll,REST APIs,OAuth2.0,Jenkins,Git,Linux,Gradle,OpenAPI" | split: "," -%}
+<div class="relative border-y border-border py-4 overflow-hidden skills-ticker-strip" style="position: fixed; bottom: 0; left: 0; width: 100%; z-index: 100; border-top: 1px solid var(--jinx); border-bottom: 0; background: #07070c; padding-top: 0.75rem; padding-bottom: 0.75rem; overflow: hidden; box-shadow: 0 -4px 20px rgba(0,0,0,0.6); margin: 0; transition: transform 0.45s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s ease; transform: translateY(0); opacity: 1;">
+  <div class="animate-marquee" style="display: inline-flex; white-space: nowrap; gap: 3rem; animation: marquee 30s linear infinite; width: max-content; will-change: transform;">
+    {%- for s in stack -%}
+      <span style="display: inline-flex; align-items: center; gap: 0.75rem; font-family: var(--font-mono); font-size: 0.82rem; color: var(--text-soft);">
+        <span style="color: var(--jinx);">/</span>
+        {{ s }}
+      </span>
+    {%- endfor -%}
+    <!-- Duplicate list to allow seamless loop -->
+    {%- for s in stack -%}
+      <span style="display: inline-flex; align-items: center; gap: 0.75rem; font-family: var(--font-mono); font-size: 0.82rem; color: var(--text-soft);">
+        <span style="color: var(--jinx);">/</span>
+        {{ s }}
+      </span>
+    {%- endfor -%}
+  </div>
+</div>
