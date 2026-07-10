@@ -313,11 +313,20 @@
 .footer__inner {
   max-width: var(--container);
   margin-inline: auto;
-  padding: 3rem clamp(1.1rem, 4vw, 2rem) 1.5rem;
+  padding: 5rem clamp(1.1rem, 4vw, 2rem) 5rem;
   display: grid;
-  grid-template-columns: 1.4fr 1fr auto;
-  gap: 2rem;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 3rem;
   align-items: start;
+}
+
+.footer__nav-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  width: 100%;
 }
 
 .footer__brand-top {
@@ -397,5 +406,14 @@
 @media (max-width: 680px) {
   .footer__inner {
     grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding: 3.5rem clamp(1.1rem, 4vw, 2rem) 3.5rem;
+  }
+}
+
+@media (max-width: 440px) {
+  .footer__nav-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 }
