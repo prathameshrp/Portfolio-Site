@@ -108,6 +108,25 @@ layout: default
       <div class="rj-projects">
         <div class="rj-project rj-animate rj-animate--slide-up" style="--rj-delay:0s">
           <div class="rj-project__header">
+            <h2 class="rj-project__title">Project RAPHAEL (Real-time Agentic Desktop Agent)</h2>
+            <span class="rj-project__date">Jul 2026</span>
+          </div>
+          <div class="rj-project__stack">
+            <span class="rj-chip rj-chip--accent">Python</span>
+            <span class="rj-chip">Groq SDK (Llama 3.1)</span>
+            <span class="rj-chip">Flask</span>
+            <span class="rj-chip">SQLite</span>
+            <span class="rj-chip">Linux DBus</span>
+          </div>
+          <ul class="rj-bullets">
+            <li>Built a background Linux desktop agent that monitors active window titles in real time, classifies focus context via an LLM pipeline, and logs productivity metrics.</li>
+            <li>Engineered a multi-provider round-robin <strong>LLM Load Balancer</strong> across Groq, Gemini, DeepSeek, and OpenAI with automatic <strong>HTTP 429 rate limit failover</strong>.</li>
+            <li>Offloaded LLM classification to async <code>threading.Thread</code> pools with <code>window_cache</code> deduplication, cutting window classification latency to <strong>0ms for 90%+ events</strong> via regex pre-filtering.</li>
+            <li>Integrated local Flask telemetry server serving real-time session stats and dynamic AI coaching insights at <code>localhost:5757/dashboard</code>.</li>
+          </ul>
+        </div>
+        <div class="rj-project rj-animate rj-animate--slide-up" style="--rj-delay:0.1s">
+          <div class="rj-project__header">
             <h2 class="rj-project__title">Mock Server CLI Tool</h2>
             <span class="rj-project__date">Jun 2026</span>
           </div>
@@ -123,7 +142,7 @@ layout: default
             <li>Applied at SailPoint: engineers use <code>/mock/&lt;system&gt;</code> instead of vendor sandboxes, eliminating credential &amp; network blockers.</li>
           </ul>
         </div>
-        <div class="rj-project rj-animate rj-animate--slide-up" style="--rj-delay:0.1s">
+        <div class="rj-project rj-animate rj-animate--slide-up" style="--rj-delay:0.2s">
           <div class="rj-project__header">
             <h2 class="rj-project__title">Module Dependency Graph Generator</h2>
             <span class="rj-project__date">Nov 2024</span>
@@ -150,34 +169,41 @@ layout: default
       <div class="rj-chapter__label">04 &mdash; Skills</div>
       <div class="rj-skills rj-animate rj-animate--slide-up">
         <div class="rj-skills__group">
-          <h3 class="rj-skills__heading">Languages</h3>
+          <h3 class="rj-skills__heading">GenAI &amp; AI Engineering</h3>
           <div class="rj-skills__chips">
-            <span class="rj-chip rj-chip--lang" style="--i:0">Java</span>
-            <span class="rj-chip rj-chip--lang" style="--i:1">JavaScript</span>
-            <span class="rj-chip rj-chip--lang" style="--i:2">TypeScript</span>
-            <span class="rj-chip rj-chip--lang" style="--i:3">Node.js</span>
-            <span class="rj-chip rj-chip--lang" style="--i:4">SQL</span>
-            <span class="rj-chip rj-chip--lang" style="--i:5">Python</span>
+            <span class="rj-chip rj-chip--cert" style="--i:0">GenAI / Agentic AI</span>
+            <span class="rj-chip rj-chip--cert" style="--i:1">LLMs &amp; Prompt Engineering</span>
+            <span class="rj-chip rj-chip--cert" style="--i:2">Multi-LLM Load Balancing</span>
+            <span class="rj-chip" style="--i:3">Groq SDK (Llama 3.1)</span>
+            <span class="rj-chip" style="--i:4">AWS Bedrock / LangGraph</span>
+            <span class="rj-chip" style="--i:5">RAG &amp; Structured JSON Outputs</span>
+          </div>
+        </div>
+        <div class="rj-skills__group">
+          <h3 class="rj-skills__heading">Languages &amp; Core Tech</h3>
+          <div class="rj-skills__chips">
+            <span class="rj-chip rj-chip--lang" style="--i:6">Python</span>
+            <span class="rj-chip rj-chip--lang" style="--i:7">Java</span>
+            <span class="rj-chip rj-chip--lang" style="--i:8">JavaScript / TypeScript</span>
+            <span class="rj-chip rj-chip--lang" style="--i:9">Node.js</span>
+            <span class="rj-chip rj-chip--lang" style="--i:10">SQL / SQLite</span>
           </div>
         </div>
         <div class="rj-skills__group">
           <h3 class="rj-skills__heading">Technologies &amp; Tools</h3>
           <div class="rj-skills__chips">
-            <span class="rj-chip" style="--i:6">Git</span>
-            <span class="rj-chip" style="--i:7">Linux</span>
-            <span class="rj-chip" style="--i:8">Jenkins</span>
-            <span class="rj-chip" style="--i:9">Gradle</span>
-            <span class="rj-chip" style="--i:10">REST APIs</span>
-            <span class="rj-chip" style="--i:11">OAuth2.0</span>
-            <span class="rj-chip" style="--i:12">OpenAPI</span>
-            <span class="rj-chip" style="--i:13">Postman</span>
+            <span class="rj-chip" style="--i:11">Linux Subprocesses &amp; DBus</span>
+            <span class="rj-chip" style="--i:12">Flask / REST APIs</span>
+            <span class="rj-chip" style="--i:13">Git / GitHub</span>
+            <span class="rj-chip" style="--i:14">OAuth2.0 / OpenAPI</span>
+            <span class="rj-chip" style="--i:15">Gradle / Jenkins</span>
           </div>
         </div>
         <div class="rj-skills__group">
           <h3 class="rj-skills__heading">Certifications</h3>
           <div class="rj-skills__chips">
-            <span class="rj-chip rj-chip--cert" style="--i:14">IBM Full Stack Developer Professional</span>
-            <span class="rj-chip rj-chip--cert" style="--i:15">Machine Learning &mdash; Basics to Advanced</span>
+            <span class="rj-chip rj-chip--cert" style="--i:16">IBM Full Stack Developer Professional</span>
+            <span class="rj-chip rj-chip--cert" style="--i:17">Machine Learning &mdash; Basics to Advanced</span>
           </div>
         </div>
       </div>
