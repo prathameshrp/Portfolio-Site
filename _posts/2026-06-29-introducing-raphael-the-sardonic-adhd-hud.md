@@ -16,6 +16,36 @@ Raphael is a sardonically supportive **ADHD cognitive advisor** that integrates 
 
 ---
 
+## Live Video Demonstrations
+
+### 1. Cockpit HUD & Distraction Challenge Interruption
+
+<div style="margin: 1.5rem 0; border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 12px; overflow: hidden; background: #090d16;">
+  <video autoplay loop muted playsinline style="width: 100%; display: block;">
+    <source src="/assets/img/raphael_hud_demo.mp4" type="video/mp4">
+    <source src="/assets/img/raphael_hud_demo.webp" type="image/webp">
+    <img src="/assets/img/raphael_hud_demo.webp" alt="RAPHAEL HUD Cognitive Overlay Video Demo" style="width: 100%;">
+  </video>
+  <div style="padding: 10px 16px; background: rgba(15, 23, 42, 0.9); font-size: 0.85rem; color: #94a3b8; font-family: monospace;">
+    🎥 <strong>Video Demo 1:</strong> RAPHAEL Desktop HUD Cognitive Overlay, Active Telemetry Sensors & Typed Distraction Challenge Justification
+  </div>
+</div>
+
+### 2. Live Telemetry Dashboard & AI Focus Insights
+
+<div style="margin: 1.5rem 0; border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 12px; overflow: hidden; background: #090d16;">
+  <video autoplay loop muted playsinline style="width: 100%; display: block;">
+    <source src="/assets/img/raphael_dashboard_demo.mp4" type="video/mp4">
+    <source src="/assets/img/raphael_dashboard_demo.webp" type="image/webp">
+    <img src="/assets/img/raphael_dashboard_demo.webp" alt="RAPHAEL Telemetry Dashboard Video Demo" style="width: 100%;">
+  </video>
+  <div style="padding: 10px 16px; background: rgba(15, 23, 42, 0.9); font-size: 0.85rem; color: #94a3b8; font-family: monospace;">
+    🎥 <strong>Video Demo 2:</strong> RAPHAEL Real-Time Telemetry Dashboard, Chart.js Timeline Graphs, Application Breakdown & Multi-LLM Load Balancer Statuses
+  </div>
+</div>
+
+---
+
 ## Core Architecture
 
 Raphael splits its footprint between a lightweight desktop layer and a background analytics daemon.
@@ -58,11 +88,11 @@ raphael/
 ├── daemon.log              # Main background log output
 └── contents/
     ├── ui/
-    │   ├── main.qml        # Core Plasma widget and control surface
-    │   ├── ChatPanel.qml   # Chat shell for mid-session rule overrides
-    │   └── daemon/
-    │       ├── raphael_core_daemon.py   # Parser, Flask app, Groq wrapper
-    │       └── dashboard.html           # Local analytics telemetry UI
+        ├── main.qml        # Core Plasma widget and control surface
+        ├── ChatPanel.qml   # Chat shell for mid-session rule overrides
+        └── daemon/
+            ├── raphael_core_daemon.py   # Parser, Flask app, Groq wrapper
+            └── dashboard.html           # Local analytics telemetry UI
     └── config/
         └── main.xml        # Preserved state schemas for the desktop layer
 ```
@@ -118,25 +148,6 @@ cd Raphael
 # Set your API key
 export GROQ_API_KEY="your_api_key_here"
 
-# Launch the daemon
-chmod +x run.sh
+# Launch daemon
 ./run.sh
 ```
-
-After the daemon starts, add the **Raphael Widget** from your desktop panel's widget picker.
-
-To reload the Plasma shell after editing QML files (without interrupting the backend):
-
-```bash
-killall plasmashell && kstart plasmashell
-```
-
----
-
-## Open Source
-
-Raphael was built for those of us who need more than a stopwatch to stay on track. If you want to configure custom modules, tweak the AI persona rules, or extend the Wayland window reader — the repo is open.
-
-👉 **[github.com/prathameshrp/Raphael](https://github.com/prathameshrp/Raphael)**
-
-If Raphael has successfully guilted you back into finishing your codebase today, consider dropping a ⭐️.

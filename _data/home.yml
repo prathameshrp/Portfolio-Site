@@ -1,18 +1,18 @@
 # Home page content — edit freely, no template changes needed.
 hero:
   rotator:
-    - "scalable systems."
-    - "clean interfaces."
-    - "fast web apps."
-    - "developer tools."
+    - "GenAI & Agentic AI."
+    - "scalable backend systems."
+    - "developer tools & HUDs."
+    - "clean API integrations."
   intro: >-
-    I'm a software engineer who likes turning messy problems into simple,
-    fast, well-tested software, and writing about it along the way.
+    I'm a software engineer specialized in GenAI, Agentic AI systems, Python backend services,
+    and developer tooling. Building fast, scalable software and writing about it along the way.
   terminal:
     - "$ whoami"
     - "prathamesh, software engineer"
     - "$ cat focus.txt"
-    - "backend · web · developer-experience"
+    - "genai · python · agentic-ai · backend"
     - "$ ./start --read-the-blog"
 
 stats:
@@ -22,7 +22,7 @@ stats:
   - value: 2
     suffix: ""
     label: "Research paper published"
-  - value: 4
+  - value: 5
     suffix: "+"
     label: "Side projects"
   - value: 2
@@ -31,8 +31,11 @@ stats:
 
 # Highlighted skills (rendered as animated chips)
 stack:
+  - Python
+  - GenAI / Agentic AI
+  - LLMs & RAG
   - Java
-  - JavaScript
   - TypeScript
-  - SQL
   - Node.js
+  - REST APIs
+  - SQL
